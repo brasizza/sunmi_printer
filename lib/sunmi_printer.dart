@@ -159,7 +159,7 @@ class SunmiPrinter {
   }
 
   /// Print Text
-  static Future<void> printRawData(List<int> data) async {
+  static Future<void> printRawData(Uint8List data) async {
     Map<String, dynamic> arguments = <String, dynamic>{"data": data};
     await _channel.invokeMethod("RAW_DATA", arguments);
   }
