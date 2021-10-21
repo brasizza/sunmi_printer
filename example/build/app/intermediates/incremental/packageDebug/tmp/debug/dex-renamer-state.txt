@@ -1,0 +1,4 @@
+#Wed Oct 20 17:53:23 BRT 2021
+base.0=/Users/marcusbrasizza/development/sunmi_printer-1.0.4/example/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
