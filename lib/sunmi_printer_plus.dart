@@ -113,8 +113,11 @@ class SunmiPrinter {
   }
 
   static Future<void> printRow({required List<ColumnMaker> cols}) async {
-    final _jsonCols = List<Map<String, String>>.from(cols.map<Map<String, String>>((ColumnMaker col) => col.toJson()));
-    Map<String, dynamic> arguments = <String, dynamic>{"cols": json.encode(_jsonCols)};
+    final _jsonCols = List<Map<String, String>>.from(
+        cols.map<Map<String, String>>((ColumnMaker col) => col.toJson()));
+    Map<String, dynamic> arguments = <String, dynamic>{
+      "cols": json.encode(_jsonCols)
+    };
     await _channel.invokeMethod("PRINT_ROW", arguments);
   }
 
@@ -130,7 +133,9 @@ class SunmiPrinter {
   ///  [modulesize] should be between 4 and 16
   ///
   /// [errorlevel] Level correction will give a mode complex QRCODE in LEVEL_H than LEVEL_L (DEFAULT IS LEVEL_H)
-  static Future<void> printQRCode(String data, {int size = 5, SunmiQrcodeLevel errorLevel = SunmiQrcodeLevel.LEVEL_H}) async {
+  static Future<void> printQRCode(String data,
+      {int size = 5,
+      SunmiQrcodeLevel errorLevel = SunmiQrcodeLevel.LEVEL_H}) async {
     int _errorlevel = 3;
     switch (errorLevel) {
       case SunmiQrcodeLevel.LEVEL_L:
@@ -147,14 +152,23 @@ class SunmiPrinter {
         _errorlevel = 3;
         break;
     }
-    Map<String, dynamic> arguments = <String, dynamic>{"data": data, 'modulesize': size, 'errorlevel': _errorlevel};
+    Map<String, dynamic> arguments = <String, dynamic>{
+      "data": data,
+      'modulesize': size,
+      'errorlevel': _errorlevel
+    };
     await _channel.invokeMethod("PRINT_QRCODE", arguments);
   }
 
   /// **printBarCode**<br><br>
   ///
   /// Print a Barcode based in some DATA
-  static Future<void> printBarCode(String data, {SunmiBarcodeType barcodeType = SunmiBarcodeType.CODE128, int height = 162, int width = 2, SunmiBarcodeTextPos textPosition = SunmiBarcodeTextPos.TEXT_ABOVE}) async {
+  static Future<void> printBarCode(String data,
+      {SunmiBarcodeType barcodeType = SunmiBarcodeType.CODE128,
+      int height = 162,
+      int width = 2,
+      SunmiBarcodeTextPos textPosition =
+          SunmiBarcodeTextPos.TEXT_ABOVE}) async {
     int _codeType = 8;
     int _textPosition = 8;
     switch (barcodeType) {
@@ -201,7 +215,13 @@ class SunmiPrinter {
         _textPosition = 3;
         break;
     }
-    Map<String, dynamic> arguments = <String, dynamic>{"data": data, 'barcodeType': _codeType, 'textPosition': _textPosition, 'width': width, 'height': height};
+    Map<String, dynamic> arguments = <String, dynamic>{
+      "data": data,
+      'barcodeType': _codeType,
+      'textPosition': _textPosition,
+      'width': width,
+      'height': height
+    };
     await _channel.invokeMethod("PRINT_BARCODE", arguments);
   }
 

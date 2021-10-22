@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.0.4
+* Fix some code to increase Pub points
+
 ## 2.0.3
 * Fixed Barcode Example
 
