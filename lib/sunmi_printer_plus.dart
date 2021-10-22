@@ -106,18 +106,26 @@ class SunmiPrinter {
     }
   }
 
-  /// Print Text
+  /// **printText**<br><br>
+  ///
+  ///
+  /// Print a simple or complex text in the printer
   static Future<void> printText(String text) async {
     Map<String, dynamic> arguments = <String, dynamic>{"text": '$text\n'};
     await _channel.invokeMethod("PRINT_TEXT", arguments);
   }
 
+  /// **printRow**<br><br>
+  ///
+  ///
+  /// Build a row based on **ColumnMaker** that you can do:
+  /// [text] = A text to put in a row
+  /// [width] = Size of the row
+  /// [align] = The alignment of the text inside
+  ///
   static Future<void> printRow({required List<ColumnMaker> cols}) async {
-    final _jsonCols = List<Map<String, String>>.from(
-        cols.map<Map<String, String>>((ColumnMaker col) => col.toJson()));
-    Map<String, dynamic> arguments = <String, dynamic>{
-      "cols": json.encode(_jsonCols)
-    };
+    final _jsonCols = List<Map<String, String>>.from(cols.map<Map<String, String>>((ColumnMaker col) => col.toJson()));
+    Map<String, dynamic> arguments = <String, dynamic>{"cols": json.encode(_jsonCols)};
     await _channel.invokeMethod("PRINT_ROW", arguments);
   }
 
@@ -129,13 +137,12 @@ class SunmiPrinter {
 
   /// **printQRCode**<br><br>
   ///
+  ///
   /// Print a QRcode based in some DATA
   ///  [modulesize] should be between 4 and 16
   ///
   /// [errorlevel] Level correction will give a mode complex QRCODE in LEVEL_H than LEVEL_L (DEFAULT IS LEVEL_H)
-  static Future<void> printQRCode(String data,
-      {int size = 5,
-      SunmiQrcodeLevel errorLevel = SunmiQrcodeLevel.LEVEL_H}) async {
+  static Future<void> printQRCode(String data, {int size = 5, SunmiQrcodeLevel errorLevel = SunmiQrcodeLevel.LEVEL_H}) async {
     int _errorlevel = 3;
     switch (errorLevel) {
       case SunmiQrcodeLevel.LEVEL_L:
@@ -152,23 +159,15 @@ class SunmiPrinter {
         _errorlevel = 3;
         break;
     }
-    Map<String, dynamic> arguments = <String, dynamic>{
-      "data": data,
-      'modulesize': size,
-      'errorlevel': _errorlevel
-    };
+    Map<String, dynamic> arguments = <String, dynamic>{"data": data, 'modulesize': size, 'errorlevel': _errorlevel};
     await _channel.invokeMethod("PRINT_QRCODE", arguments);
   }
 
   /// **printBarCode**<br><br>
   ///
+  ///
   /// Print a Barcode based in some DATA
-  static Future<void> printBarCode(String data,
-      {SunmiBarcodeType barcodeType = SunmiBarcodeType.CODE128,
-      int height = 162,
-      int width = 2,
-      SunmiBarcodeTextPos textPosition =
-          SunmiBarcodeTextPos.TEXT_ABOVE}) async {
+  static Future<void> printBarCode(String data, {SunmiBarcodeType barcodeType = SunmiBarcodeType.CODE128, int height = 162, int width = 2, SunmiBarcodeTextPos textPosition = SunmiBarcodeTextPos.TEXT_ABOVE}) async {
     int _codeType = 8;
     int _textPosition = 8;
     switch (barcodeType) {
@@ -215,13 +214,7 @@ class SunmiPrinter {
         _textPosition = 3;
         break;
     }
-    Map<String, dynamic> arguments = <String, dynamic>{
-      "data": data,
-      'barcodeType': _codeType,
-      'textPosition': _textPosition,
-      'width': width,
-      'height': height
-    };
+    Map<String, dynamic> arguments = <String, dynamic>{"data": data, 'barcodeType': _codeType, 'textPosition': _textPosition, 'width': width, 'height': height};
     await _channel.invokeMethod("PRINT_BARCODE", arguments);
   }
 
@@ -231,6 +224,12 @@ class SunmiPrinter {
     await _channel.invokeMethod("LINE_WRAP", arguments);
   }
 
+  /// **line**<br><br>
+  ///
+  ///
+  /// Print a simple line to divide your area
+  /// [ch] = The stirng that you will use to do the line
+  /// [len] = Size of the line [Default = 31]
   static Future<void> line({
     String ch = '-',
     int len = 31,
@@ -239,19 +238,32 @@ class SunmiPrinter {
     await printText(List.filled(len, ch[0]).join());
   }
 
+  /// **bold**<br><br>
+  ///
+  ///
+  /// Start a bold command.
+  /// Every text will be bold after this command
   static Future<void> bold() async {
     final List<int> boldOn = [27, 69, 1];
 
     await printRawData(Uint8List.fromList(boldOn));
   }
 
+  /// **resetBold**<br><br>
+  ///
+  ///
+  /// Turns off the bold command
+  /// Every text will be normal again
   static Future<void> resetBold() async {
     final List<int> boldOff = [27, 69, 0];
 
     await printRawData(Uint8List.fromList(boldOff));
   }
 
-  /// alignment for your next line method ( images / text ).
+  /// **setAlignment**<br><br>
+  ///
+  /// Set the alignment of the text
+  /// Every text will be aligned after this command
   static Future<void> setAlignment(SunmiPrintAlign alignment) async {
     late int value;
     switch (alignment) {
@@ -271,6 +283,8 @@ class SunmiPrinter {
     await _channel.invokeMethod("SET_ALIGNMENT", arguments);
   }
 
+  /// **printImage**<br><br>
+  ///
   /// uint8List format image
   ///
   /// Note: the resolution of an image should be within 2M, and the width should be set in accordance with the paper spec (58: 384 Pixel, 80: 576 Pixel). It cannot be shown if it exceeds the paper width.
@@ -280,29 +294,33 @@ class SunmiPrinter {
     await _channel.invokeMethod("PRINT_IMAGE", arguments);
   }
 
+  /// **startTransactionPrint**<br><br>
+  ///
   /// Enter into the transaction printing mode
   static Future<void> startTransactionPrint([bool clear = false]) async {
     Map<String, dynamic> arguments = <String, dynamic>{"clearEnter": clear};
     await _channel.invokeMethod("ENTER_PRINTER_BUFFER", arguments);
   }
 
+  /// **submitTransactionPrint**<br><br>
+  ///
   /// Submit transaction printing
   static Future<void> submitTransactionPrint() async {
     await _channel.invokeMethod("COMMIT_PRINTER_BUFFER");
   }
 
+  /// **exitTransactionPrint**<br><br>
+  ///
   /// Exit the transaction printing mode
   static Future<void> exitTransactionPrint([bool clear = true]) async {
     Map<String, dynamic> arguments = <String, dynamic>{"clearExit": clear};
     await _channel.invokeMethod("EXIT_PRINTER_BUFFER", arguments);
   }
 
-  static Future<void> resetFontSize() async {
-    Map<String, dynamic> arguments = <String, dynamic>{"size": 24};
-    await _channel.invokeMethod("FONT_SIZE", arguments);
-  }
+  /// **setFontSize**<br><br>
+  ///
+  /// Every text will be with this size after this command
 
-  /// SetFontSize
   static Future<void> setFontSize(SunmiFontSize _size) async {
     int _fontSize = 24;
     switch (_size) {
@@ -327,11 +345,23 @@ class SunmiPrinter {
     await _channel.invokeMethod("FONT_SIZE", arguments);
   }
 
+  /// **setFontSize**<br><br>
+  ///
+  /// Every text size will be reseted to medium value
+  static Future<void> resetFontSize() async {
+    Map<String, dynamic> arguments = <String, dynamic>{"size": 24};
+    await _channel.invokeMethod("FONT_SIZE", arguments);
+  }
+
+  /// **startLabelPrint**<br><br>
+  ///
   /// Enter into the label printing mode
   static Future<void> startLabelPrint() async {
     await _channel.invokeMethod("LABEL_LOCATE");
   }
 
+  /// **exitLabelPrint**<br><br>
+  ///
   /// Exit into the label printing mode
   static Future<void> exitLabelPrint() async {
     await _channel.invokeMethod("LABEL_OUTPUT");

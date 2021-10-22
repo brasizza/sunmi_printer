@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.0.6
+* Fix enum.dart to format issues
+
 ## 2.0.5
 * Fix enum.dart to format issues
 

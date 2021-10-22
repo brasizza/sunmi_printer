@@ -41,8 +41,10 @@ This is good if you already have a code that another printers use, and u can reu
 
 #Just see the example folder!
 
-
-# Getting Started
+Example screen
+<p align="left">
+  <img src="https://images2.imgbox.com/a1/f1/r1JCZvD2_o.png" width="350" title="hover text">
+</p>
 
 ```dart
 // import packages
