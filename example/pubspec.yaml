@@ -34,7 +34,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  sunmi_printer:
+  sunmi_printer_plus:
   # When depending on this package from a real application you should use:
   #   sunmi_printer: ^x.y.z
   # See https://dart.dev/tools/pub/dependencies#version-constraints

@@ -16,9 +16,9 @@ public final class GeneratedPluginRegistrant {
   private static final String TAG = "GeneratedPluginRegistrant";
   public static void registerWith(@NonNull FlutterEngine flutterEngine) {
     try {
-      flutterEngine.getPlugins().add(new com.tanzigang.sunmi_printer.SunmiPrinterPlugin());
+      flutterEngine.getPlugins().add(new br.com.brasizza.sunmi_printer_plus.SunmiPrinterPlugin());
     } catch(Exception e) {
-      Log.e(TAG, "Error registering plugin sunmi_printer, com.tanzigang.sunmi_printer.SunmiPrinterPlugin", e);
+      Log.e(TAG, "Error registering plugin sunmi_printer_plus, br.com.brasizza.sunmi_printer_plus.SunmiPrinterPlugin", e);
     }
   }
 }

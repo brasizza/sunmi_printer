@@ -1,4 +1,4 @@
-group 'com.tanzigang.sunmi_printer'
+group 'br.com.brasizza.sunmi_printer_plus'
 version '1.0'
 
 buildscript {
@@ -17,6 +17,13 @@ rootProject.allprojects {
         google()
         jcenter()
     }
+
+     gradle.projectsEvaluated {
+        tasks.withType(JavaCompile) {
+            options.compilerArgs << "-Xlint:deprecation"
+            // options.compilerArgs << "-Xlint:unchecked"
+        }
+    }  
 }
 
 apply plugin: 'com.android.library'

@@ -2,7 +2,9 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:async';
-import 'package:sunmi_printer/sunmi_printer.dart';
+
+import 'package:sunmi_printer_plus/enums.dart';
+import 'package:sunmi_printer_plus/sunmi_printer_plus.dart';
 
 void main() {
   runApp(const MyApp());
@@ -73,17 +75,29 @@ class _HomeState extends State<Home> {
 
   Future<void> _printLabel(Uint8List img) async {
     // must start with this function if you are print with label
-    await SunmiPrinter.startTransactionPrint(true);
-    await SunmiPrinter.printText("ASDASDASDASDASD");
-    await SunmiPrinter.setAlignment(PrintAlign.LEFT);
-    await SunmiPrinter.printText("ASDASDASDASDASD");
+    await SunmiPrinter.startTransactionPrint();
 
+    await SunmiPrinter.printText("INIICIO");
+    await SunmiPrinter.setAlignment(PrintAlign.LEFT);
+    await SunmiPrinter.bold();
+    await SunmiPrinter.printText("AQUI TA BOLD");
+
+    await SunmiPrinter.setFontSize(FontSize.LG);
+    await SunmiPrinter.printText("FONTE GRANDE");
+    await SunmiPrinter.resetBold();
+
+    await SunmiPrinter.setFontSize(FontSize.XS);
+    await SunmiPrinter.printText("FONTE MINUSCULA");
+    await SunmiPrinter.resetFontSize();
+
+    await SunmiPrinter.line();
+    await SunmiPrinter.printQRCode("MARCUS BRASIZZA", size: 10, errorLevel: QrcodeLevel.LEVEL_M);
+    await SunmiPrinter.printBarCode('1234567890', barcodeType: BarcodeType.CODE128, textPosition: BarcodeTextPos.BOTH, height: 20);
     await SunmiPrinter.printText("ASDASDASDASDASD");
     await SunmiPrinter.setAlignment(PrintAlign.RIGHT);
     await SunmiPrinter.printText("ASDASDASDASDASD");
     await SunmiPrinter.lineWrap(6);
     await SunmiPrinter.setAlignment(PrintAlign.CENTER);
-    await SunmiPrinter.printImage(img);
     await SunmiPrinter.lineWrap(6);
 
     await SunmiPrinter.submitTransactionPrint();

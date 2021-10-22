@@ -1,6 +1,8 @@
-name: sunmi_printer
+name: sunmi_printer_plus
+
+
 description: Support V2 Pro Sunmi Label Version and Null safety.
-version: 1.0.4
+version: 2.0.0
 homepage: https://github.com/zigang93
 
 environment:
@@ -29,7 +31,7 @@ flutter:
   plugin:
     platforms:
       android:
-        package: com.tanzigang.sunmi_printer
+        package: br.com.brasizza.sunmi_printer_plus
         pluginClass: SunmiPrinterPlugin
       ios:
         pluginClass: SunmiPrinterPlugin

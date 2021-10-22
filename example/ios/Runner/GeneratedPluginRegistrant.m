@@ -6,10 +6,10 @@
 
 #import "GeneratedPluginRegistrant.h"
 
-#if __has_include(<sunmi_printer/SunmiPrinterPlugin.h>)
-#import <sunmi_printer/SunmiPrinterPlugin.h>
+#if __has_include(<sunmi_printer_plus/SunmiPrinterPlugin.h>)
+#import <sunmi_printer_plus/SunmiPrinterPlugin.h>
 #else
-@import sunmi_printer;
+@import sunmi_printer_plus;
 #endif
 
 @implementation GeneratedPluginRegistrant

@@ -1,0 +1,326 @@
+import 'dart:async';
+import 'dart:convert';
+import 'dart:typed_data';
+import 'package:flutter/services.dart';
+import 'package:sunmi_printer_plus/enums.dart';
+import 'package:sunmi_printer_plus/column_maker.dart';
+export 'package:sunmi_printer_plus/column_maker.dart';
+export 'package:sunmi_printer_plus/enums.dart';
+
+class SunmiPrinter {
+  static final Map _printerStatus = {
+    'ERROR': 'Something went wrong.',
+    'NORMAL': 'Works normally',
+    'ABNORMAL_COMMUNICATION': 'Abnormal communication',
+    'OUT_OF_PAPER': 'Out of paper',
+    'PREPARING': 'Preparing printer',
+    'OVERHEATED': 'Overheated',
+    'OPEN_THE_LID': 'Open the lid',
+    'PAPER_CUTTER_ABNORMAL': 'The paper cutter is abnormal',
+    'PAPER_CUTTER_RECOVERED': 'The paper cutter has been recovered',
+    'NO_BLACK_MARK': 'No black mark had been detected',
+    'NO_PRINTER_DETECTED': 'No printer had been detected',
+    'FAILED_TO_UPGRADE_FIRMWARE': 'Failed to upgrade firmware',
+    'EXCEPTION': 'Unknown Error code',
+  };
+
+  static const MethodChannel _channel = MethodChannel('sunmi_printer_plus');
+
+  /// bind sunmi inner printer
+  static Future<bool?> bindingPrinter() async {
+    final bool? status = await _channel.invokeMethod('BIND_PRINTER_SERVICE');
+    return status;
+  }
+
+  /// unbind sunmi inner printer
+  static Future<bool?> unbindingPrinter() async {
+    final bool? status = await _channel.invokeMethod('UNBIND_PRINTER_SERVICE');
+    return status;
+  }
+
+  /// Printer initialization
+  ///
+  /// NOTE: reset the logic programs (type setting, bold, etc.) of a printer but not to clear the data in the buffer.
+  ///
+  /// Therefore, uncompleted print jobs will be continued after resetting.
+  static Future<bool?> initPrinter() async {
+    final bool? status = await _channel.invokeMethod('INIT_PRINTER');
+    return status;
+  }
+
+  /// return enum status , if you want verbose status can use [getPrinterStatusWithVerbose()] .
+  static Future<PrinterStatus> getPrinterStatus() async {
+    final String? status = await _channel.invokeMethod('GET_UPDATE_PRINTER');
+    switch (status) {
+      case 'ERROR':
+        return PrinterStatus.ERROR;
+      case 'NORMAL':
+        return PrinterStatus.NORMAL;
+      case 'ABNORMAL_COMMUNICATION':
+        return PrinterStatus.ABNORMAL_COMMUNICATION;
+      case 'OUT_OF_PAPER':
+        return PrinterStatus.OUT_OF_PAPER;
+      case 'PREPARING':
+        return PrinterStatus.PREPARING;
+      case 'OVERHEATED':
+        return PrinterStatus.OVERHEATED;
+      case 'OPEN_THE_LID':
+        return PrinterStatus.OPEN_THE_LID;
+      case 'PAPER_CUTTER_ABNORMAL':
+        return PrinterStatus.PAPER_CUTTER_ABNORMAL;
+      case 'PAPER_CUTTER_RECOVERED':
+        return PrinterStatus.PAPER_CUTTER_RECOVERED;
+      case 'NO_BLACK_MARK':
+        return PrinterStatus.NO_BLACK_MARK;
+      case 'NO_PRINTER_DETECTED':
+        return PrinterStatus.NO_PRINTER_DETECTED;
+      case 'FAILED_TO_UPGRADE_FIRMWARE':
+        return PrinterStatus.FAILED_TO_UPGRADE_FIRMWARE;
+      case 'EXCEPTION':
+        return PrinterStatus.EXCEPTION;
+      default:
+        return PrinterStatus.UNKNOWN;
+    }
+  }
+
+  /// verbose explain of printer status
+  static Future<String?> getPrinterStatusWithVerbose() async {
+    final String? status = await _channel.invokeMethod('GET_UPDATE_PRINTER');
+    final statusMsg = _printerStatus[status];
+    return statusMsg;
+  }
+
+  /// mode = [  NORMAL_MODE , BLACK_LABEL_MODE, LABEL_MODE ]
+  /// if want to print label please change the printer mode to label mode.
+  static Future<PrinterMode> getPrinterMode() async {
+    final String mode = await _channel.invokeMethod('GET_PRINTER_MODE');
+    switch (mode) {
+      case 'NORMAL_MODE':
+        return PrinterMode.NORMAL_MODE;
+      case 'BLACK_LABEL_MODE':
+        return PrinterMode.BLACK_LABEL_MODE;
+      case 'LABEL_MODE':
+        return PrinterMode.LABEL_MODE;
+      default:
+        return PrinterMode.UNKNOWN;
+    }
+  }
+
+  /// Print Text
+  static Future<void> printText(String text) async {
+    Map<String, dynamic> arguments = <String, dynamic>{"text": '$text\n'};
+    await _channel.invokeMethod("PRINT_TEXT", arguments);
+  }
+
+  // static Future<void> printRow({required List<ColumnMaker> cols}) async {
+  //   final isSumValid = cols.fold(0, (int sum, col) => sum + col.width) == 12;
+  //   if (!isSumValid) {
+  //     throw Exception('Total columns width must be equal to 12');
+  //   }
+  //   final _jsonCols = List<Map<String, String>>.from(cols.map<Map<String, String>>((ColumnMaker col) => col.toJson()));
+  //   Map<String, dynamic> arguments = <String, dynamic>{"cols": json.encode(_jsonCols)};
+  //   await _channel.invokeMethod("PRINT_ROW", arguments);
+  // }
+
+  /// Print raw Data
+  static Future<void> printRawData(Uint8List data) async {
+    Map<String, dynamic> arguments = <String, dynamic>{"data": data};
+    await _channel.invokeMethod("RAW_DATA", arguments);
+  }
+
+  /// **printQRCode**<br><br>
+  ///
+  /// Print a QRcode based in some DATA
+  ///  [modulesize] should be between 4 and 16
+  ///
+  /// [errorlevel] Level correction will give a mode complex QRCODE in LEVEL_H than LEVEL_L (DEFAULT IS LEVEL_H)
+  static Future<void> printQRCode(String data, {int size = 5, QrcodeLevel errorLevel = QrcodeLevel.LEVEL_H}) async {
+    int _errorlevel = 3;
+    switch (errorLevel) {
+      case QrcodeLevel.LEVEL_L:
+        _errorlevel = 0;
+        break;
+      case QrcodeLevel.LEVEL_M:
+        _errorlevel = 1;
+
+        break;
+      case QrcodeLevel.LEVEL_Q:
+        _errorlevel = 2;
+        break;
+      case QrcodeLevel.LEVEL_H:
+        _errorlevel = 3;
+        break;
+    }
+    Map<String, dynamic> arguments = <String, dynamic>{"data": data, 'modulesize': size, 'errorlevel': _errorlevel};
+    await _channel.invokeMethod("PRINT_QRCODE", arguments);
+  }
+
+  /// **printBarCode**<br><br>
+  ///
+  /// Print a Barcode based in some DATA
+
+  static Future<void> printBarCode(String data, {BarcodeType barcodeType = BarcodeType.CODE128, int height = 162, int width = 2, BarcodeTextPos textPosition = BarcodeTextPos.TEXT_ABOVE}) async {
+    int _codeType = 8;
+    int _textPosition = 8;
+    switch (barcodeType) {
+      case BarcodeType.UPCA:
+        _codeType = 0;
+        break;
+      case BarcodeType.UPCE:
+        _codeType = 1;
+        break;
+      case BarcodeType.JAN13:
+        _codeType = 2;
+        break;
+      case BarcodeType.JAN8:
+        _codeType = 3;
+        break;
+      case BarcodeType.CODE39:
+        _codeType = 4;
+        break;
+      case BarcodeType.ITF:
+        _codeType = 5;
+        break;
+      case BarcodeType.CODABAR:
+        _codeType = 6;
+        break;
+      case BarcodeType.CODE93:
+        _codeType = 7;
+        break;
+      case BarcodeType.CODE128:
+        _codeType = 8;
+        break;
+    }
+
+    switch (textPosition) {
+      case BarcodeTextPos.NO_TEXT:
+        _textPosition = 0;
+        break;
+      case BarcodeTextPos.TEXT_ABOVE:
+        _textPosition = 1;
+
+        break;
+      case BarcodeTextPos.TEXT_UNDER:
+        _textPosition = 2;
+
+        break;
+      case BarcodeTextPos.BOTH:
+        _textPosition = 3;
+
+        break;
+    }
+    Map<String, dynamic> arguments = <String, dynamic>{"data": data, 'barcodeType': _codeType, 'textPosition': _textPosition, 'width': width, 'height': height};
+    await _channel.invokeMethod("PRINT_BARCODE", arguments);
+  }
+
+  /// space how many next line
+  static Future<void> lineWrap(int lines) async {
+    Map<String, dynamic> arguments = <String, dynamic>{"lines": lines};
+    await _channel.invokeMethod("LINE_WRAP", arguments);
+  }
+
+  static Future<void> line({
+    String ch = '-',
+    int len = 31,
+  }) async {
+    await printText(List.filled(len, ch[0]).join());
+  }
+
+  static Future<void> bold() async {
+    final List<int> boldOn = [27, 69, 1];
+
+    await printRawData(Uint8List.fromList(boldOn));
+  }
+
+  static Future<void> resetBold() async {
+    final List<int> boldOff = [27, 69, 0];
+
+    await printRawData(Uint8List.fromList(boldOff));
+  }
+
+  /// alignment for your next line method ( images / text ).
+  static Future<void> setAlignment(PrintAlign alignment) async {
+    late int value;
+    switch (alignment) {
+      case PrintAlign.LEFT:
+        value = 0;
+        break;
+      case PrintAlign.CENTER:
+        value = 1;
+        break;
+      case PrintAlign.RIGHT:
+        value = 2;
+        break;
+      default:
+        value = 0;
+    }
+    Map<String, dynamic> arguments = <String, dynamic>{"alignment": value};
+    await _channel.invokeMethod("SET_ALIGNMENT", arguments);
+  }
+
+  /// uint8List format image
+  ///
+  /// Note: the resolution of an image should be within 2M, and the width should be set in accordance with the paper spec (58: 384 Pixel, 80: 576 Pixel). It cannot be shown if it exceeds the paper width.
+  static Future<void> printImage(Uint8List img) async {
+    Map<String, dynamic> arguments = <String, dynamic>{};
+    arguments.putIfAbsent("bitmap", () => img);
+    await _channel.invokeMethod("PRINT_IMAGE", arguments);
+  }
+
+  /// Enter into the transaction printing mode
+  static Future<void> startTransactionPrint([bool clear = false]) async {
+    Map<String, dynamic> arguments = <String, dynamic>{"clearEnter": clear};
+    await _channel.invokeMethod("ENTER_PRINTER_BUFFER", arguments);
+  }
+
+  /// Submit transaction printing
+  static Future<void> submitTransactionPrint() async {
+    await _channel.invokeMethod("COMMIT_PRINTER_BUFFER");
+  }
+
+  /// Exit the transaction printing mode
+  static Future<void> exitTransactionPrint([bool clear = true]) async {
+    Map<String, dynamic> arguments = <String, dynamic>{"clearExit": clear};
+    await _channel.invokeMethod("EXIT_PRINTER_BUFFER", arguments);
+  }
+
+  static Future<void> resetFontSize() async {
+    Map<String, dynamic> arguments = <String, dynamic>{"size": 24};
+    await _channel.invokeMethod("FONT_SIZE", arguments);
+  }
+
+  /// SetFontSize
+  static Future<void> setFontSize(FontSize _size) async {
+    int _fontSize = 24;
+    switch (_size) {
+      case FontSize.XS:
+        _fontSize = 14;
+        break;
+      case FontSize.SM:
+        _fontSize = 18;
+        break;
+      case FontSize.MD:
+        _fontSize = 24;
+        break;
+      case FontSize.LG:
+        _fontSize = 36;
+        break;
+      case FontSize.XL:
+        _fontSize = 42;
+        break;
+    }
+    Map<String, dynamic> arguments = <String, dynamic>{"size": _fontSize};
+
+    await _channel.invokeMethod("FONT_SIZE", arguments);
+  }
+
+  /// Enter into the label printing mode
+  static Future<void> startLabelPrint() async {
+    await _channel.invokeMethod("LABEL_LOCATE");
+  }
+
+  /// Exit into the label printing mode
+  static Future<void> exitLabelPrint() async {
+    await _channel.invokeMethod("LABEL_OUTPUT");
+  }
+}

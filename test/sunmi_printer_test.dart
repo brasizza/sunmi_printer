@@ -2,7 +2,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  const MethodChannel channel = MethodChannel('sunmi_printer');
+  const MethodChannel channel = MethodChannel('sunmi_printer_plus');
 
   TestWidgetsFlutterBinding.ensureInitialized();
 

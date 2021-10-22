@@ -152,13 +152,13 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "sunmi_printer",
+      "name": "sunmi_printer_plus",
       "rootUri": "../",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2021-10-20T20:49:00.807792Z",
+  "generated": "2021-10-22T03:50:31.406002Z",
   "generator": "pub",
   "generatorVersion": "2.14.2"
 }
