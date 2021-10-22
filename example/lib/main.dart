@@ -75,6 +75,7 @@ class _HomeState extends State<Home> {
                 children: [
                   ElevatedButton(
                       onPressed: () async {
+                        await SunmiPrinter.initPrinter();
                         await SunmiPrinter.startTransactionPrint(true);
                         await SunmiPrinter.printQRCode('https://github.com/brasizza/sunmi_printer');
                         await SunmiPrinter.lineWrap(2);
@@ -83,6 +84,7 @@ class _HomeState extends State<Home> {
                       child: const Text('Print qrCode')),
                   ElevatedButton(
                       onPressed: () async {
+                        await SunmiPrinter.initPrinter();
                         await SunmiPrinter.startTransactionPrint(true);
                         await SunmiPrinter.printBarCode('1234567890', barcodeType: SunmiBarcodeType.CODE128, textPosition: SunmiBarcodeTextPos.TEXT_UNDER, height: 20);
                         await SunmiPrinter.lineWrap(2);
@@ -91,6 +93,7 @@ class _HomeState extends State<Home> {
                       child: const Text('Print barCode')),
                   ElevatedButton(
                       onPressed: () async {
+                        await SunmiPrinter.initPrinter();
                         await SunmiPrinter.startTransactionPrint(true);
                         await SunmiPrinter.line();
                         await SunmiPrinter.lineWrap(2);
@@ -112,17 +115,18 @@ class _HomeState extends State<Home> {
                 children: [
                   ElevatedButton(
                       onPressed: () async {
+                        await SunmiPrinter.initPrinter();
                         await SunmiPrinter.startTransactionPrint(true);
                         await SunmiPrinter.bold();
                         await SunmiPrinter.printText('Hello I\'m bold');
                         await SunmiPrinter.resetBold();
-
                         await SunmiPrinter.lineWrap(2);
                         await SunmiPrinter.exitTransactionPrint(true);
                       },
                       child: const Text('Bold Text')),
                   ElevatedButton(
                       onPressed: () async {
+                        await SunmiPrinter.initPrinter();
                         await SunmiPrinter.startTransactionPrint(true);
                         await SunmiPrinter.setFontSize(SunmiFontSize.XS);
                         await SunmiPrinter.printText('Very small!');
@@ -133,6 +137,7 @@ class _HomeState extends State<Home> {
                       child: const Text('Very small font')),
                   ElevatedButton(
                       onPressed: () async {
+                        await SunmiPrinter.initPrinter();
                         await SunmiPrinter.startTransactionPrint(true);
                         await SunmiPrinter.setFontSize(SunmiFontSize.SM);
                         await SunmiPrinter.printText('Small font !');
@@ -143,6 +148,7 @@ class _HomeState extends State<Home> {
                       child: const Text('Small font')),
                   ElevatedButton(
                       onPressed: () async {
+                        await SunmiPrinter.initPrinter();
                         await SunmiPrinter.startTransactionPrint(true);
                         await SunmiPrinter.setFontSize(SunmiFontSize.MD);
                         await SunmiPrinter.printText('Default font!');
@@ -153,6 +159,7 @@ class _HomeState extends State<Home> {
                       child: const Text('Normal font')),
                   ElevatedButton(
                       onPressed: () async {
+                        await SunmiPrinter.initPrinter();
                         await SunmiPrinter.startTransactionPrint(true);
                         await SunmiPrinter.setFontSize(SunmiFontSize.LG);
                         await SunmiPrinter.printText('Large font!');
@@ -163,6 +170,7 @@ class _HomeState extends State<Home> {
                       child: const Text('Large font')),
                   ElevatedButton(
                       onPressed: () async {
+                        await SunmiPrinter.initPrinter();
                         await SunmiPrinter.startTransactionPrint(true);
                         await SunmiPrinter.setFontSize(SunmiFontSize.XL);
                         await SunmiPrinter.printText('Very Large font!');
@@ -181,26 +189,34 @@ class _HomeState extends State<Home> {
                 children: [
                   ElevatedButton(
                       onPressed: () async {
+                        await SunmiPrinter.initPrinter();
                         await SunmiPrinter.startTransactionPrint(true);
                         await SunmiPrinter.setAlignment(SunmiPrintAlign.RIGHT);
                         await SunmiPrinter.printText('Align right');
                         await SunmiPrinter.lineWrap(2);
+                        await SunmiPrinter.exitTransactionPrint(true);
                       },
                       child: const Text('Align right')),
                   ElevatedButton(
                       onPressed: () async {
+                        await SunmiPrinter.initPrinter();
+
                         await SunmiPrinter.startTransactionPrint(true);
                         await SunmiPrinter.setAlignment(SunmiPrintAlign.LEFT);
                         await SunmiPrinter.printText('Align left');
                         await SunmiPrinter.lineWrap(2);
+                        await SunmiPrinter.exitTransactionPrint(true);
                       },
                       child: const Text('Align left')),
                   ElevatedButton(
                     onPressed: () async {
+                      await SunmiPrinter.initPrinter();
+
                       await SunmiPrinter.startTransactionPrint(true);
                       await SunmiPrinter.setAlignment(SunmiPrintAlign.CENTER);
                       await SunmiPrinter.printText('Align center');
                       await SunmiPrinter.lineWrap(2);
+                      await SunmiPrinter.exitTransactionPrint(true);
                     },
                     child: const Text('Align center'),
                   ),
@@ -214,6 +230,8 @@ class _HomeState extends State<Home> {
                 children: [
                   GestureDetector(
                     onTap: () async {
+                      await SunmiPrinter.initPrinter();
+
                       Uint8List byte = await _getImageFromAsset('assets/images/dash.jpeg');
                       await SunmiPrinter.setAlignment(SunmiPrintAlign.CENTER);
 
@@ -234,6 +252,8 @@ class _HomeState extends State<Home> {
                   ),
                   GestureDetector(
                     onTap: () async {
+                      await SunmiPrinter.initPrinter();
+
                       String url = 'https://avatars.githubusercontent.com/u/14101776?s=100';
                       // convert image to Uint8List format
                       Uint8List byte = (await NetworkAssetBundle(Uri.parse(url)).load(url)).buffer.asUint8List();
@@ -266,6 +286,8 @@ class _HomeState extends State<Home> {
               child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
                 ElevatedButton(
                     onPressed: () async {
+                      await SunmiPrinter.initPrinter();
+
                       await SunmiPrinter.startLabelPrint();
                       Uint8List byte = await _getImageFromAsset('assets/images/dash.jpeg');
                       await SunmiPrinter.setAlignment(SunmiPrintAlign.CENTER);
@@ -282,6 +304,8 @@ class _HomeState extends State<Home> {
               child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
                 ElevatedButton(
                     onPressed: () async {
+                      await SunmiPrinter.initPrinter();
+
                       await SunmiPrinter.startTransactionPrint(true);
                       await SunmiPrinter.setAlignment(SunmiPrintAlign.CENTER);
                       await SunmiPrinter.line();
@@ -339,7 +363,10 @@ class _HomeState extends State<Home> {
                 ElevatedButton(
                     onPressed: () async {
                       final List<int> _escPos = await _customEscPos();
+                      await SunmiPrinter.initPrinter();
+                      await SunmiPrinter.startTransactionPrint(true);
                       await SunmiPrinter.printRawData(Uint8List.fromList(_escPos));
+                      await SunmiPrinter.exitTransactionPrint(true);
                     },
                     child: const Text('Custom ESC/POS to print')),
               ]),

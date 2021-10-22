@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.0.3
+* Fixed Barcode Example
+
+## 2.0.2
+* Fixed pubspec.yaml
+
+## 2.0.1
+* Fixed Readme
+
 ## 2.0.0
 
 * 2.0.0 release

@@ -201,7 +201,7 @@ class SunmiPrinter {
         _textPosition = 3;
         break;
     }
-    Map<String, dynamic> arguments = <String, dynamic>{"data": data, 'SunmibarcodeType': _codeType, 'textPosition': _textPosition, 'width': width, 'height': height};
+    Map<String, dynamic> arguments = <String, dynamic>{"data": data, 'barcodeType': _codeType, 'textPosition': _textPosition, 'width': width, 'height': height};
     await _channel.invokeMethod("PRINT_BARCODE", arguments);
   }
 
