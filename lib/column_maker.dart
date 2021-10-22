@@ -3,27 +3,23 @@ import 'package:sunmi_printer_plus/enums.dart';
 class ColumnMaker {
   String text;
   int width;
-  PrintAlign align;
+  SunmiPrintAlign align;
   ColumnMaker({
     this.text = '',
     this.width = 2,
-    this.align = PrintAlign.LEFT,
-  }) {
-    if (width < 1 || width > 12) {
-      throw Exception('Column width must be between 1..12');
-    }
-  }
+    this.align = SunmiPrintAlign.LEFT,
+  }) {}
 
   Map<String, String> toJson() {
     int value = 0;
     switch (align) {
-      case PrintAlign.LEFT:
+      case SunmiPrintAlign.LEFT:
         value = 0;
         break;
-      case PrintAlign.CENTER:
+      case SunmiPrintAlign.CENTER:
         value = 1;
         break;
-      case PrintAlign.RIGHT:
+      case SunmiPrintAlign.RIGHT:
         value = 2;
         break;
       default:

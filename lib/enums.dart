@@ -5,12 +5,12 @@ enum PrinterStatus { UNKNOWN, ERROR, NORMAL, ABNORMAL_COMMUNICATION, OUT_OF_PAPE
 
 enum PrinterMode { UNKNOWN, NORMAL_MODE, BLACK_LABEL_MODE, LABEL_MODE }
 
-enum PrintAlign { LEFT, CENTER, RIGHT }
+enum SunmiPrintAlign { LEFT, CENTER, RIGHT }
 
-enum QrcodeLevel { LEVEL_L, LEVEL_M, LEVEL_Q, LEVEL_H }
+enum SunmiQrcodeLevel { LEVEL_L, LEVEL_M, LEVEL_Q, LEVEL_H }
 
-enum BarcodeType { UPCA, UPCE, JAN13, JAN8, CODE39, ITF, CODABAR, CODE93, CODE128 }
+enum SunmiBarcodeType { UPCA, UPCE, JAN13, JAN8, CODE39, ITF, CODABAR, CODE93, CODE128 }
 
-enum BarcodeTextPos { NO_TEXT, TEXT_ABOVE, TEXT_UNDER, BOTH }
+enum SunmiBarcodeTextPos { NO_TEXT, TEXT_ABOVE, TEXT_UNDER, BOTH }
 
-enum FontSize { XS, SM, MD, LG, XL }
+enum SunmiFontSize { XS, SM, MD, LG, XL }

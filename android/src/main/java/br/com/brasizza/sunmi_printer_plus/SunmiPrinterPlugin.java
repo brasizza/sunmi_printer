@@ -2,21 +2,19 @@ package br.com.brasizza.sunmi_printer_plus;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import androidx.annotation.NonNull;
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
+import java.util.Arrays;
 import java.util.HashMap;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import woyou.aidlservice.jiuiv5.ICallback;
-import android.util.Log;
-import java.util.Arrays;
-
-
 
 /** SunmiPrinterPlugin */
 public class SunmiPrinterPlugin implements FlutterPlugin, MethodCallHandler {
@@ -160,13 +158,11 @@ public class SunmiPrinterPlugin implements FlutterPlugin, MethodCallHandler {
         sunmiPrinterMethod.lineWrap(lines);
         result.success(true);
         break;
-
-
-        case "FONT_SIZE":
+      case "FONT_SIZE":
         int fontSize = call.argument("size");
         sunmiPrinterMethod.setFontSize(fontSize);
         result.success(true);
-        break; 
+        break;
       case "SET_ALIGNMENT":
         int alignment = call.argument("alignment");
         sunmiPrinterMethod.setAlignment(alignment);
@@ -179,7 +175,6 @@ public class SunmiPrinterPlugin implements FlutterPlugin, MethodCallHandler {
         result.success(true);
 
         break;
-     
       case "GET_PRINTER_MODE":
         final int mode_code = sunmiPrinterMethod.getPrinterMode();
 
@@ -222,6 +217,30 @@ public class SunmiPrinterPlugin implements FlutterPlugin, MethodCallHandler {
       case "COMMIT_PRINTER_BUFFER":
         sunmiPrinterMethod.commitPrinterBuffer();
         result.success(true);
+        break;
+      case "PRINT_ROW":
+        String colsStr = call.argument("cols");
+
+        try {
+          JSONArray cols = new JSONArray(colsStr);
+          String[] colsText = new String[cols.length()];
+          int[] colsWidth = new int[cols.length()];
+          int[] colsAlign = new int[cols.length()];
+          for (int i = 0; i < cols.length(); i++) {
+            JSONObject col = cols.getJSONObject(i);
+            String textColumn = col.getString("text");
+            int widthColumn = col.getInt("width");
+            int alignColumn = col.getInt("align");
+            colsText[i] = textColumn;
+            colsWidth[i] = widthColumn;
+            colsAlign[i] = alignColumn;
+          }
+
+          sunmiPrinterMethod.printColumn(colsText, colsWidth, colsAlign);
+          result.success(true);
+        } catch (Exception err) {
+          Log.d("SunmiPrinter", err.getMessage());
+        }
         break;
       case "EXIT_PRINTER_BUFFER":
         Boolean clearExit = call.argument("clearExit");

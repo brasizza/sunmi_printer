@@ -112,15 +112,11 @@ class SunmiPrinter {
     await _channel.invokeMethod("PRINT_TEXT", arguments);
   }
 
-  // static Future<void> printRow({required List<ColumnMaker> cols}) async {
-  //   final isSumValid = cols.fold(0, (int sum, col) => sum + col.width) == 12;
-  //   if (!isSumValid) {
-  //     throw Exception('Total columns width must be equal to 12');
-  //   }
-  //   final _jsonCols = List<Map<String, String>>.from(cols.map<Map<String, String>>((ColumnMaker col) => col.toJson()));
-  //   Map<String, dynamic> arguments = <String, dynamic>{"cols": json.encode(_jsonCols)};
-  //   await _channel.invokeMethod("PRINT_ROW", arguments);
-  // }
+  static Future<void> printRow({required List<ColumnMaker> cols}) async {
+    final _jsonCols = List<Map<String, String>>.from(cols.map<Map<String, String>>((ColumnMaker col) => col.toJson()));
+    Map<String, dynamic> arguments = <String, dynamic>{"cols": json.encode(_jsonCols)};
+    await _channel.invokeMethod("PRINT_ROW", arguments);
+  }
 
   /// Print raw Data
   static Future<void> printRawData(Uint8List data) async {
@@ -134,20 +130,20 @@ class SunmiPrinter {
   ///  [modulesize] should be between 4 and 16
   ///
   /// [errorlevel] Level correction will give a mode complex QRCODE in LEVEL_H than LEVEL_L (DEFAULT IS LEVEL_H)
-  static Future<void> printQRCode(String data, {int size = 5, QrcodeLevel errorLevel = QrcodeLevel.LEVEL_H}) async {
+  static Future<void> printQRCode(String data, {int size = 5, SunmiQrcodeLevel errorLevel = SunmiQrcodeLevel.LEVEL_H}) async {
     int _errorlevel = 3;
     switch (errorLevel) {
-      case QrcodeLevel.LEVEL_L:
+      case SunmiQrcodeLevel.LEVEL_L:
         _errorlevel = 0;
         break;
-      case QrcodeLevel.LEVEL_M:
+      case SunmiQrcodeLevel.LEVEL_M:
         _errorlevel = 1;
 
         break;
-      case QrcodeLevel.LEVEL_Q:
+      case SunmiQrcodeLevel.LEVEL_Q:
         _errorlevel = 2;
         break;
-      case QrcodeLevel.LEVEL_H:
+      case SunmiQrcodeLevel.LEVEL_H:
         _errorlevel = 3;
         break;
     }
@@ -158,58 +154,54 @@ class SunmiPrinter {
   /// **printBarCode**<br><br>
   ///
   /// Print a Barcode based in some DATA
-
-  static Future<void> printBarCode(String data, {BarcodeType barcodeType = BarcodeType.CODE128, int height = 162, int width = 2, BarcodeTextPos textPosition = BarcodeTextPos.TEXT_ABOVE}) async {
+  static Future<void> printBarCode(String data, {SunmiBarcodeType barcodeType = SunmiBarcodeType.CODE128, int height = 162, int width = 2, SunmiBarcodeTextPos textPosition = SunmiBarcodeTextPos.TEXT_ABOVE}) async {
     int _codeType = 8;
     int _textPosition = 8;
     switch (barcodeType) {
-      case BarcodeType.UPCA:
+      case SunmiBarcodeType.UPCA:
         _codeType = 0;
         break;
-      case BarcodeType.UPCE:
+      case SunmiBarcodeType.UPCE:
         _codeType = 1;
         break;
-      case BarcodeType.JAN13:
+      case SunmiBarcodeType.JAN13:
         _codeType = 2;
         break;
-      case BarcodeType.JAN8:
+      case SunmiBarcodeType.JAN8:
         _codeType = 3;
         break;
-      case BarcodeType.CODE39:
+      case SunmiBarcodeType.CODE39:
         _codeType = 4;
         break;
-      case BarcodeType.ITF:
+      case SunmiBarcodeType.ITF:
         _codeType = 5;
         break;
-      case BarcodeType.CODABAR:
+      case SunmiBarcodeType.CODABAR:
         _codeType = 6;
         break;
-      case BarcodeType.CODE93:
+      case SunmiBarcodeType.CODE93:
         _codeType = 7;
         break;
-      case BarcodeType.CODE128:
+      case SunmiBarcodeType.CODE128:
         _codeType = 8;
         break;
     }
 
     switch (textPosition) {
-      case BarcodeTextPos.NO_TEXT:
+      case SunmiBarcodeTextPos.NO_TEXT:
         _textPosition = 0;
         break;
-      case BarcodeTextPos.TEXT_ABOVE:
+      case SunmiBarcodeTextPos.TEXT_ABOVE:
         _textPosition = 1;
-
         break;
-      case BarcodeTextPos.TEXT_UNDER:
+      case SunmiBarcodeTextPos.TEXT_UNDER:
         _textPosition = 2;
-
         break;
-      case BarcodeTextPos.BOTH:
+      case SunmiBarcodeTextPos.BOTH:
         _textPosition = 3;
-
         break;
     }
-    Map<String, dynamic> arguments = <String, dynamic>{"data": data, 'barcodeType': _codeType, 'textPosition': _textPosition, 'width': width, 'height': height};
+    Map<String, dynamic> arguments = <String, dynamic>{"data": data, 'SunmibarcodeType': _codeType, 'textPosition': _textPosition, 'width': width, 'height': height};
     await _channel.invokeMethod("PRINT_BARCODE", arguments);
   }
 
@@ -223,6 +215,7 @@ class SunmiPrinter {
     String ch = '-',
     int len = 31,
   }) async {
+    resetFontSize();
     await printText(List.filled(len, ch[0]).join());
   }
 
@@ -239,16 +232,16 @@ class SunmiPrinter {
   }
 
   /// alignment for your next line method ( images / text ).
-  static Future<void> setAlignment(PrintAlign alignment) async {
+  static Future<void> setAlignment(SunmiPrintAlign alignment) async {
     late int value;
     switch (alignment) {
-      case PrintAlign.LEFT:
+      case SunmiPrintAlign.LEFT:
         value = 0;
         break;
-      case PrintAlign.CENTER:
+      case SunmiPrintAlign.CENTER:
         value = 1;
         break;
-      case PrintAlign.RIGHT:
+      case SunmiPrintAlign.RIGHT:
         value = 2;
         break;
       default:
@@ -290,22 +283,22 @@ class SunmiPrinter {
   }
 
   /// SetFontSize
-  static Future<void> setFontSize(FontSize _size) async {
+  static Future<void> setFontSize(SunmiFontSize _size) async {
     int _fontSize = 24;
     switch (_size) {
-      case FontSize.XS:
+      case SunmiFontSize.XS:
         _fontSize = 14;
         break;
-      case FontSize.SM:
+      case SunmiFontSize.SM:
         _fontSize = 18;
         break;
-      case FontSize.MD:
+      case SunmiFontSize.MD:
         _fontSize = 24;
         break;
-      case FontSize.LG:
+      case SunmiFontSize.LG:
         _fontSize = 36;
         break;
-      case FontSize.XL:
+      case SunmiFontSize.XL:
         _fontSize = 42;
         break;
     }
