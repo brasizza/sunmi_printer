@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.0.7
+* Code format
+
 ## 2.0.6
 * Fix enum.dart to format issues
 
