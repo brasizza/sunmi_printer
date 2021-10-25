@@ -200,14 +200,14 @@ public class SunmiPrinterPlugin implements FlutterPlugin, MethodCallHandler {
 
         result.success(mode_desc);
         break;
-      case "LABEL_LOCATE":
-        sunmiPrinterMethod.labelLocate();
-        result.success(true);
-        break;
-      case "LABEL_OUTPUT":
-        sunmiPrinterMethod.labelOutput();
-        result.success(true);
-        break;
+      // case "LABEL_LOCATE":
+      //   sunmiPrinterMethod.labelLocate();
+      //   result.success(true);
+      //   break;
+      // case "LABEL_OUTPUT":
+      //   sunmiPrinterMethod.labelOutput();
+      //   result.success(true);
+      //   break;
       case "ENTER_PRINTER_BUFFER":
         Boolean clearEnter = call.argument("clearEnter");
         sunmiPrinterMethod.enterPrinterBuffer(clearEnter);
@@ -216,6 +216,10 @@ public class SunmiPrinterPlugin implements FlutterPlugin, MethodCallHandler {
         break;
       case "COMMIT_PRINTER_BUFFER":
         sunmiPrinterMethod.commitPrinterBuffer();
+        result.success(true);
+        break;
+      case "CUT_PAPER":
+        sunmiPrinterMethod.cutPaper();
         result.success(true);
         break;
       case "PRINT_ROW":
@@ -246,7 +250,18 @@ public class SunmiPrinterPlugin implements FlutterPlugin, MethodCallHandler {
         Boolean clearExit = call.argument("clearExit");
         sunmiPrinterMethod.exitPrinterBuffer(clearExit);
         result.success(true);
-
+        break;
+      case "PRINTER_SERIAL_NUMBER":
+        final String serial = sunmiPrinterMethod.getPrinterSerialNo();
+        result.success(serial);
+        break;
+      case "PRINTER_VERSION":
+        final String printer_verison = sunmiPrinterMethod.getPrinterVersion();
+        result.success(printer_verison);
+        break;
+      case "PAPER_SIZE":
+        final int paper = sunmiPrinterMethod.getPrinterPaper();
+        result.success(paper);
         break;
       default:
         result.notImplemented();

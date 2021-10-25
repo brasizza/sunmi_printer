@@ -38,16 +38,37 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  bool? printBinded = false;
+  bool printBinded = false;
+  int paperSize = 0;
+  String serialNumber = "";
+  String printerVersion = "";
   @override
   void initState() {
     super.initState();
 
-    _bindingPrinter().then((bool? isBind) async => {
-          setState(() {
-            printBinded = isBind;
-          })
+    _bindingPrinter().then((bool? isBind) async {
+      SunmiPrinter.paperSize().then((int size) {
+        setState(() {
+          paperSize = size;
         });
+      });
+
+      SunmiPrinter.printerVersion().then((String version) {
+        setState(() {
+          printerVersion = version;
+        });
+      });
+
+      SunmiPrinter.serialNumber().then((String serial) {
+        setState(() {
+          serialNumber = serial;
+        });
+      });
+
+      setState(() {
+        printBinded = isBind!;
+      });
+    });
   }
 
   /// must binding ur printer at first init in app
@@ -65,9 +86,24 @@ class _HomeState extends State<Home> {
         body: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 18.0),
+              padding: const EdgeInsets.only(
+                top: 10,
+              ),
               child: Text("Print binded: " + printBinded.toString()),
             ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 2.0),
+              child: Text("Paper size: " + paperSize.toString()),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 2.0),
+              child: Text("Serial number: " + serialNumber),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 2.0),
+              child: Text("Printer version: " + printerVersion),
+            ),
+            const Divider(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
@@ -117,9 +153,7 @@ class _HomeState extends State<Home> {
                       onPressed: () async {
                         await SunmiPrinter.initPrinter();
                         await SunmiPrinter.startTransactionPrint(true);
-                        await SunmiPrinter.bold();
-                        await SunmiPrinter.printText('Hello I\'m bold');
-                        await SunmiPrinter.resetBold();
+                        await SunmiPrinter.printText('Hello I\'m bold', style: SunmiStyle(bold: true));
                         await SunmiPrinter.lineWrap(2);
                         await SunmiPrinter.exitTransactionPrint(true);
                       },
@@ -128,10 +162,9 @@ class _HomeState extends State<Home> {
                       onPressed: () async {
                         await SunmiPrinter.initPrinter();
                         await SunmiPrinter.startTransactionPrint(true);
-                        await SunmiPrinter.setFontSize(SunmiFontSize.XS);
-                        await SunmiPrinter.printText('Very small!');
-                        await SunmiPrinter.resetFontSize();
+                        await SunmiPrinter.printText('Very small!', style: SunmiStyle(fontSize: SunmiFontSize.XS));
                         await SunmiPrinter.lineWrap(2);
+
                         await SunmiPrinter.exitTransactionPrint(true);
                       },
                       child: const Text('Very small font')),
@@ -139,9 +172,7 @@ class _HomeState extends State<Home> {
                       onPressed: () async {
                         await SunmiPrinter.initPrinter();
                         await SunmiPrinter.startTransactionPrint(true);
-                        await SunmiPrinter.setFontSize(SunmiFontSize.SM);
-                        await SunmiPrinter.printText('Small font !');
-                        await SunmiPrinter.resetFontSize();
+                        await SunmiPrinter.printText('Very small!', style: SunmiStyle(fontSize: SunmiFontSize.SM));
                         await SunmiPrinter.lineWrap(2);
                         await SunmiPrinter.exitTransactionPrint(true);
                       },
@@ -150,9 +181,8 @@ class _HomeState extends State<Home> {
                       onPressed: () async {
                         await SunmiPrinter.initPrinter();
                         await SunmiPrinter.startTransactionPrint(true);
-                        await SunmiPrinter.setFontSize(SunmiFontSize.MD);
-                        await SunmiPrinter.printText('Default font!');
-                        await SunmiPrinter.resetFontSize();
+                        await SunmiPrinter.printText('Normal font', style: SunmiStyle(fontSize: SunmiFontSize.MD));
+
                         await SunmiPrinter.lineWrap(2);
                         await SunmiPrinter.exitTransactionPrint(true);
                       },
@@ -160,10 +190,8 @@ class _HomeState extends State<Home> {
                   ElevatedButton(
                       onPressed: () async {
                         await SunmiPrinter.initPrinter();
-                        await SunmiPrinter.startTransactionPrint(true);
-                        await SunmiPrinter.setFontSize(SunmiFontSize.LG);
-                        await SunmiPrinter.printText('Large font!');
-                        await SunmiPrinter.resetFontSize();
+                        await SunmiPrinter.printText('Large font', style: SunmiStyle(fontSize: SunmiFontSize.LG));
+
                         await SunmiPrinter.lineWrap(2);
                         await SunmiPrinter.exitTransactionPrint(true);
                       },
@@ -191,8 +219,7 @@ class _HomeState extends State<Home> {
                       onPressed: () async {
                         await SunmiPrinter.initPrinter();
                         await SunmiPrinter.startTransactionPrint(true);
-                        await SunmiPrinter.setAlignment(SunmiPrintAlign.RIGHT);
-                        await SunmiPrinter.printText('Align right');
+                        await SunmiPrinter.printText('Align right', style: SunmiStyle(align: SunmiPrintAlign.RIGHT));
                         await SunmiPrinter.lineWrap(2);
                         await SunmiPrinter.exitTransactionPrint(true);
                       },
@@ -202,8 +229,8 @@ class _HomeState extends State<Home> {
                         await SunmiPrinter.initPrinter();
 
                         await SunmiPrinter.startTransactionPrint(true);
-                        await SunmiPrinter.setAlignment(SunmiPrintAlign.LEFT);
-                        await SunmiPrinter.printText('Align left');
+                        await SunmiPrinter.printText('Align left', style: SunmiStyle(align: SunmiPrintAlign.LEFT));
+
                         await SunmiPrinter.lineWrap(2);
                         await SunmiPrinter.exitTransactionPrint(true);
                       },
@@ -213,8 +240,11 @@ class _HomeState extends State<Home> {
                       await SunmiPrinter.initPrinter();
 
                       await SunmiPrinter.startTransactionPrint(true);
-                      await SunmiPrinter.setAlignment(SunmiPrintAlign.CENTER);
-                      await SunmiPrinter.printText('Align center');
+                      await SunmiPrinter.printText(
+                        'Align center/ LARGE TEXT AND BOLD',
+                        style: SunmiStyle(align: SunmiPrintAlign.CENTER, bold: true, fontSize: SunmiFontSize.LG),
+                      );
+
                       await SunmiPrinter.lineWrap(2);
                       await SunmiPrinter.exitTransactionPrint(true);
                     },
@@ -276,27 +306,9 @@ class _HomeState extends State<Home> {
               child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
                 ElevatedButton(
                     onPressed: () async {
-                      await SunmiPrinter.submitTransactionPrint();
+                      await SunmiPrinter.cut();
                     },
                     child: const Text('CUT PAPER')),
-              ]),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-                ElevatedButton(
-                    onPressed: () async {
-                      await SunmiPrinter.initPrinter();
-
-                      await SunmiPrinter.startLabelPrint();
-                      Uint8List byte = await _getImageFromAsset('assets/images/dash.jpeg');
-                      await SunmiPrinter.setAlignment(SunmiPrintAlign.CENTER);
-                      await SunmiPrinter.printImage(byte);
-                      await SunmiPrinter.setAlignment(SunmiPrintAlign.CENTER);
-                      await SunmiPrinter.printText('LABEL MODE!'); // Note: img variable must convert
-                      await SunmiPrinter.exitLabelPrint();
-                    },
-                    child: const Text('LABEL MODE (PRINTER WITH LABEL MODE')),
               ]),
             ),
             Padding(
@@ -310,6 +322,7 @@ class _HomeState extends State<Home> {
                       await SunmiPrinter.setAlignment(SunmiPrintAlign.CENTER);
                       await SunmiPrinter.line();
                       await SunmiPrinter.printText('Payment receipt');
+                      await SunmiPrinter.printText('Using the old way to bold!');
                       await SunmiPrinter.line();
 
                       await SunmiPrinter.printRow(cols: [
@@ -401,6 +414,8 @@ Future<List<int>> _customEscPos() async {
   bytes += generator.text('Align left', styles: const PosStyles(align: PosAlign.left));
   bytes += generator.text('Align center', styles: const PosStyles(align: PosAlign.center));
   bytes += generator.text('Align right', styles: const PosStyles(align: PosAlign.right), linesAfter: 1);
+  bytes += generator.qrcode('Barcode by escpos', size: QRSize.Size4, cor: QRCorrection.H);
+  bytes += generator.feed(2);
 
   bytes += generator.row([
     PosColumn(
@@ -425,6 +440,9 @@ Future<List<int>> _customEscPos() async {
         height: PosTextSize.size2,
         width: PosTextSize.size2,
       ));
+
+  bytes += generator.reset();
+  bytes += generator.cut();
 
   return bytes;
 }

@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.0.8
+* Removed Label Printing Support , because the aidl don't give the support anymore (updated the IWoyouService)
+* Update the printText method, now you can set the style, bold and size in the method.
+* [x] cutPaper - Dedicated method just to cut the line
+* [x] getPrinterSerialNo - Get the serial number of the printer
+* [x] getPrinterVersion - Get the printer's version
+* [x] getPrinterPaper - Get the paper size ( 0: 80mm 1: 58mm)
 ## 2.0.7
 * Code format
 

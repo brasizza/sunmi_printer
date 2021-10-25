@@ -2,11 +2,13 @@
 
 # This is a fork from [sunmi_printer](https://pub.dev/packages/sunmi_printer) , but i implemented a lot of other features described below
 
+## Important: 
+  **THIS PACKAGE WILL WORK ONLY IN ANDROID!**
 
 
-Support Sunmi V2 Pro Label Version and Null Safety.
+Support Sunmi and Null Safety.
 I build this flutter plugin based on this:
-[Official Sunmi Inner Printer Doc](https://file.cdn.sunmi.com/SUNMIDOCS/%E5%95%86%E7%B1%B3%E5%86%85%E7%BD%AE%E6%89%93%E5%8D%B0%E6%9C%BA%E5%BC%80%E5%8F%91%E8%80%85%E6%96%87%E6%A1%A3EN-0224.pdf). But not all method from doc is included in this plugins. I am only select few of important method which is important for my personal usecase only.
+[Official Sunmi Inner Printer Doc](https://file.cdn.sunmi.com/SUNMIDOCS/%E5%95%86%E7%B1%B3%E5%86%85%E7%BD%AE%E6%89%93%E5%8D%B0%E6%9C%BA%E5%BC%80%E5%8F%91%E8%80%85%E6%96%87%E6%A1%A3EN-0224.pdf). But not all method from doc was included in this package, beacuse i don't have equipment. If you have and can help me, just contact me on github!
 
 ## Installation  
 
@@ -15,7 +17,7 @@ flutter pub add sunmi_printer_plus
 ```
 
 ## What this package do
-- [x] Write some text
+- [x] Write some text (with style or not!)
 - [x] Change font size
 - [x] Jump (n) lines
 - [x] Draw a divisor line
@@ -25,12 +27,18 @@ flutter pub add sunmi_printer_plus
 - [x] Print image from asset or from web (example show how to print both)
 - [x] Print rows like recepit with custom width and alignment
 - [x] Able to combine with some esc/pos code that you already have!
+- [x] Cut paper - Dedicated method just to cut the line
+- [x] Printer serial no - Get the serial number of the printer
+- [x] Printer version - Get the printer's version
+- [x] Printer paper size - Get the paper size ( 0: 80mm 1: 58mm)
+
+## If you have an LDC printer and want to help me with the LCD functions just contact me
+- [-] LCD functions
 
 ## Tested Devices
 
 ```bash
 Sunmi V2 Pro 
-Sunmi V2 Pro (Label Version)
 ```
 
 
@@ -82,17 +90,7 @@ await SunmiPrinter.bindingPrinter(); // must bind the printer first. for more ex
 
 ```
 
-## Example code when use for label printing
 
-```dart
-// Enter into the label mode
-await SunmiPrinter.startLabelPrint();
-// Set whatever alignment u like
-await SunmiPrinter.setAlignment(SunmiPrintAlign.CENTER); 
-await SunmiPrinter.printText("Label mode for some printers"); 
-// remember to exit the label mode after finish printing.
-await SunmiPrinter.exitLabelPrint(); 
-```
 
 
 ## List of enum printer status
@@ -147,29 +145,59 @@ enum PrinterMode {
 
 ### List of enum Alignments
 ```dart
-enum SunmiPrintAlign { LEFT, CENTER, RIGHT }
+enum SunmiPrintAlign {
+  LEFT,
+  CENTER,
+  RIGHT,
+}
 ```
 
 ### List of enum Qrcode levels
 ```dart
-enum SunmiQrcodeLevel { LEVEL_L, LEVEL_M, LEVEL_Q, LEVEL_H }
+enum SunmiQrcodeLevel {
+  LEVEL_L,
+  LEVEL_M,
+  LEVEL_Q,
+  LEVEL_H,
+}
 ```
 
 ### List of enum Barcode types
 ```dart
-enum SunmiBarcodeType { UPCA, UPCE, JAN13, JAN8, CODE39, ITF, CODABAR, CODE93, CODE128 }
+enum SunmiBarcodeType {
+  UPCA,
+  UPCE,
+  JAN13,
+  JAN8,
+  CODE39,
+  ITF,
+  CODABAR,
+  CODE93,
+  CODE128,
+}
 ```
 
 
 ### List of enum Text position in barcode
 ```dart
-enum SunmiBarcodeTextPos { NO_TEXT, TEXT_ABOVE, TEXT_UNDER, BOTH }
+enum SunmiBarcodeTextPos {
+  NO_TEXT,
+  TEXT_ABOVE,
+  TEXT_UNDER,
+  BOTH,
+}
 ```
 
 
 ### List of enum Font sizes
 ```dart
-enum SunmiFontSize { XS, SM, MD, LG, XL }
+enum SunmiFontSize {
+  XS,
+  SM,
+  MD,
+  LG,
+  XL,
+}
 ```
 
 

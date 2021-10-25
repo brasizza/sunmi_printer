@@ -1,8 +1,8 @@
 name: sunmi_printer_plus
 
 
-description: Support V2 Pro Sunmi Label Version and Null safety.\nWith this package you can connect with Sunmi printers, print text, image, qrcode, barcodes and a custom Esc/Pos if you like.
-version: 2.0.6
+description: Support V2 Pro Sunmi Label Version and Null safety. With this package you can connect with Sunmi printers, print text, image, qrcode, barcodes and a custom Esc/Pos if you like.
+version: 2.0.8
 homepage: https://github.com/brasizza/sunmi_printer/
 
 environment:

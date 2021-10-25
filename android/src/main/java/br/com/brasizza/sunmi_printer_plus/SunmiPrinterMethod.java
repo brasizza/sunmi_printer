@@ -182,6 +182,45 @@ public class SunmiPrinterMethod {
     }
   }
 
+
+  public Boolean cutPaper() {
+    try {
+      _woyouService.cutPaper(this._callback());
+      return true;
+    } catch (RemoteException e) {
+      return false;
+    }
+  }
+
+  public String getPrinterSerialNo() {
+    try {
+      final String serial = _woyouService.getPrinterSerialNo();
+      return serial;
+    } catch (RemoteException e) {
+      return ""; // error;
+    }
+  } 
+
+   public String getPrinterVersion() {
+    try {
+      final String version = _woyouService.getPrinterVersion();
+      return version;
+    } catch (RemoteException e) {
+      return "";// error;
+    }
+  } 
+  
+  public int getPrinterPaper() {
+    try {
+      final int paper = _woyouService.getPrinterPaper();
+      return paper;
+    } catch (RemoteException e) {
+              e.printStackTrace();
+
+      return 1; // error;
+    }
+  } 
+  
   public int getPrinterMode() {
     try {
       final int mode = _woyouService.getPrinterMode();
@@ -191,17 +230,17 @@ public class SunmiPrinterMethod {
     }
   }
 
-  public void labelLocate() {
-    try {
-      _woyouService.labelLocate();
-    } catch (RemoteException e) {}
-  }
+  // public void labelLocate() {
+  //   try {
+  //     _woyouService.labelLocate();
+  //   } catch (RemoteException e) {}
+  // }
 
-  public void labelOutput() {
-    try {
-      _woyouService.labelOutput();
-    } catch (RemoteException e) {}
-  }
+  // public void labelOutput() {
+  //   try {
+  //     _woyouService.labelOutput();
+  //   } catch (RemoteException e) {}
+  // }
 
   public void lineWrap(int lines) {
     try {
