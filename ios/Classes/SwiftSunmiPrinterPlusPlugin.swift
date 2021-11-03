@@ -1,10 +1,10 @@
 import Flutter
 import UIKit
 
-public class SwiftSunmiPrinterPlugin: NSObject, FlutterPlugin {
+public class SwiftSunmiPrinterPlusPlugin: NSObject, FlutterPlugin {
   public static func register(with registrar: FlutterPluginRegistrar) {
     let channel = FlutterMethodChannel(name: "sunmi_printer_plus", binaryMessenger: registrar.messenger())
-    let instance = SwiftSunmiPrinterPlugin()
+    let instance = SwiftSunmiPrinterPlusPlugin()
     registrar.addMethodCallDelegate(instance, channel: channel)
   }
 
