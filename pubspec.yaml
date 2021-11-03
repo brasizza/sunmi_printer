@@ -32,7 +32,7 @@ flutter:
         package: br.com.brasizza.sunmi_printer_plus
         pluginClass: SunmiPrinterPlugin
       ios:
-        pluginClass: SunmiPrinterPlugin
+        pluginClass: SunmiPrinterPlusPlugin
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:
