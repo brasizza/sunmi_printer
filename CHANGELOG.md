@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.9
+* This package still ( and i think will never) woks in IOS, but now you can generate your apps in IOS without exceptions.<br>
+**Thanks to open the issue [@akshaykalola28](https://github.com/akshaykalola28)**
+
 ## 2.0.8
 * Removed Label Printing Support , because the aidl don't give the support anymore (updated the IWoyouService)
 * Update the printText method, now you can set the style, bold and size in the method.
