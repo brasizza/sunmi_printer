@@ -358,6 +358,35 @@ class _HomeState extends State<Home> {
                         ColumnMaker(text: 'TOTAL', width: 25, align: SunmiPrintAlign.LEFT),
                         ColumnMaker(text: '38.43', width: 6, align: SunmiPrintAlign.RIGHT),
                       ]);
+
+                      await SunmiPrinter.printRow(cols: [
+                        ColumnMaker(text: 'ARABIC TEXT', width: 15, align: SunmiPrintAlign.LEFT),
+                        ColumnMaker(text: 'اسم المشترك', width: 15, align: SunmiPrintAlign.LEFT),
+                      ]);
+
+                      await SunmiPrinter.printRow(cols: [
+                        ColumnMaker(text: 'اسم المشترك', width: 15, align: SunmiPrintAlign.LEFT),
+                        ColumnMaker(text: 'اسم المشترك', width: 15, align: SunmiPrintAlign.LEFT),
+                      ]);
+
+                      await SunmiPrinter.printRow(cols: [
+                        ColumnMaker(text: 'RUSSIAN TEXT', width: 15, align: SunmiPrintAlign.LEFT),
+                        ColumnMaker(text: 'Санкт-Петербу́рг', width: 15, align: SunmiPrintAlign.LEFT),
+                      ]);
+                      await SunmiPrinter.printRow(cols: [
+                        ColumnMaker(text: 'Санкт-Петербу́рг', width: 15, align: SunmiPrintAlign.LEFT),
+                        ColumnMaker(text: 'Санкт-Петербу́рг', width: 15, align: SunmiPrintAlign.LEFT),
+                      ]);
+
+                      await SunmiPrinter.printRow(cols: [
+                        ColumnMaker(text: 'CHINESE TEXT', width: 15, align: SunmiPrintAlign.LEFT),
+                        ColumnMaker(text: '風俗通義', width: 15, align: SunmiPrintAlign.LEFT),
+                      ]);
+                      await SunmiPrinter.printRow(cols: [
+                        ColumnMaker(text: '風俗通義', width: 15, align: SunmiPrintAlign.LEFT),
+                        ColumnMaker(text: '風俗通義', width: 15, align: SunmiPrintAlign.LEFT),
+                      ]);
+
                       await SunmiPrinter.setAlignment(SunmiPrintAlign.CENTER);
                       await SunmiPrinter.line();
                       await SunmiPrinter.bold();

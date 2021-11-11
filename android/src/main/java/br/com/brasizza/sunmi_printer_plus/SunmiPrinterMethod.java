@@ -150,16 +150,8 @@ public class SunmiPrinterMethod {
 
       
      try {
-    //    _woyouService.printColumnsText(new String[]{"MARCUS","TESTE","JORGE"}, new int[]{8,8,8}, new int[]{1,1,1},this._callback());
-    //         return true;
-    // //   Log.d("SunmiPrinter", "printColumn111");
-    // //   Log.d("SunmiPrinter", Arrays.toString(columnWidth));
-    // //   Log.d("SunmiPrinter", Arrays.toString(columnAlignment));
-    // //   Log.d("SunmiPrinter", Arrays.deepToString(stringColumns));
-    // //   Log.d("SunmiPrinter", "printColumn111");
-    // //   Log.d("SunmiPrinter", "printColumn111");
 
-      _woyouService.printColumnsText(
+      _woyouService.printColumnsString(
         stringColumns,
         columnWidth,
         columnAlignment,

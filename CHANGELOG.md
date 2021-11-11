@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.10
+* Print the arabic text in ColumnMaker wasn't working. Now it's fixed and the example will print chinese, russian and arabic.<br>
+**Thanks AGAIN!!! to open the issue [@akshaykalola28](https://github.com/akshaykalola28)**
+
 ## 2.0.9
 * This package still ( and i think will never) woks in IOS, but now you can generate your apps in IOS without exceptions.<br>
 **Thanks to open the issue [@akshaykalola28](https://github.com/akshaykalola28)**
