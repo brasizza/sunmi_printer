@@ -1,7 +1,7 @@
 # Changelog
 
 ## 2.0.11#
-* Now you can use the package with another app that can or cannot print with sunmi and not explode a lot of exceptions.<br>
+* Fixed exceptions with a device that is not sunmi.
 * This is good if you have a hybrid app with just a condition to start or not sunmi printer.
 **Thanks to open the issue [@aoeminh](https://github.com/aoeminh)**
 
