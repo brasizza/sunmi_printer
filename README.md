@@ -56,7 +56,7 @@ Example screen
 
 ```dart
 // import packages
-import 'package:sunmi_printer/sunmi_printer_plus.dart';
+import 'package:sunmi_printer_plus/sunmi_printer_plus.dart';
 
 
 // all method from sunmi printer need to async await
