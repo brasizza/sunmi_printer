@@ -42,7 +42,7 @@ class SunmiPrinter {
   ///*bindingPrinter*
   ///
   ///This method will intializate the printer to start the whole print.
-  ///This method *Must* be executed before any other print command.
+  ///This method *Must* be executed before any other print and LCD command.
   static Future<bool?> bindingPrinter() async {
     final bool? status = await _channel.invokeMethod('BIND_PRINTER_SERVICE');
     return status;
@@ -432,4 +432,61 @@ class SunmiPrinter {
   static Future<String> printerVersion() async {
     return await _channel.invokeMethod("PRINTER_VERSION");
   }
+
+  /// LCD Methods
+
+  /// Initialize LCD
+  static Future<void> lcdInitialize() async {
+    return await _channel.invokeMethod("LCD_COMMAND", {"flag": 1});
+  }
+
+  /// Wakeup LCD
+  static Future<void> lcdWakeup() async {
+    return await _channel.invokeMethod("LCD_COMMAND", {"flag": 2});
+  }
+
+  /// Sleep LCD
+  static Future<void> lcdSleep() async {
+    return await _channel.invokeMethod("LCD_COMMAND", {"flag": 3});
+  }
+
+  /// clear LCD
+  static Future<void> lcdClear() async {
+    return await _channel.invokeMethod("LCD_COMMAND", {"flag": 4});
+  }
+
+  /// Display string on LCD
+  static Future<void> lcdString(String text) async {
+    return await _channel.invokeMethod("LCD_STRING", {"string": text});
+  }
+
+  /// Display Bitmap on LCD
+  /// Image size is 128 x 40 pixels.
+  static Future<void> lcdImage(Uint8List img) async {
+    return await _channel.invokeMethod("LCD_BITMAP", {"bitmap": img});
+  }
+
+  /// Display 2 lines string on LCD
+  static Future<void> lcdDoubleString(String topText, String bottomText) async {
+    return await _channel.invokeMethod(
+        "LCD_DOUBLE_STRING", {"topText": topText, "bottomText": bottomText});
+  }
+
+  /// Send a single-line text in a customized size.
+  /// If fill = true, The size parameter be used to set the width of characters.
+  /// e.g. size:16, fill:false ... Half size char ( Like lcdDoubleString() )
+  ///      size:32, fill:false ... Full size char ( Like lcdString() )
+  ///      size:64, fill:true ... Width 64 pixel huge character.
+  static Future<void> lcdFillString(String text,{ int size = 32, bool fill=false} ) async {
+    return await _channel.invokeMethod(
+        "LCD_FILL_STRING", {"string": text, "size": size, "fill": fill});
+  }
+
+  /// Display variable height multiline string.
+  /// aligns: The weight of the solid content of each line. Like flex.
+  static Future<void> lcdMultiString(List<String> texts, List<int> aligns ) async {
+    return await _channel.invokeMethod(
+        "LCD_MULTI_STRING", {"text": texts, "align": aligns});
+  }
+
 }
