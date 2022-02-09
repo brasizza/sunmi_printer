@@ -2,12 +2,10 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:flutter/services.dart';
-import 'package:sunmi_printer_plus/enums.dart';
-import 'package:sunmi_printer_plus/column_maker.dart';
-import 'package:sunmi_printer_plus/sunmi_style.dart';
-export 'package:sunmi_printer_plus/sunmi_style.dart';
-export 'package:sunmi_printer_plus/column_maker.dart';
-export 'package:sunmi_printer_plus/enums.dart';
+
+import 'column_maker.dart';
+import 'enums.dart';
+import 'sunmi_style.dart';
 
 ///*SunmiPrinter*
 ///
@@ -477,16 +475,17 @@ class SunmiPrinter {
   /// e.g. size:16, fill:false ... Half size char ( Like lcdDoubleString() )
   ///      size:32, fill:false ... Full size char ( Like lcdString() )
   ///      size:64, fill:true ... Width 64 pixel huge character.
-  static Future<void> lcdFillString(String text,{ int size = 32, bool fill=false} ) async {
+  static Future<void> lcdFillString(String text,
+      {int size = 32, bool fill = false}) async {
     return await _channel.invokeMethod(
         "LCD_FILL_STRING", {"string": text, "size": size, "fill": fill});
   }
 
   /// Display variable height multiline string.
   /// aligns: The weight of the solid content of each line. Like flex.
-  static Future<void> lcdMultiString(List<String> texts, List<int> aligns ) async {
-    return await _channel.invokeMethod(
-        "LCD_MULTI_STRING", {"text": texts, "align": aligns});
+  static Future<void> lcdMultiString(
+      List<String> texts, List<int> aligns) async {
+    return await _channel
+        .invokeMethod("LCD_MULTI_STRING", {"text": texts, "align": aligns});
   }
-
 }

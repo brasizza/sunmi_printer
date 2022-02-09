@@ -1,5 +1,4 @@
 import 'dart:typed_data';
-import 'package:esc_pos_utils/esc_pos_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:async';
@@ -11,8 +10,7 @@ import 'main.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.landscapeRight, DeviceOrientation.landscapeRight]);
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeRight, DeviceOrientation.landscapeRight]);
   runApp(const MyApp());
 }
 
@@ -155,24 +153,21 @@ class _HomeState extends State<Home> {
                   context,
                   labels: ['Fill String', '32px, fill=false'],
                   onPressed: () async {
-                    await SunmiPrinter.lcdFillString('Size32',
-                        size: 32, fill: false);
+                    await SunmiPrinter.lcdFillString('Size32', size: 32, fill: false);
                   },
                 ),
                 _buildButton(
                   context,
                   labels: ['Fill String', '16px, fill=true'],
                   onPressed: () async {
-                    await SunmiPrinter.lcdFillString('abcDEFgj0123\$&=+',
-                        size: 16, fill: true);
+                    await SunmiPrinter.lcdFillString('abcDEFgj0123\$&=+', size: 16, fill: true);
                   },
                 ),
                 _buildButton(
                   context,
                   labels: ['Fill String', '64px, fill=true'],
                   onPressed: () async {
-                    await SunmiPrinter.lcdFillString('64px',
-                        size: 64, fill: true);
+                    await SunmiPrinter.lcdFillString('64px', size: 64, fill: true);
                   },
                 ),
                 _buildButton(
@@ -211,8 +206,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget _buildButton(BuildContext context,
-      {required List<String> labels, required VoidCallback onPressed}) {
+  Widget _buildButton(BuildContext context, {required List<String> labels, required VoidCallback onPressed}) {
     return ElevatedButton(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

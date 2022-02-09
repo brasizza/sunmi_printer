@@ -31,14 +31,15 @@ flutter pub add sunmi_printer_plus
 - [x] Printer serial no - Get the serial number of the printer
 - [x] Printer version - Get the printer's version
 - [x] Printer paper size - Get the paper size ( 0: 80mm 1: 58mm)
+- [x] LCD Print a image  [ytyng](https://github.com/ytyng)
+- [x] LCD Print a string , multi lines as double lines Thanks to [ytyng](https://github.com/ytyng)
 
-## If you have an LDC printer and want to help me with the LCD functions just contact me
-- [-] LCD functions
 
 ## Tested Devices
 
 ```bash
 Sunmi V2 Pro 
+Sunmi T2 mini
 ```
 
 
@@ -49,10 +50,9 @@ This is good if you already have a code that another printers use, and u can reu
 
 #Just see the example folder!
 
-Example screen
-<p align="left">
-  <img src="https://images2.imgbox.com/a1/f1/r1JCZvD2_o.png" width="350" title="hover text">
-</p>
+
+
+
 
 ```dart
 // import packages
@@ -90,6 +90,28 @@ await SunmiPrinter.bindingPrinter(); // must bind the printer first. for more ex
 
 ```
 
+# Example code for LCD functions  [@ytyng](https://github.com/ytyng)
+
+```dart
+ await SunmiPrinter.lcdInitialize(); //Initialize the LCD 
+ await SunmiPrinter.lcdWakeup(); //Turn the LCD ON
+ await SunmiPrinter.lcdSleep(); //Turn the LCD OFF
+ await SunmiPrinter.lcdClear(); //Clear LCD screen
+ await SunmiPrinter.lcdString('Hello'); //Write a simple line 
+ await SunmiPrinter.lcdString('Hello'); //Write a simple line 
+ await SunmiPrinter.lcdDoubleString('Hello', 'World'); //Write two lines
+
+ Uint8List byte = await readFileBytes('assets/images/128x40.png');
+ await SunmiPrinter.lcdImage(byte); // Put an image in LCD
+ await SunmiPrinter.lcdFillString('abcDEFgj0123\$&=+', size: 16, fill: true); // Print a string and fill with zeros until the size is reached
+await SunmiPrinter.lcdMultiString([  'Welcome to flutter.',  'Align 2.',], [  1,  2,]); // Write multiple lines with alignent
+
+
+
+
+
+
+ ```
 
 
 

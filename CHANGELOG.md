@@ -1,5 +1,10 @@
 # Changelog
 
+
+## 2.0.12#
+* LCD functions fot T2mini
+**Thanks to make this AWESOME PR [@ytyng](https://github.com/ytyng)**
+
 ## 2.0.11#
 * Fixed exceptions with a device that is not sunmi.
 * This is good if you have a hybrid app with just a condition to start or not sunmi printer.

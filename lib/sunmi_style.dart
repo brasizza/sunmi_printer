@@ -1,4 +1,4 @@
-import 'package:sunmi_printer_plus/enums.dart';
+import 'enums.dart';
 
 ///*SunmiStyle*
 ///
