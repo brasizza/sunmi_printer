@@ -9,6 +9,8 @@ import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import org.json.JSONArray;
@@ -263,6 +265,47 @@ public class SunmiPrinterPlugin implements FlutterPlugin, MethodCallHandler {
         final int paper = sunmiPrinterMethod.getPrinterPaper();
         result.success(paper);
         break;
+
+      // LCD METHODS
+      case "LCD_COMMAND":
+        int flag = call.argument("flag");
+        sunmiPrinterMethod.sendLCDCommand(flag);
+        result.success(true);
+        break;
+      case "LCD_STRING":
+        String lcdString = call.argument("string");
+        sunmiPrinterMethod.sendLCDString(lcdString);
+        result.success(true);
+        break;
+      case "LCD_BITMAP":
+        byte[] lcdBitmapData = call.argument("bitmap");
+        Bitmap lcdBitmap = BitmapFactory.decodeByteArray(
+                lcdBitmapData, 0, lcdBitmapData.length);
+        sunmiPrinterMethod.sendLCDBitmap(lcdBitmap);
+        result.success(true);
+        break;
+      case "LCD_DOUBLE_STRING":
+        String topText = call.argument("topText");
+        String bottomText = call.argument("bottomText");
+        sunmiPrinterMethod.sendLCDDoubleString(topText, bottomText);
+        result.success(true);
+        break;
+      case "LCD_FILL_STRING":
+        String lcdFillString = call.argument("string");
+        int lcdFillSize = call.argument("size");
+        boolean lcdFill = call.argument("fill");
+        sunmiPrinterMethod.sendLCDFillString(lcdFillString, lcdFillSize, lcdFill);
+        result.success(true);
+        break;
+      case "LCD_MULTI_STRING":
+        ArrayList<String> lcdTextAL = call.argument("text");
+        String[] lcdText = Utilities.arrayListToString(lcdTextAL);
+        ArrayList<Integer> lcdAlignAL = call.argument("align");
+        int[] lcdAlign = Utilities.arrayListToIntList(lcdAlignAL);
+        sunmiPrinterMethod.sendLCDMultiString(lcdText, lcdAlign);
+        result.success(true);
+        break;
+
       default:
         result.notImplemented();
         break;
