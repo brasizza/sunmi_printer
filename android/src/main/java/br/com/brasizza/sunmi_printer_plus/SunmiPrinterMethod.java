@@ -169,7 +169,7 @@ public class SunmiPrinterMethod {
 
         try {
 
-            _woyouService.printColumnsString(
+            _woyouService.printColumnsText(
                     stringColumns,
                     columnWidth,
                     columnAlignment,

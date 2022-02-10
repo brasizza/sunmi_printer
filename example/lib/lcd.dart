@@ -1,9 +1,8 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'dart:async';
-
 import 'package:sunmi_printer_plus/sunmi_printer_plus.dart';
+import 'dart:async';
 
 import 'main.dart';
 
