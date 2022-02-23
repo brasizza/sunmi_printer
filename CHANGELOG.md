@@ -1,6 +1,10 @@
 # Changelog
 
 
+## 2.0.13#
+* Replace the method to print row to native sunmi (but will cannot print arabic at this moment)
+* build a custom size font method called setCustomFontSize and you can put any integer to fit an not use the pre defined like XL, SM and etc!
+
 ## 2.0.12#
 * LCD functions fot T2mini
 **Thanks to make this AWESOME PR [@ytyng](https://github.com/ytyng)**

@@ -1,10 +1,7 @@
 # sunmi_printer_plus
 
-# This is a fork from [sunmi_printer](https://pub.dev/packages/sunmi_printer) , but i implemented a lot of other features described below
-
 ## Important: 
   **THIS PACKAGE WILL WORK ONLY IN ANDROID!**
-
 
 Support Sunmi and Null Safety.
 I build this flutter plugin based on this:
@@ -84,6 +81,10 @@ await SunmiPrinter.bindingPrinter(); // must bind the printer first. for more ex
   await SunmiPrinter.printText('Very Large font!');
   await SunmiPrinter.resetFontSize(); // Reset font to medium size
 
+  await SunmiPrinter.setCustomFontSize(12); // SET CUSTOM FONT 12
+  await SunmiPrinter.printText('Custom font size!!!');
+  await SunmiPrinter.resetFontSize(); // Reset font to medium size
+
   await SunmiPrinter.printQRCode('https://github.com/brasizza/sunmi_printer'); // PRINT A QRCODE
   await SunmiPrinter.submitTransactionPrint(); // SUBMIT and cut paper
   await SunmiPrinter.exitTransactionPrint(true); // Close the transaction
@@ -104,55 +105,9 @@ await SunmiPrinter.bindingPrinter(); // must bind the printer first. for more ex
  Uint8List byte = await readFileBytes('assets/images/128x40.png');
  await SunmiPrinter.lcdImage(byte); // Put an image in LCD
  await SunmiPrinter.lcdFillString('abcDEFgj0123\$&=+', size: 16, fill: true); // Print a string and fill with zeros until the size is reached
-await SunmiPrinter.lcdMultiString([  'Welcome to flutter.',  'Align 2.',], [  1,  2,]); // Write multiple lines with alignent
+ await SunmiPrinter.lcdMultiString([  'Welcome to flutter.',  'Align 2.',], [  1,  2,]); // Write multiple lines with alignent
 
 
-
-
-
-
- ```
-
-
-
-## List of enum printer status
-
-```dart
-enum PrinterStatus {
-  ERROR,
-  NORMAL, 
-  ABNORMAL_COMMUNICATION, 
-  OUT_OF_PAPER, 
-  PREPARING,
-  OVERHEATED,
-  OPEN_THE_LID, 
-  PAPER_CUTTER_ABNORMAL,
-  PAPER_CUTTER_RECOVERED,
-  NO_BLACK_MARK,
-  NO_PRINTER_DETECTED,
-  FAILED_TO_UPGRADE_FIRMWARE,
-  EXCEPTION
-}
-```
-
-### List of printer verbose status
-
-```dart
-{
-    'ERROR': 'Something went wrong.', 
-    'NORMAL': 'Works normally', 
-    'ABNORMAL_COMMUNICATION': 'Abnormal communication',
-    'OUT_OF_PAPER': 'Out of paper',
-    'PREPARING': 'Preparing printer',
-    'OVERHEATED': 'Overheated',
-    'OPEN_THE_LID': 'Open the lid',
-    'PAPER_CUTTER_ABNORMAL': 'The paper cutter is abnormal',
-    'PAPER_CUTTER_RECOVERED': 'The paper cutter has been recovered',
-    'NO_BLACK_MARK': 'No black mark had been detected',
-    'NO_PRINTER_DETECTED': 'No printer had been detected',
-    'FAILED_TO_UPGRADE_FIRMWARE': 'Failed to upgrade firmware',
-    'EXCEPTION': 'Unknown Error code',
-}
 ```
 
 ### List of enum printer mode

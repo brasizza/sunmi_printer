@@ -224,6 +224,17 @@ class _HomeState extends State<Home> {
                           await SunmiPrinter.exitTransactionPrint(true);
                         },
                         child: const Text('Very large font')),
+                    ElevatedButton(
+                        onPressed: () async {
+                          await SunmiPrinter.initPrinter();
+                          await SunmiPrinter.startTransactionPrint(true);
+                          await SunmiPrinter.setCustomFontSize(13);
+                          await SunmiPrinter.printText('Very Large font!');
+                          await SunmiPrinter.resetFontSize();
+                          await SunmiPrinter.lineWrap(2);
+                          await SunmiPrinter.exitTransactionPrint(true);
+                        },
+                        child: const Text('Custom size font')),
                   ],
                 ),
               ),
@@ -446,7 +457,7 @@ class _HomeState extends State<Home> {
                                   align: SunmiPrintAlign.LEFT),
                               ColumnMaker(
                                   text: '38.43',
-                                  width: 6,
+                                  width: 5,
                                   align: SunmiPrintAlign.RIGHT),
                             ]);
 

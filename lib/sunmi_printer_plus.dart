@@ -401,6 +401,14 @@ class SunmiPrinter {
     await _channel.invokeMethod("FONT_SIZE", arguments);
   }
 
+  ///*setCustomFontSize*
+  ///
+  ///This method will allow you to put any font size integer and try the best fit for you
+  static Future<void> setCustomFontSize(int _size) async {
+    Map<String, dynamic> arguments = <String, dynamic>{"size": _size};
+    await _channel.invokeMethod("FONT_SIZE", arguments);
+  }
+
   ///*resetFontSize*
   ///
   ///This method will reset the font size to the medium (default) size
