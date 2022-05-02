@@ -1,5 +1,7 @@
 # sunmi_printer_plus
 
+# This is a fork from [sunmi_printer](https://pub.dev/packages/sunmi_printer) , but i implemented a lot of other features described below
+
 ## Important: 
   **THIS PACKAGE WILL WORK ONLY IN ANDROID!**
 
@@ -30,6 +32,9 @@ flutter pub add sunmi_printer_plus
 - [x] Printer paper size - Get the paper size ( 0: 80mm 1: 58mm)
 - [x] LCD Print a image  [ytyng](https://github.com/ytyng)
 - [x] LCD Print a string , multi lines as double lines Thanks to [ytyng](https://github.com/ytyng)
+- [x] Open de cash drawer Thanks to [ZheruiL](https://github.com/ZheruiL)
+- [x] Check if the cash drawer is connected or not 
+- [x] Get how many times the cash drawer was oppened
 
 
 ## Tested Devices
@@ -48,9 +53,6 @@ This is good if you already have a code that another printers use, and u can reu
 #Just see the example folder!
 
 
-
-
-
 ```dart
 // import packages
 import 'package:sunmi_printer_plus/sunmi_printer_plus.dart';
@@ -60,7 +62,6 @@ import 'package:sunmi_printer_plus/sunmi_printer_plus.dart';
 await SunmiPrinter.bindingPrinter(); // must bind the printer first. for more exmaple.. pls refer to example tab.
 
 ```
-
 ## Example code when use for transaction printing
 
 ```dart
@@ -107,8 +108,17 @@ await SunmiPrinter.bindingPrinter(); // must bind the printer first. for more ex
  await SunmiPrinter.lcdFillString('abcDEFgj0123\$&=+', size: 16, fill: true); // Print a string and fill with zeros until the size is reached
  await SunmiPrinter.lcdMultiString([  'Welcome to flutter.',  'Align 2.',], [  1,  2,]); // Write multiple lines with alignent
 
-
 ```
+# Example to open the cashier  [@ZheruiL](https://github.com/ZheruiL)
+
+```dart
+  bool await SunmiPrinter.drawerStatus(); //check if the cash drawer is connect or disconnect
+
+  await SunmiPrinter.openDrawer(); //open de cash drawer
+
+  int await SunmiPrinter.drawerTimesOpen(); //How many times de cash drawer was oppened
+
+ ```
 
 ### List of enum printer mode
 

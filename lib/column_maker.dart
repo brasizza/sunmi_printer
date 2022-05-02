@@ -1,5 +1,4 @@
 import 'enums.dart';
-import 'sunmi_printer_plus.dart';
 
 ///*ColumnMaker*
 /// With this class you can build a column with some text and alignment

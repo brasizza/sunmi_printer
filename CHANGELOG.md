@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.1.00#
+* Create some cash drawer methods to use when it's connected in the USB
+* Upgrade de flutter version to 1.15.1
+* Upgrade the kotlin and gradle to major versions
+
 
 ## 2.0.13#
 * Replace the method to print row to native sunmi (but will cannot print arabic at this moment)
