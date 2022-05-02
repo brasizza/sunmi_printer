@@ -254,6 +254,16 @@ public class SunmiPrinterMethod {
         }
     }
 
+    public Boolean openDrawer() {
+        try {
+            _woyouService.openDrawer(this._callback());
+            return true;
+        } catch (RemoteException e) {
+            return false;
+        } catch (NullPointerException e) {
+            return false;
+        }
+    }
 
     public void lineWrap(int lines) {
         try {

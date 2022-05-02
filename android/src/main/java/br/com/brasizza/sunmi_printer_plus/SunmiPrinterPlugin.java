@@ -224,6 +224,10 @@ public class SunmiPrinterPlugin implements FlutterPlugin, MethodCallHandler {
         sunmiPrinterMethod.cutPaper();
         result.success(true);
         break;
+      case "OPEN_DRAWER":
+        sunmiPrinterMethod.openDrawer();
+        result.success(true);
+        break;
       case "PRINT_ROW":
         String colsStr = call.argument("cols");
 

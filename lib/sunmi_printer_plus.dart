@@ -363,6 +363,14 @@ class SunmiPrinter {
     await _channel.invokeMethod("CUT_PAPER");
   }
 
+  ///*openDrawer*
+  ///
+  ///This method will open drawer
+  static Future<void> openDrawer() async {
+    await _channel.invokeMethod("OPEN_DRAWER");
+  }
+
+
   ///*exitTransactionPrint*
   ///
   ///This method will close the transaction
