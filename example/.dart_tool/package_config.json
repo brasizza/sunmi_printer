@@ -185,7 +185,7 @@
       "name": "sunmi_printer_plus",
       "rootUri": "../../",
       "packageUri": "lib/",
-      "languageVersion": "2.15"
+      "languageVersion": "2.17"
     },
     {
       "name": "term_glyph",
@@ -224,7 +224,7 @@
       "languageVersion": "2.15"
     }
   ],
-  "generated": "2022-06-09T06:14:47.251056Z",
+  "generated": "2022-06-09T06:15:55.623755Z",
   "generator": "pub",
   "generatorVersion": "2.17.1"
 }
