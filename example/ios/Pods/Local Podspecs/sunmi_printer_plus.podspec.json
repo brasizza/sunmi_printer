@@ -1,0 +1,31 @@
+{
+  "name": "sunmi_printer_plus",
+  "version": "0.0.1",
+  "summary": "Sunmi printer plus.",
+  "description": "Support V2 Pro Sunmi Label Version and Null safety. With this package you can connect with Sunmi printers, print text, image, qrcode, barcodes and a custom Esc/Pos if you like.",
+  "homepage": "https://marcus.brasizza.com",
+  "license": {
+    "file": "../LICENSE"
+  },
+  "authors": {
+    "Your Company": "mvbdesenvolvimento@gmail.com"
+  },
+  "source": {
+    "path": "."
+  },
+  "source_files": "Classes/**/*",
+  "dependencies": {
+    "Flutter": [
+
+    ]
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "pod_target_xcconfig": {
+    "DEFINES_MODULE": "YES",
+    "EXCLUDED_ARCHS[sdk=iphonesimulator*]": "i386"
+  },
+  "swift_versions": "5.0",
+  "swift_version": "5.0"
+}

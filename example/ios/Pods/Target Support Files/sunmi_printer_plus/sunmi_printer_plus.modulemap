@@ -1,0 +1,6 @@
+framework module sunmi_printer_plus {
+  umbrella header "sunmi_printer_plus-umbrella.h"
+
+  export *
+  module * { export * }
+}

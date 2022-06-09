@@ -1,0 +1,11 @@
+framework module sunmi_printer_plus {
+  umbrella header "sunmi_printer_plus-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module sunmi_printer_plus.Swift {
+    header "sunmi_printer_plus-Swift.h"
+    requires objc
+}
