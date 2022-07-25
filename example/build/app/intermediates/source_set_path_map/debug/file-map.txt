@@ -1,0 +1,13 @@
+com.example.example.app-jetified-annotation-experimental-1.1.0-0 /Users/francescodemartini/.gradle/caches/transforms-3/028e0f0377dddc9cdac4eee10e0073b7/transformed/jetified-annotation-experimental-1.1.0/res
+com.example.example.app-jetified-window-1.0.0-beta04-1 /Users/francescodemartini/.gradle/caches/transforms-3/09bbbfc1d45a60ff9548743810e518d7/transformed/jetified-window-1.0.0-beta04/res
+com.example.example.app-core-1.6.0-2 /Users/francescodemartini/.gradle/caches/transforms-3/8b66f73d2aab2a4601b3bf5235121d13/transformed/core-1.6.0/res
+com.example.example.app-jetified-window-java-1.0.0-beta04-3 /Users/francescodemartini/.gradle/caches/transforms-3/ceedefc388835d469f0ff72bdfac0b9c/transformed/jetified-window-java-1.0.0-beta04/res
+com.example.example.app-debug-4 /Users/francescodemartini/Documents/GitHub/sunmi_printer_for_V2s/example/android/app/src/debug/res
+com.example.example.app-main-5 /Users/francescodemartini/Documents/GitHub/sunmi_printer_for_V2s/example/android/app/src/main/res
+com.example.example.app-pngs-6 /Users/francescodemartini/Documents/GitHub/sunmi_printer_for_V2s/example/build/app/generated/res/pngs/debug
+com.example.example.app-resValues-7 /Users/francescodemartini/Documents/GitHub/sunmi_printer_for_V2s/example/build/app/generated/res/resValues/debug
+com.example.example.app-rs-8 /Users/francescodemartini/Documents/GitHub/sunmi_printer_for_V2s/example/build/app/generated/res/rs/debug
+com.example.example.app-mergeDebugResources-9 /Users/francescodemartini/Documents/GitHub/sunmi_printer_for_V2s/example/build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir
+com.example.example.app-mergeDebugResources-10 /Users/francescodemartini/Documents/GitHub/sunmi_printer_for_V2s/example/build/app/intermediates/incremental/debug/mergeDebugResources/stripped.dir
+com.example.example.app-merged_res-11 /Users/francescodemartini/Documents/GitHub/sunmi_printer_for_V2s/example/build/app/intermediates/merged_res/debug
+com.example.example.app-packaged_res-12 /Users/francescodemartini/Documents/GitHub/sunmi_printer_for_V2s/example/build/sunmi_printer_plus/intermediates/packaged_res/debug

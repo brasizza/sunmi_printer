@@ -1,0 +1,4 @@
+#Mon Jul 25 16:59:32 CEST 2022
+base.0=/Users/francescodemartini/Documents/GitHub/sunmi_printer_for_V2s/example/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+renamed.0=classes.dex
+path.0=classes.dex
