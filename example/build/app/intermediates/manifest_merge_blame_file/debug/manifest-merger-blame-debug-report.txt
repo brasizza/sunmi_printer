@@ -1,0 +1,114 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.example"
+4    android:versionCode="1"
+5    android:versionName="1.0.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="16"
+9        android:targetSdkVersion="30" />
+10    <!--
+11         Flutter needs it to communicate with the running application
+12         to allow setting breakpoints, to provide hot reload, etc.
+13    -->
+14    <uses-permission android:name="android.permission.INTERNET" />
+14-->/Users/francescodemartini/Documents/GitHub/sunmi_printer_for_V2s/example/android/app/src/debug/AndroidManifest.xml:6:5-66
+14-->/Users/francescodemartini/Documents/GitHub/sunmi_printer_for_V2s/example/android/app/src/debug/AndroidManifest.xml:6:22-64
+15
+16    <queries>
+16-->/Users/francescodemartini/Documents/GitHub/sunmi_printer_for_V2s/example/android/app/src/main/AndroidManifest.xml:3:6-5:16
+17        <package android:name="woyou.aidlservice.jiuiv5" />
+17-->/Users/francescodemartini/Documents/GitHub/sunmi_printer_for_V2s/example/android/app/src/main/AndroidManifest.xml:4:10-61
+17-->/Users/francescodemartini/Documents/GitHub/sunmi_printer_for_V2s/example/android/app/src/main/AndroidManifest.xml:4:19-58
+18    </queries>
+19
+20    <application
+20-->/Users/francescodemartini/Documents/GitHub/sunmi_printer_for_V2s/example/android/app/src/main/AndroidManifest.xml:7:4-45:19
+21        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+21-->[androidx.core:core:1.6.0] /Users/francescodemartini/.gradle/caches/transforms-3/8b66f73d2aab2a4601b3bf5235121d13/transformed/core-1.6.0/AndroidManifest.xml:24:18-86
+22        android:debuggable="true"
+23        android:icon="@mipmap/ic_launcher"
+23-->/Users/francescodemartini/Documents/GitHub/sunmi_printer_for_V2s/example/android/app/src/main/AndroidManifest.xml:9:9-43
+24        android:label="example"
+24-->/Users/francescodemartini/Documents/GitHub/sunmi_printer_for_V2s/example/android/app/src/main/AndroidManifest.xml:8:9-32
+25        android:testOnly="true" >
+26        <activity
+26-->/Users/francescodemartini/Documents/GitHub/sunmi_printer_for_V2s/example/android/app/src/main/AndroidManifest.xml:10:9-39:20
+27            android:name="com.example.example.MainActivity"
+27-->/Users/francescodemartini/Documents/GitHub/sunmi_printer_for_V2s/example/android/app/src/main/AndroidManifest.xml:11:13-41
+28            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+28-->/Users/francescodemartini/Documents/GitHub/sunmi_printer_for_V2s/example/android/app/src/main/AndroidManifest.xml:14:13-163
+29            android:exported="true"
+29-->/Users/francescodemartini/Documents/GitHub/sunmi_printer_for_V2s/example/android/app/src/main/AndroidManifest.xml:17:13-36
+30            android:hardwareAccelerated="true"
+30-->/Users/francescodemartini/Documents/GitHub/sunmi_printer_for_V2s/example/android/app/src/main/AndroidManifest.xml:15:13-47
+31            android:launchMode="singleTop"
+31-->/Users/francescodemartini/Documents/GitHub/sunmi_printer_for_V2s/example/android/app/src/main/AndroidManifest.xml:12:13-43
+32            android:theme="@style/LaunchTheme"
+32-->/Users/francescodemartini/Documents/GitHub/sunmi_printer_for_V2s/example/android/app/src/main/AndroidManifest.xml:13:13-47
+33            android:windowSoftInputMode="adjustResize" >
+33-->/Users/francescodemartini/Documents/GitHub/sunmi_printer_for_V2s/example/android/app/src/main/AndroidManifest.xml:16:13-55
+34
+35            <!--
+36                 Specifies an Android theme to apply to this Activity as soon as
+37                 the Android process has started. This theme is visible to the user
+38                 while the Flutter UI initializes. After that, this theme continues
+39                 to determine the Window background behind the Flutter UI.
+40            -->
+41            <meta-data
+41-->/Users/francescodemartini/Documents/GitHub/sunmi_printer_for_V2s/example/android/app/src/main/AndroidManifest.xml:22:13-25:17
+42                android:name="io.flutter.embedding.android.NormalTheme"
+42-->/Users/francescodemartini/Documents/GitHub/sunmi_printer_for_V2s/example/android/app/src/main/AndroidManifest.xml:23:15-70
+43                android:resource="@style/NormalTheme" />
+43-->/Users/francescodemartini/Documents/GitHub/sunmi_printer_for_V2s/example/android/app/src/main/AndroidManifest.xml:24:15-52
+44            <!--
+45                 Displays an Android View that continues showing the launch screen
+46                 Drawable until Flutter paints its first frame, then this splash
+47                 screen fades out. A splash screen is useful to avoid any visual
+48                 gap between the end of Android's launch screen and the painting of
+49                 Flutter's first frame.
+50            -->
+51            <meta-data
+51-->/Users/francescodemartini/Documents/GitHub/sunmi_printer_for_V2s/example/android/app/src/main/AndroidManifest.xml:31:13-34:17
+52                android:name="io.flutter.embedding.android.SplashScreenDrawable"
+52-->/Users/francescodemartini/Documents/GitHub/sunmi_printer_for_V2s/example/android/app/src/main/AndroidManifest.xml:32:15-79
+53                android:resource="@drawable/launch_background" />
+53-->/Users/francescodemartini/Documents/GitHub/sunmi_printer_for_V2s/example/android/app/src/main/AndroidManifest.xml:33:15-61
+54
+55            <intent-filter>
+55-->/Users/francescodemartini/Documents/GitHub/sunmi_printer_for_V2s/example/android/app/src/main/AndroidManifest.xml:35:13-38:29
+56                <action android:name="android.intent.action.MAIN" />
+56-->/Users/francescodemartini/Documents/GitHub/sunmi_printer_for_V2s/example/android/app/src/main/AndroidManifest.xml:36:17-68
+56-->/Users/francescodemartini/Documents/GitHub/sunmi_printer_for_V2s/example/android/app/src/main/AndroidManifest.xml:36:25-66
+57
+58                <category android:name="android.intent.category.LAUNCHER" />
+58-->/Users/francescodemartini/Documents/GitHub/sunmi_printer_for_V2s/example/android/app/src/main/AndroidManifest.xml:37:17-76
+58-->/Users/francescodemartini/Documents/GitHub/sunmi_printer_for_V2s/example/android/app/src/main/AndroidManifest.xml:37:27-74
+59            </intent-filter>
+60        </activity>
+61        <!--
+62             Don't delete the meta-data below.
+63             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+64        -->
+65        <meta-data
+65-->/Users/francescodemartini/Documents/GitHub/sunmi_printer_for_V2s/example/android/app/src/main/AndroidManifest.xml:42:9-44:33
+66            android:name="flutterEmbedding"
+66-->/Users/francescodemartini/Documents/GitHub/sunmi_printer_for_V2s/example/android/app/src/main/AndroidManifest.xml:43:13-44
+67            android:value="2" />
+67-->/Users/francescodemartini/Documents/GitHub/sunmi_printer_for_V2s/example/android/app/src/main/AndroidManifest.xml:44:13-30
+68
+69        <uses-library
+69-->[androidx.window:window:1.0.0-beta04] /Users/francescodemartini/.gradle/caches/transforms-3/09bbbfc1d45a60ff9548743810e518d7/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:25:9-27:40
+70            android:name="androidx.window.extensions"
+70-->[androidx.window:window:1.0.0-beta04] /Users/francescodemartini/.gradle/caches/transforms-3/09bbbfc1d45a60ff9548743810e518d7/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:26:13-54
+71            android:required="false" />
+71-->[androidx.window:window:1.0.0-beta04] /Users/francescodemartini/.gradle/caches/transforms-3/09bbbfc1d45a60ff9548743810e518d7/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:27:13-37
+72        <uses-library
+72-->[androidx.window:window:1.0.0-beta04] /Users/francescodemartini/.gradle/caches/transforms-3/09bbbfc1d45a60ff9548743810e518d7/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:28:9-30:40
+73            android:name="androidx.window.sidecar"
+73-->[androidx.window:window:1.0.0-beta04] /Users/francescodemartini/.gradle/caches/transforms-3/09bbbfc1d45a60ff9548743810e518d7/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:29:13-51
+74            android:required="false" />
+74-->[androidx.window:window:1.0.0-beta04] /Users/francescodemartini/.gradle/caches/transforms-3/09bbbfc1d45a60ff9548743810e518d7/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:30:13-37
+75    </application>
+76
+77</manifest>

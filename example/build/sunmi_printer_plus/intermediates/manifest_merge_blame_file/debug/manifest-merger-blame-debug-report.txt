@@ -1,0 +1,11 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="br.com.brasizza.sunmi_printer_plus" >
+4
+5    <uses-sdk
+6        android:minSdkVersion="16"
+6-->/Users/francescodemartini/Documents/GitHub/sunmi_printer_for_V2s/android/src/main/AndroidManifest.xml
+7        android:targetSdkVersion="16" />
+7-->/Users/francescodemartini/Documents/GitHub/sunmi_printer_for_V2s/android/src/main/AndroidManifest.xml
+8
+9</manifest>
