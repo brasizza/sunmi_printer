@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.1.01#
+* Add the querie 
+ <queries>
+      <package android:name="woyou.aidlservice.jiuiv5" />
+    </queries>
+to work with V2s devices
+Thanks to [@FrenkyDema](https://github.com/FrenkyDema)
+
+
 ## 2.1.00#
 * Create some cash drawer methods to use when it's connected in the USB
 * Upgrade de flutter version to 1.15.1

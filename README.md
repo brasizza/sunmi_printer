@@ -42,6 +42,7 @@ flutter pub add sunmi_printer_plus
 ```bash
 Sunmi V2 Pro 
 Sunmi T2 mini
+Sunmi V2S
 ```
 
 
