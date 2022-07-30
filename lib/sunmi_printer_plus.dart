@@ -521,8 +521,6 @@ class SunmiPrinter {
 
   static Future<String> getDisplays() async {
     final _invoke = await _channel.invokeMethod("LCD_GET_DISPLAYS");
-
-    print(_invoke);
-    return '';
+    return _invoke;
   }
 }
