@@ -284,6 +284,8 @@ public class SunmiPrinterPlugin implements FlutterPlugin, MethodCallHandler {
         sunmiPrinterMethod.sendLCDCommand(flag);
         result.success(true);
         break;
+      
+       
       case "LCD_STRING":
         String lcdString = call.argument("string");
         sunmiPrinterMethod.sendLCDString(lcdString);
@@ -316,6 +318,12 @@ public class SunmiPrinterPlugin implements FlutterPlugin, MethodCallHandler {
         int[] lcdAlign = Utilities.arrayListToIntList(lcdAlignAL);
         sunmiPrinterMethod.sendLCDMultiString(lcdText, lcdAlign);
         result.success(true);
+        break;
+
+
+        case "LCD_GET_DISPLAYS":
+        String dsiplays = sunmiPrinterMethod.getDisplays();
+        result.success(dsiplays);
         break;
 
       default:

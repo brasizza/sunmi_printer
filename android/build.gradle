@@ -38,3 +38,11 @@ android {
         disable 'InvalidPackage'
     }
 }
+
+dependencies {
+    implementation 'androidx.annotation:annotation:1.4.0'
+    implementation 'com.google.code.gson:gson:2.9.0'
+
+}
+
+

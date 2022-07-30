@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:typed_data';
+
 import 'package:flutter/services.dart';
 
 import 'column_maker.dart';
@@ -516,5 +517,12 @@ class SunmiPrinter {
       List<String> texts, List<int> aligns) async {
     return await _channel
         .invokeMethod("LCD_MULTI_STRING", {"text": texts, "align": aligns});
+  }
+
+  static Future<String> getDisplays() async {
+    final _invoke = await _channel.invokeMethod("LCD_GET_DISPLAYS");
+
+    print(_invoke);
+    return '';
   }
 }

@@ -10,6 +10,11 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
 import android.widget.Toast;
+import android.hardware.display.DisplayManager;
+import android.view.Display;
+
+
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -17,8 +22,8 @@ import woyou.aidlservice.jiuiv5.*;
 
 import java.util.Arrays;
 
-
 public class SunmiPrinterMethod {
+    private Display[] displays = null;
 
     private final String TAG = SunmiPrinterMethod.class.getSimpleName();
     private ArrayList<Boolean> _printingText = new ArrayList<Boolean>();
@@ -35,37 +40,17 @@ public class SunmiPrinterMethod {
             try {
                 _woyouService = IWoyouService.Stub.asInterface(service);
                 String serviceVersion = _woyouService.getServiceVersion();
-                Toast
-                        .makeText(
-                                _context,
-                                "Sunmi Printer Service Connected. Version :" + serviceVersion,
-                                Toast.LENGTH_LONG
-                        )
-                        .show();
-
 
             } catch (RemoteException e) {
                 e.printStackTrace();
             } catch (NullPointerException e) {
 
-                Toast
-                        .makeText(
-                                _context,
-                                "Sunmi Printer Service Not Found",
-                                Toast.LENGTH_LONG
-                        ).show();
             }
         }
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
-            Toast
-                    .makeText(
-                            _context,
-                            "Sunmi Printer Service Disconnected",
-                            Toast.LENGTH_LONG
-                    )
-                    .show();
+
         }
     };
 
@@ -159,13 +144,10 @@ public class SunmiPrinterMethod {
         }
     }
 
-
     public Boolean printColumn(
             String[] stringColumns,
             int[] columnWidth,
-            int[] columnAlignment
-    ) {
-
+            int[] columnAlignment) {
 
         try {
 
@@ -173,8 +155,7 @@ public class SunmiPrinterMethod {
                     stringColumns,
                     columnWidth,
                     columnAlignment,
-                    this._callback()
-            );
+                    this._callback());
 
             return true;
         } catch (RemoteException e) {
@@ -194,7 +175,6 @@ public class SunmiPrinterMethod {
             return false;
         }
     }
-
 
     public Boolean cutPaper() {
         try {
@@ -265,10 +245,9 @@ public class SunmiPrinterMethod {
         }
     }
 
-
     public Boolean drawerStatus() {
         try {
-            return  _woyouService.getDrawerStatus();
+            return _woyouService.getDrawerStatus();
         } catch (RemoteException e) {
             return false;
         } catch (NullPointerException e) {
@@ -278,7 +257,7 @@ public class SunmiPrinterMethod {
 
     public int timesOpened() {
         try {
-            return  _woyouService.getOpenDrawerTimes();
+            return _woyouService.getOpenDrawerTimes();
         } catch (RemoteException e) {
             return 0;
         } catch (NullPointerException e) {
@@ -347,8 +326,7 @@ public class SunmiPrinterMethod {
             int barcodeType,
             int textPosition,
             int width,
-            int height
-    ) {
+            int height) {
         try {
             _woyouService.printBarCode(
                     data,
@@ -356,8 +334,7 @@ public class SunmiPrinterMethod {
                     height,
                     width,
                     textPosition,
-                    this._callback()
-            );
+                    this._callback());
         } catch (RemoteException e) {
         } catch (NullPointerException e) {
         }
@@ -391,39 +368,72 @@ public class SunmiPrinterMethod {
 
     // LCD METHODS
 
+
+    public String getDisplays() {
+
+        DisplayManager mDisplayManager = (DisplayManager) _context.getSystemService(Context.DISPLAY_SERVICE);
+        displays = mDisplayManager.getDisplays();
+        Log.d("Display", "init: ----------->" + displays.length);
+            if(displays != null) {
+                ArrayList<DisplayClass> listJson = new ArrayList() ;
+                Gson gson = new Gson();
+
+                for (int i = 0; i <  displays.length; i++) {
+                    Display display = displays[i];
+                    DisplayClass d = new DisplayClass(
+                            display.getDisplayId(),
+                            display.getFlags(),
+                            display.getRotation(),
+                            display.getName()
+                    );
+
+                    listJson.add(d);
+                }
+    return gson.toJson(listJson);
+            }
+
+            return null;
+    }
+
+    public Display getPresentationDisplays() {
+        for (int i = 0; i < displays.length; i++) {
+            if ((displays[i].getFlags() & Display.FLAG_SECURE) != 0
+                    && (displays[i].getFlags() & Display.FLAG_SUPPORTS_PROTECTED_BUFFERS) != 0
+                    && (displays[i].getFlags() & Display.FLAG_PRESENTATION) != 0) {
+                return displays[i];
+            }
+        }
+        return null;
+
+    }
+
     public void sendLCDCommand(
-            int flag
-    ) {
+            int flag) {
         try {
             _woyouService.sendLCDCommand(
-                    flag
-            );
+                    flag);
         } catch (RemoteException e) {
         } catch (NullPointerException e) {
         }
     }
 
     public void sendLCDString(
-            String string
-    ) {
+            String string) {
         try {
             _woyouService.sendLCDString(
                     string,
-                    this._lcdCallback()
-            );
+                    this._lcdCallback());
         } catch (RemoteException e) {
         } catch (NullPointerException e) {
         }
     }
 
     public void sendLCDBitmap(
-            android.graphics.Bitmap bitmap
-    ) {
+            android.graphics.Bitmap bitmap) {
         try {
             _woyouService.sendLCDBitmap(
                     bitmap,
-                    this._lcdCallback()
-            );
+                    this._lcdCallback());
         } catch (RemoteException e) {
         } catch (NullPointerException e) {
         }
@@ -431,13 +441,11 @@ public class SunmiPrinterMethod {
 
     public void sendLCDDoubleString(
             String topText,
-            String bottomText
-    ) {
+            String bottomText) {
         try {
             _woyouService.sendLCDDoubleString(
                     topText, bottomText,
-                    this._lcdCallback()
-            );
+                    this._lcdCallback());
         } catch (RemoteException e) {
         } catch (NullPointerException e) {
         }
@@ -446,13 +454,11 @@ public class SunmiPrinterMethod {
     public void sendLCDFillString(
             String string,
             int size,
-            boolean fill
-    ) {
+            boolean fill) {
         try {
             _woyouService.sendLCDFillString(
                     string, size, fill,
-                    this._lcdCallback()
-            );
+                    this._lcdCallback());
         } catch (RemoteException e) {
         } catch (NullPointerException e) {
         }
@@ -460,18 +466,17 @@ public class SunmiPrinterMethod {
 
     /**
      * Show multi lines text on LCD.
-     * @param text Text lines.
+     *
+     * @param text  Text lines.
      * @param align The weight of the solid content of each line. Like flex.
      */
     public void sendLCDMultiString(
             String[] text,
-            int[] align
-    ) {
+            int[] align) {
         try {
             _woyouService.sendLCDMultiString(
                     text, align,
-                    this._lcdCallback()
-            );
+                    this._lcdCallback());
         } catch (RemoteException e) {
         } catch (NullPointerException e) {
         }
