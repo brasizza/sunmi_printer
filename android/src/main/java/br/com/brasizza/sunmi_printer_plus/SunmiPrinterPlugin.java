@@ -221,20 +221,20 @@ public class SunmiPrinterPlugin implements FlutterPlugin, MethodCallHandler {
         result.success(true);
         break;
       case "CUT_PAPER":
-        sunmiPrinterMethod.cutPaper();
+        // sunmiPrinterMethod.cutPaper();
         result.success(true);
         break;
       case "OPEN_DRAWER":
-        sunmiPrinterMethod.openDrawer();
+        // sunmiPrinterMethod.openDrawer();
         result.success(true);
         break;
 
         case "DRAWER_OPENED":
-        result.success(sunmiPrinterMethod.timesOpened());
+        // result.success(sunmiPrinterMethod.timesOpened());
         break;
       
       case "DRAWER_STATUS":
-        result.success(sunmiPrinterMethod.drawerStatus());
+        // result.success(sunmiPrinterMethod.drawerStatus());
       break;  
       case "PRINT_ROW":
         String colsStr = call.argument("cols");
@@ -281,32 +281,32 @@ public class SunmiPrinterPlugin implements FlutterPlugin, MethodCallHandler {
       // LCD METHODS
       case "LCD_COMMAND":
         int flag = call.argument("flag");
-        sunmiPrinterMethod.sendLCDCommand(flag);
+        // sunmiPrinterMethod.sendLCDCommand(flag);
         result.success(true);
         break;
       case "LCD_STRING":
         String lcdString = call.argument("string");
-        sunmiPrinterMethod.sendLCDString(lcdString);
+        // sunmiPrinterMethod.sendLCDString(lcdString);
         result.success(true);
         break;
       case "LCD_BITMAP":
         byte[] lcdBitmapData = call.argument("bitmap");
         Bitmap lcdBitmap = BitmapFactory.decodeByteArray(
                 lcdBitmapData, 0, lcdBitmapData.length);
-        sunmiPrinterMethod.sendLCDBitmap(lcdBitmap);
+        // sunmiPrinterMethod.sendLCDBitmap(lcdBitmap);
         result.success(true);
         break;
       case "LCD_DOUBLE_STRING":
         String topText = call.argument("topText");
         String bottomText = call.argument("bottomText");
-        sunmiPrinterMethod.sendLCDDoubleString(topText, bottomText);
+        // sunmiPrinterMethod.sendLCDDoubleString(topText, bottomText);
         result.success(true);
         break;
       case "LCD_FILL_STRING":
         String lcdFillString = call.argument("string");
         int lcdFillSize = call.argument("size");
         boolean lcdFill = call.argument("fill");
-        sunmiPrinterMethod.sendLCDFillString(lcdFillString, lcdFillSize, lcdFill);
+        // sunmiPrinterMethod.sendLCDFillString(lcdFillString, lcdFillSize, lcdFill);
         result.success(true);
         break;
       case "LCD_MULTI_STRING":
@@ -314,7 +314,7 @@ public class SunmiPrinterPlugin implements FlutterPlugin, MethodCallHandler {
         String[] lcdText = Utilities.arrayListToString(lcdTextAL);
         ArrayList<Integer> lcdAlignAL = call.argument("align");
         int[] lcdAlign = Utilities.arrayListToIntList(lcdAlignAL);
-        sunmiPrinterMethod.sendLCDMultiString(lcdText, lcdAlign);
+        // sunmiPrinterMethod.sendLCDMultiString(lcdText, lcdAlign);
         result.success(true);
         break;
 
