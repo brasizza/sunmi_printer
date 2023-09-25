@@ -353,4 +353,8 @@ interface IWoyouService
     *   支持版本:v4.2.22以上
     */
     void setPrinterStyle(int key, int value);
+
+    void labelLocate();
+
+    void labelOutput();
 }

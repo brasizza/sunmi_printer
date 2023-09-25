@@ -16,6 +16,7 @@ flutter pub add sunmi_printer_plus
 ```
 
 ## What this package do
+- [x] Print in label mode (when avaliable!)
 - [x] Write some text (with style or not!)
 - [x] Change font size
 - [x] Jump (n) lines

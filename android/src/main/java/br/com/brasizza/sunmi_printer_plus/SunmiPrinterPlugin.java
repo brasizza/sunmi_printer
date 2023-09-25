@@ -202,14 +202,7 @@ public class SunmiPrinterPlugin implements FlutterPlugin, MethodCallHandler {
 
         result.success(mode_desc);
         break;
-      // case "LABEL_LOCATE":
-      //   sunmiPrinterMethod.labelLocate();
-      //   result.success(true);
-      //   break;
-      // case "LABEL_OUTPUT":
-      //   sunmiPrinterMethod.labelOutput();
-      //   result.success(true);
-      //   break;
+
       case "ENTER_PRINTER_BUFFER":
         Boolean clearEnter = call.argument("clearEnter");
         sunmiPrinterMethod.enterPrinterBuffer(clearEnter);
@@ -276,6 +269,16 @@ public class SunmiPrinterPlugin implements FlutterPlugin, MethodCallHandler {
       case "PAPER_SIZE":
         final int paper = sunmiPrinterMethod.getPrinterPaper();
         result.success(paper);
+        break;
+
+        case "LABEL_LOCATE":
+        sunmiPrinterMethod.labelLocate();
+        result.success(true);
+        break;
+
+      case "LABEL_OUTPUT":
+        sunmiPrinterMethod.labelOutput();
+        result.success(true);
         break;
 
       // LCD METHODS

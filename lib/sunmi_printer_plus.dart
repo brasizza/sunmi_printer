@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:typed_data';
+
 import 'package:flutter/services.dart';
 
 import 'column_maker.dart';
@@ -458,6 +458,16 @@ class SunmiPrinter {
   /// Get the printer's version
   static Future<String> printerVersion() async {
     return await _channel.invokeMethod("PRINTER_VERSION");
+  }
+
+  /// Enter into the label printing mode
+  static Future<void> startLabelPrint() async {
+    await _channel.invokeMethod("LABEL_LOCATE");
+  }
+
+  /// Exit into the label printing mode
+  static Future<void> exitLabelPrint() async {
+    await _channel.invokeMethod("LABEL_OUTPUT");
   }
 
   /// LCD Methods

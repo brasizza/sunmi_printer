@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.02#
+* Print label returns!
+
+
 ## 2.1.01#
 * Add the querie 
  <queries>
