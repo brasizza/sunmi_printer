@@ -64,6 +64,10 @@ public class SunmiPrinterPlugin implements FlutterPlugin, MethodCallHandler {
         result.success(true);
 
         break;
+      case "GET_SERVICE_STATUS":
+        Boolean status = sunmiPrinterMethod.getServiceStatus();
+        result.success(status);
+        break;
       case "INIT_PRINTER":
         // ICallback callback = call.argument("callback");
         sunmiPrinterMethod.initPrinter();

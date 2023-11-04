@@ -56,6 +56,11 @@ class SunmiPrinter {
     return status;
   }
 
+  static Future<bool> getServiceStatus() async {
+    final bool? status = await _channel.invokeMethod('GET_SERVICE_STATUS');
+    return status ?? false;
+  }
+
   ///*initPrinter*
   ///
   ///This method will reset the printer styles, font and everything that can change your text, but the method will *NOT* erase the buffer inside.

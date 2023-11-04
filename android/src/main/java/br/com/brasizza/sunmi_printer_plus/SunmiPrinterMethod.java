@@ -24,6 +24,7 @@ public class SunmiPrinterMethod {
     private ArrayList<Boolean> _printingText = new ArrayList<Boolean>();
     private IWoyouService _woyouService;
     private Context _context;
+    private Boolean _serviceStatus = false;
 
     public SunmiPrinterMethod(Context context) {
         this._context = context;
@@ -42,10 +43,11 @@ public class SunmiPrinterMethod {
                                 Toast.LENGTH_LONG
                         )
                         .show();
-
+_serviceStatus = true;
 
             } catch (RemoteException e) {
                 e.printStackTrace();
+                _serviceStatus = false;
             } catch (NullPointerException e) {
 
                 Toast
@@ -54,6 +56,7 @@ public class SunmiPrinterMethod {
                                 "Sunmi Printer Service Not Found",
                                 Toast.LENGTH_LONG
                         ).show();
+                _serviceStatus = false;
             }
         }
 
@@ -66,8 +69,13 @@ public class SunmiPrinterMethod {
                             Toast.LENGTH_LONG
                     )
                     .show();
+            _serviceStatus = false;
         }
     };
+
+    public Boolean getServiceStatus() {
+        return  _serviceStatus;
+    }
 
     public void bindPrinterService() {
         Intent intent = new Intent();
