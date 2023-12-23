@@ -21,22 +21,21 @@ import woyou.aidlservice.jiuiv5.ICallback;
 /** SunmiPrinterPlugin */
 public class SunmiPrinterPlugin implements FlutterPlugin, MethodCallHandler {
 
-  /// The MethodChannel that will the communication between Flutter and native Android
+  /// The MethodChannel that will the communication between Flutter and native
+  /// Android
   ///
-  /// This local reference serves to register the plugin with the Flutter Engine and unregister it
+  /// This local reference serves to register the plugin with the Flutter Engine
+  /// and unregister it
   /// when the Flutter Engine is detached from the Activity
   private static SunmiPrinterMethod sunmiPrinterMethod;
 
   @Override
   public void onAttachedToEngine(
-    @NonNull FlutterPluginBinding flutterPluginBinding
-  ) {
+      @NonNull FlutterPluginBinding flutterPluginBinding) {
     final MethodChannel channel = new MethodChannel(
-      flutterPluginBinding.getBinaryMessenger(),
-      "sunmi_printer_plus"
-    );
-    sunmiPrinterMethod =
-      new SunmiPrinterMethod(flutterPluginBinding.getApplicationContext());
+        flutterPluginBinding.getBinaryMessenger(),
+        "sunmi_printer_plus");
+    sunmiPrinterMethod = new SunmiPrinterMethod(flutterPluginBinding.getApplicationContext());
     channel.setMethodCallHandler(this);
   }
 
@@ -143,17 +142,17 @@ public class SunmiPrinterPlugin implements FlutterPlugin, MethodCallHandler {
         int width = call.argument("width");
         int height = call.argument("height");
         sunmiPrinterMethod.printBarCode(
-          barCodeData,
-          barcodeType,
-          textPosition,
-          width,
-          height
-        );
+            barCodeData,
+            barcodeType,
+            textPosition,
+            width,
+            height);
         sunmiPrinterMethod.lineWrap(1);
 
         result.success(true);
         break;
-      // void printBarCode(String data, int symbology, int height, int width, int textposition,  in ICallback callback);
+      // void printBarCode(String data, int symbology, int height, int width, int
+      // textposition, in ICallback callback);
 
       case "LINE_WRAP":
         int lines = call.argument("lines");
@@ -222,15 +221,16 @@ public class SunmiPrinterPlugin implements FlutterPlugin, MethodCallHandler {
         result.success(true);
         break;
 
-        case "DRAWER_OPENED":
+      case "DRAWER_OPENED":
         result.success(sunmiPrinterMethod.timesOpened());
         break;
-      
+
       case "DRAWER_STATUS":
         result.success(sunmiPrinterMethod.drawerStatus());
-      break;  
+        break;
       case "PRINT_ROW":
         String colsStr = call.argument("cols");
+        Boolean arabic = call.argument("arabic");
 
         try {
           JSONArray cols = new JSONArray(colsStr);
@@ -247,7 +247,7 @@ public class SunmiPrinterPlugin implements FlutterPlugin, MethodCallHandler {
             colsAlign[i] = alignColumn;
           }
 
-          sunmiPrinterMethod.printColumn(colsText, colsWidth, colsAlign);
+          sunmiPrinterMethod.printColumn(colsText, colsWidth, colsAlign, arabic);
           result.success(true);
         } catch (Exception err) {
           Log.d("SunmiPrinter", err.getMessage());
@@ -271,7 +271,7 @@ public class SunmiPrinterPlugin implements FlutterPlugin, MethodCallHandler {
         result.success(paper);
         break;
 
-        case "LABEL_LOCATE":
+      case "LABEL_LOCATE":
         sunmiPrinterMethod.labelLocate();
         result.success(true);
         break;
@@ -295,7 +295,7 @@ public class SunmiPrinterPlugin implements FlutterPlugin, MethodCallHandler {
       case "LCD_BITMAP":
         byte[] lcdBitmapData = call.argument("bitmap");
         Bitmap lcdBitmap = BitmapFactory.decodeByteArray(
-                lcdBitmapData, 0, lcdBitmapData.length);
+            lcdBitmapData, 0, lcdBitmapData.length);
         sunmiPrinterMethod.sendLCDBitmap(lcdBitmap);
         result.success(true);
         break;
@@ -328,5 +328,6 @@ public class SunmiPrinterPlugin implements FlutterPlugin, MethodCallHandler {
   }
 
   @Override
-  public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {}
+  public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
+  }
 }

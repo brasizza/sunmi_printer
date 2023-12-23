@@ -157,11 +157,15 @@ class SunmiPrinter {
   ///*printRow*
   ///
   ///This method will print a row based in a list of [ColumnMaker].
-  static Future<void> printRow({required List<ColumnMaker> cols}) async {
+  static Future<void> printRow(
+      {required List<ColumnMaker> cols, bool isArabic = false}) async {
     final _jsonCols = List<Map<String, String>>.from(
         cols.map<Map<String, String>>((ColumnMaker col) => col.toJson()));
     Map<String, dynamic> arguments = <String, dynamic>{
-      "cols": json.encode(_jsonCols)
+      "cols": json.encode(
+        _jsonCols,
+      ),
+      "arabic": isArabic,
     };
     await _channel.invokeMethod("PRINT_ROW", arguments);
   }
