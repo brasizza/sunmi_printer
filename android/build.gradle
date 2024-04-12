@@ -4,18 +4,18 @@ version '1.0'
 buildscript {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.1.1'
+        classpath 'com.android.tools.build:gradle:8.3.2'
     }
 }
 
 rootProject.allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 
      gradle.projectsEvaluated {
@@ -29,12 +29,18 @@ rootProject.allprojects {
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 31
+    compileSdk 34
 
     defaultConfig {
         minSdkVersion 16
+        if (project.android.hasProperty('namespace')) {
+            namespace 'br.com.brasizza.sunmi_printer_plus'
+        }
     }
     lintOptions {
         disable 'InvalidPackage'
+    }
+    buildFeatures {
+        aidl true
     }
 }
