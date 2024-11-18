@@ -1,21 +1,22 @@
-import 'dart:typed_data';
+// ignore_for_file: library_private_types_in_public_api
+
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sunmi_printer_plus/sunmi_printer_plus.dart';
-import 'dart:async';
 
 import 'main.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.landscapeRight, DeviceOrientation.landscapeRight]);
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeRight, DeviceOrientation.landscapeRight]);
   runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   _MyAppState createState() => _MyAppState();
@@ -35,7 +36,7 @@ class _MyAppState extends State<MyApp> {
 }
 
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+  const Home({super.key});
 
   @override
   _HomeState createState() => _HomeState();
@@ -73,7 +74,7 @@ class _HomeState extends State<Home> {
             padding: const EdgeInsets.only(
               top: 10,
             ),
-            child: Text("LCD binded: " + printBinded.toString()),
+            child: Text("LCD binded: $printBinded"),
           ),
           const Divider(),
           Expanded(
@@ -129,8 +130,7 @@ class _HomeState extends State<Home> {
                   context,
                   labels: ['LCD Bitmap', '128x40'],
                   onPressed: () async {
-                    Uint8List byte =
-                        await readFileBytes('assets/images/128x40.png');
+                    Uint8List byte = await readFileBytes('assets/images/128x40.png');
                     await SunmiPrinter.lcdImage(byte);
                   },
                 ),
@@ -138,8 +138,7 @@ class _HomeState extends State<Home> {
                   context,
                   labels: ['LCD Bitmap', '16x16'],
                   onPressed: () async {
-                    Uint8List byte =
-                        await readFileBytes('assets/images/16x16.png');
+                    Uint8List byte = await readFileBytes('assets/images/16x16.png');
                     await SunmiPrinter.lcdImage(byte);
                   },
                 ),
@@ -147,8 +146,7 @@ class _HomeState extends State<Home> {
                   context,
                   labels: ['LCD Bitmap', 'dash.jpeg', 'But no fit.'],
                   onPressed: () async {
-                    Uint8List byte =
-                        await readFileBytes('assets/images/dash.jpeg');
+                    Uint8List byte = await readFileBytes('assets/images/dash.jpeg');
                     await SunmiPrinter.lcdImage(byte);
                   },
                 ),
@@ -156,24 +154,21 @@ class _HomeState extends State<Home> {
                   context,
                   labels: ['Fill String', '32px, fill=false'],
                   onPressed: () async {
-                    await SunmiPrinter.lcdFillString('Size32',
-                        size: 32, fill: false);
+                    await SunmiPrinter.lcdFillString('Size32', size: 32, fill: false);
                   },
                 ),
                 _buildButton(
                   context,
                   labels: ['Fill String', '16px, fill=true'],
                   onPressed: () async {
-                    await SunmiPrinter.lcdFillString('abcDEFgj0123\$&=+',
-                        size: 16, fill: true);
+                    await SunmiPrinter.lcdFillString('abcDEFgj0123\$&=+', size: 16, fill: true);
                   },
                 ),
                 _buildButton(
                   context,
                   labels: ['Fill String', '64px, fill=true'],
                   onPressed: () async {
-                    await SunmiPrinter.lcdFillString('64px',
-                        size: 64, fill: true);
+                    await SunmiPrinter.lcdFillString('64px', size: 64, fill: true);
                   },
                 ),
                 _buildButton(
@@ -212,14 +207,13 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget _buildButton(BuildContext context,
-      {required List<String> labels, required VoidCallback onPressed}) {
+  Widget _buildButton(BuildContext context, {required List<String> labels, required VoidCallback onPressed}) {
     return ElevatedButton(
+      onPressed: onPressed,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: labels.map((l) => Text(l)).toList(),
       ),
-      onPressed: onPressed,
     );
   }
 }

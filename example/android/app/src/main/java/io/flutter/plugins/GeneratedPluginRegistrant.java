@@ -17,7 +17,7 @@ public final class GeneratedPluginRegistrant {
   public static void registerWith(@NonNull FlutterEngine flutterEngine) {
     try {
       flutterEngine.getPlugins().add(new br.com.brasizza.sunmi_printer_plus.SunmiPrinterPlugin());
-    } catch(Exception e) {
+    } catch (Exception e) {
       Log.e(TAG, "Error registering plugin sunmi_printer_plus, br.com.brasizza.sunmi_printer_plus.SunmiPrinterPlugin", e);
     }
   }

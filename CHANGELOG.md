@@ -1,5 +1,8 @@
 # Changelog
 
+## 3.0.0#
+-Upgrade to latest flutter version.
+
 
 ## 2.1.03#
 -Upgrade gradle to compileSdkVersion 34 in android core!
