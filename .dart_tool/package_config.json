@@ -3,162 +3,171 @@
   "packages": [
     {
       "name": "async",
-      "rootUri": "file:///Users/marcusbrasizza/.asdf/installs/flutter/2.5.0-stable/.pub-cache/hosted/pub.dartlang.org/async-2.8.1",
+      "rootUri": "file:///Users/marcusbrasizza/.pub-cache/hosted/pub.dev/async-2.11.0",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.18"
     },
     {
       "name": "boolean_selector",
-      "rootUri": "file:///Users/marcusbrasizza/.asdf/installs/flutter/2.5.0-stable/.pub-cache/hosted/pub.dartlang.org/boolean_selector-2.1.0",
+      "rootUri": "file:///Users/marcusbrasizza/.pub-cache/hosted/pub.dev/boolean_selector-2.1.1",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.17"
     },
     {
       "name": "characters",
-      "rootUri": "file:///Users/marcusbrasizza/.asdf/installs/flutter/2.5.0-stable/.pub-cache/hosted/pub.dartlang.org/characters-1.1.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "charcode",
-      "rootUri": "file:///Users/marcusbrasizza/.asdf/installs/flutter/2.5.0-stable/.pub-cache/hosted/pub.dartlang.org/charcode-1.3.1",
+      "rootUri": "file:///Users/marcusbrasizza/.pub-cache/hosted/pub.dev/characters-1.3.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "clock",
-      "rootUri": "file:///Users/marcusbrasizza/.asdf/installs/flutter/2.5.0-stable/.pub-cache/hosted/pub.dartlang.org/clock-1.1.0",
+      "rootUri": "file:///Users/marcusbrasizza/.pub-cache/hosted/pub.dev/clock-1.1.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "collection",
-      "rootUri": "file:///Users/marcusbrasizza/.asdf/installs/flutter/2.5.0-stable/.pub-cache/hosted/pub.dartlang.org/collection-1.15.0",
+      "rootUri": "file:///Users/marcusbrasizza/.pub-cache/hosted/pub.dev/collection-1.18.0",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.18"
     },
     {
       "name": "fake_async",
-      "rootUri": "file:///Users/marcusbrasizza/.asdf/installs/flutter/2.5.0-stable/.pub-cache/hosted/pub.dartlang.org/fake_async-1.2.0",
+      "rootUri": "file:///Users/marcusbrasizza/.pub-cache/hosted/pub.dev/fake_async-1.3.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "flutter",
-      "rootUri": "file:///Users/marcusbrasizza/.asdf/installs/flutter/2.5.0-stable/packages/flutter",
+      "rootUri": "file:///opt/homebrew/Caskroom/flutter/3.3.1/flutter/packages/flutter",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "3.3"
     },
     {
       "name": "flutter_lints",
-      "rootUri": "file:///Users/marcusbrasizza/.asdf/installs/flutter/2.5.0-stable/.pub-cache/hosted/pub.dartlang.org/flutter_lints-1.0.4",
+      "rootUri": "file:///Users/marcusbrasizza/.pub-cache/hosted/pub.dev/flutter_lints-1.0.4",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "flutter_test",
-      "rootUri": "file:///Users/marcusbrasizza/.asdf/installs/flutter/2.5.0-stable/packages/flutter_test",
+      "rootUri": "file:///opt/homebrew/Caskroom/flutter/3.3.1/flutter/packages/flutter_test",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "3.3"
     },
     {
-      "name": "http",
-      "rootUri": "file:///Users/marcusbrasizza/.asdf/installs/flutter/2.5.0-stable/.pub-cache/hosted/pub.dartlang.org/http-0.13.4",
+      "name": "leak_tracker",
+      "rootUri": "file:///Users/marcusbrasizza/.pub-cache/hosted/pub.dev/leak_tracker-10.0.5",
       "packageUri": "lib/",
-      "languageVersion": "2.14"
+      "languageVersion": "3.2"
     },
     {
-      "name": "http_parser",
-      "rootUri": "file:///Users/marcusbrasizza/.asdf/installs/flutter/2.5.0-stable/.pub-cache/hosted/pub.dartlang.org/http_parser-4.0.0",
+      "name": "leak_tracker_flutter_testing",
+      "rootUri": "file:///Users/marcusbrasizza/.pub-cache/hosted/pub.dev/leak_tracker_flutter_testing-3.0.5",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "3.2"
+    },
+    {
+      "name": "leak_tracker_testing",
+      "rootUri": "file:///Users/marcusbrasizza/.pub-cache/hosted/pub.dev/leak_tracker_testing-3.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "3.2"
     },
     {
       "name": "lints",
-      "rootUri": "file:///Users/marcusbrasizza/.asdf/installs/flutter/2.5.0-stable/.pub-cache/hosted/pub.dartlang.org/lints-1.0.1",
+      "rootUri": "file:///Users/marcusbrasizza/.pub-cache/hosted/pub.dev/lints-1.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "matcher",
-      "rootUri": "file:///Users/marcusbrasizza/.asdf/installs/flutter/2.5.0-stable/.pub-cache/hosted/pub.dartlang.org/matcher-0.12.10",
+      "rootUri": "file:///Users/marcusbrasizza/.pub-cache/hosted/pub.dev/matcher-0.12.16+1",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "material_color_utilities",
+      "rootUri": "file:///Users/marcusbrasizza/.pub-cache/hosted/pub.dev/material_color_utilities-0.11.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
     },
     {
       "name": "meta",
-      "rootUri": "file:///Users/marcusbrasizza/.asdf/installs/flutter/2.5.0-stable/.pub-cache/hosted/pub.dartlang.org/meta-1.7.0",
+      "rootUri": "file:///Users/marcusbrasizza/.pub-cache/hosted/pub.dev/meta-1.15.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "path",
-      "rootUri": "file:///Users/marcusbrasizza/.asdf/installs/flutter/2.5.0-stable/.pub-cache/hosted/pub.dartlang.org/path-1.8.0",
+      "rootUri": "file:///Users/marcusbrasizza/.pub-cache/hosted/pub.dev/path-1.9.0",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "3.0"
     },
     {
       "name": "sky_engine",
-      "rootUri": "file:///Users/marcusbrasizza/.asdf/installs/flutter/2.5.0-stable/bin/cache/pkg/sky_engine",
+      "rootUri": "file:///opt/homebrew/Caskroom/flutter/3.3.1/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "3.2"
     },
     {
       "name": "source_span",
-      "rootUri": "file:///Users/marcusbrasizza/.asdf/installs/flutter/2.5.0-stable/.pub-cache/hosted/pub.dartlang.org/source_span-1.8.1",
+      "rootUri": "file:///Users/marcusbrasizza/.pub-cache/hosted/pub.dev/source_span-1.10.0",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.18"
     },
     {
       "name": "stack_trace",
-      "rootUri": "file:///Users/marcusbrasizza/.asdf/installs/flutter/2.5.0-stable/.pub-cache/hosted/pub.dartlang.org/stack_trace-1.10.0",
+      "rootUri": "file:///Users/marcusbrasizza/.pub-cache/hosted/pub.dev/stack_trace-1.11.1",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.18"
     },
     {
       "name": "stream_channel",
-      "rootUri": "file:///Users/marcusbrasizza/.asdf/installs/flutter/2.5.0-stable/.pub-cache/hosted/pub.dartlang.org/stream_channel-2.1.0",
+      "rootUri": "file:///Users/marcusbrasizza/.pub-cache/hosted/pub.dev/stream_channel-2.1.2",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.19"
     },
     {
       "name": "string_scanner",
-      "rootUri": "file:///Users/marcusbrasizza/.asdf/installs/flutter/2.5.0-stable/.pub-cache/hosted/pub.dartlang.org/string_scanner-1.1.0",
+      "rootUri": "file:///Users/marcusbrasizza/.pub-cache/hosted/pub.dev/string_scanner-1.2.0",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.18"
     },
     {
       "name": "term_glyph",
-      "rootUri": "file:///Users/marcusbrasizza/.asdf/installs/flutter/2.5.0-stable/.pub-cache/hosted/pub.dartlang.org/term_glyph-1.2.0",
+      "rootUri": "file:///Users/marcusbrasizza/.pub-cache/hosted/pub.dev/term_glyph-1.2.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "test_api",
-      "rootUri": "file:///Users/marcusbrasizza/.asdf/installs/flutter/2.5.0-stable/.pub-cache/hosted/pub.dartlang.org/test_api-0.4.2",
+      "rootUri": "file:///Users/marcusbrasizza/.pub-cache/hosted/pub.dev/test_api-0.7.2",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "typed_data",
-      "rootUri": "file:///Users/marcusbrasizza/.asdf/installs/flutter/2.5.0-stable/.pub-cache/hosted/pub.dartlang.org/typed_data-1.3.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "3.2"
     },
     {
       "name": "vector_math",
-      "rootUri": "file:///Users/marcusbrasizza/.asdf/installs/flutter/2.5.0-stable/.pub-cache/hosted/pub.dartlang.org/vector_math-2.1.0",
+      "rootUri": "file:///Users/marcusbrasizza/.pub-cache/hosted/pub.dev/vector_math-2.1.4",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.14"
+    },
+    {
+      "name": "vm_service",
+      "rootUri": "file:///Users/marcusbrasizza/.pub-cache/hosted/pub.dev/vm_service-14.2.5",
+      "packageUri": "lib/",
+      "languageVersion": "3.3"
     },
     {
       "name": "sunmi_printer_plus",
       "rootUri": "../",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "3.5"
     }
   ],
-  "generated": "2021-10-22T17:17:54.613608Z",
+  "generated": "2024-11-18T15:52:13.407617Z",
   "generator": "pub",
-  "generatorVersion": "2.14.2"
+  "generatorVersion": "3.5.4",
+  "flutterRoot": "file:///opt/homebrew/Caskroom/flutter/3.3.1/flutter",
+  "flutterVersion": "3.24.5",
+  "pubCache": "file:///Users/marcusbrasizza/.pub-cache"
 }
