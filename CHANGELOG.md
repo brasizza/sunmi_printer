@@ -1,5 +1,7 @@
 # Changelog
 
+## 3.0.1#
+-Make compatible with dart >=3.5.0
 ## 3.0.0#
 -Upgrade to latest flutter version.
 
