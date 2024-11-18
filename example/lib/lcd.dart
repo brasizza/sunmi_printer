@@ -11,7 +11,8 @@ import 'main.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeRight, DeviceOrientation.landscapeRight]);
+  await SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.landscapeRight, DeviceOrientation.landscapeRight]);
   runApp(const MyApp());
 }
 
@@ -130,7 +131,8 @@ class _HomeState extends State<Home> {
                   context,
                   labels: ['LCD Bitmap', '128x40'],
                   onPressed: () async {
-                    Uint8List byte = await readFileBytes('assets/images/128x40.png');
+                    Uint8List byte =
+                        await readFileBytes('assets/images/128x40.png');
                     await SunmiPrinter.lcdImage(byte);
                   },
                 ),
@@ -138,7 +140,8 @@ class _HomeState extends State<Home> {
                   context,
                   labels: ['LCD Bitmap', '16x16'],
                   onPressed: () async {
-                    Uint8List byte = await readFileBytes('assets/images/16x16.png');
+                    Uint8List byte =
+                        await readFileBytes('assets/images/16x16.png');
                     await SunmiPrinter.lcdImage(byte);
                   },
                 ),
@@ -146,7 +149,8 @@ class _HomeState extends State<Home> {
                   context,
                   labels: ['LCD Bitmap', 'dash.jpeg', 'But no fit.'],
                   onPressed: () async {
-                    Uint8List byte = await readFileBytes('assets/images/dash.jpeg');
+                    Uint8List byte =
+                        await readFileBytes('assets/images/dash.jpeg');
                     await SunmiPrinter.lcdImage(byte);
                   },
                 ),
@@ -154,21 +158,24 @@ class _HomeState extends State<Home> {
                   context,
                   labels: ['Fill String', '32px, fill=false'],
                   onPressed: () async {
-                    await SunmiPrinter.lcdFillString('Size32', size: 32, fill: false);
+                    await SunmiPrinter.lcdFillString('Size32',
+                        size: 32, fill: false);
                   },
                 ),
                 _buildButton(
                   context,
                   labels: ['Fill String', '16px, fill=true'],
                   onPressed: () async {
-                    await SunmiPrinter.lcdFillString('abcDEFgj0123\$&=+', size: 16, fill: true);
+                    await SunmiPrinter.lcdFillString('abcDEFgj0123\$&=+',
+                        size: 16, fill: true);
                   },
                 ),
                 _buildButton(
                   context,
                   labels: ['Fill String', '64px, fill=true'],
                   onPressed: () async {
-                    await SunmiPrinter.lcdFillString('64px', size: 64, fill: true);
+                    await SunmiPrinter.lcdFillString('64px',
+                        size: 64, fill: true);
                   },
                 ),
                 _buildButton(
@@ -207,7 +214,8 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget _buildButton(BuildContext context, {required List<String> labels, required VoidCallback onPressed}) {
+  Widget _buildButton(BuildContext context,
+      {required List<String> labels, required VoidCallback onPressed}) {
     return ElevatedButton(
       onPressed: onPressed,
       child: Column(
