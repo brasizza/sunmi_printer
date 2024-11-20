@@ -1,35 +1,88 @@
 package br.com.brasizza.sunmi_printer_plus
 
-import androidx.annotation.NonNull
-
+import android.content.Context
+import android.util.Log
+import com.sunmi.printerx.PrinterSdk
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
-import io.flutter.plugin.common.MethodChannel.Result
 
 /** SunmiPrinterPlusPlugin */
-class SunmiPrinterPlusPlugin: FlutterPlugin, MethodCallHandler {
-  /// The MethodChannel that will the communication between Flutter and native Android
-  ///
-  /// This local reference serves to register the plugin with the Flutter Engine and unregister it
-  /// when the Flutter Engine is detached from the Activity
-  private lateinit var channel : MethodChannel
+class SunmiPrinterPlusPlugin : FlutterPlugin, MethodCallHandler {
+    /// The MethodChannel that will the communication between Flutter and native Android
+    ///
+    /// This local reference serves to register the plugin with the Flutter Engine and unregister it
+    /// when the Flutter Engine is detached from the Activity
+    private lateinit var channel: MethodChannel
+    private lateinit var printer: SunmiPrinterClass
+    private lateinit var sunmiInit: SunmiInitClass;
+    private lateinit var configPrinter: SunmiConfigClass
+    private lateinit var selectPrinter: PrinterSdk.Printer
+    override fun onAttachedToEngine(flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
+        val context: Context = flutterPluginBinding.getApplicationContext()
 
-  override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-    channel = MethodChannel(flutterPluginBinding.binaryMessenger, "sunmi_printer_plus")
-    channel.setMethodCallHandler(this)
-  }
+        channel = MethodChannel(flutterPluginBinding.binaryMessenger, "sunmi_printer_plus")
+        channel.setMethodCallHandler(this)
+        sunmiInit = SunmiInitClass(context);
+        sunmiInit.initPrinter { selectPrinter ->
+            if (selectPrinter != null) {
+                printer = SunmiPrinterClass(selectPrinter)
+                configPrinter = SunmiConfigClass(selectPrinter)
 
-  override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
-    if (call.method == "getPlatformVersion") {
-      result.success("Android ${android.os.Build.VERSION.RELEASE}")
-    } else {
-      result.notImplemented()
+            } else {
+
+            }
+        }
+
+
     }
-  }
 
-  override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
-    channel.setMethodCallHandler(null)
-  }
+    override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
+        when (call.method) {
+            "getPlatformVersion" -> {
+                result.success("Android ${android.os.Build.VERSION.RELEASE}")
+            }
+
+            "getStatus" -> {
+                result.success(configPrinter.getStatus())
+            }
+
+            "getVersion" -> {
+                result.success(configPrinter.getVersion())
+            }
+
+            "getPaper" -> {
+                result.success(configPrinter.getPaper())
+            }
+
+            "getId" -> {
+                result.success(configPrinter.getId())
+            }
+
+            "getType" -> {
+                result.success(configPrinter.getType())
+            }
+
+            "printText" -> {
+                val printerArgument: Map<String, Any>? = call.argument("data")
+                result.success(printer.printText(printerArgument))
+            }
+
+            "printQrcode" -> {
+                val qrcodeArgument: Map<String, Any>? = call.argument("data")
+                result.success(printer.printQrcode(qrcodeArgument))
+            }
+
+            else -> {
+                result.notImplemented()
+            }
+        }
+
+    }
+
+
+    override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
+        channel.setMethodCallHandler(null)
+    }
 }

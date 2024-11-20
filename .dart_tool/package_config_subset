@@ -58,6 +58,10 @@ path
 3.0
 file:///Users/marcusbrasizza/.pub-cache/hosted/pub.dev/path-1.9.0/
 file:///Users/marcusbrasizza/.pub-cache/hosted/pub.dev/path-1.9.0/lib/
+plugin_platform_interface
+3.0
+file:///Users/marcusbrasizza/.pub-cache/hosted/pub.dev/plugin_platform_interface-2.1.8/
+file:///Users/marcusbrasizza/.pub-cache/hosted/pub.dev/plugin_platform_interface-2.1.8/lib/
 source_span
 2.18
 file:///Users/marcusbrasizza/.pub-cache/hosted/pub.dev/source_span-1.10.0/
@@ -92,8 +96,8 @@ file:///Users/marcusbrasizza/.pub-cache/hosted/pub.dev/vm_service-14.2.5/
 file:///Users/marcusbrasizza/.pub-cache/hosted/pub.dev/vm_service-14.2.5/lib/
 sunmi_printer_plus
 3.5
-file:///Users/marcusbrasizza/development_interno/sunmi_printer/
-file:///Users/marcusbrasizza/development_interno/sunmi_printer/lib/
+file:///Users/marcusbrasizza/development_interno/sunmi_printer_plus/
+file:///Users/marcusbrasizza/development_interno/sunmi_printer_plus/lib/
 sky_engine
 3.2
 file:///opt/homebrew/Caskroom/flutter/3.3.1/flutter/bin/cache/pkg/sky_engine/
