@@ -104,6 +104,12 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "plugin_platform_interface",
+      "rootUri": "file:///Users/marcusbrasizza/.pub-cache/hosted/pub.dev/plugin_platform_interface-2.1.8",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
       "name": "sky_engine",
       "rootUri": "file:///opt/homebrew/Caskroom/flutter/3.3.1/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
@@ -164,10 +170,10 @@
       "languageVersion": "3.5"
     }
   ],
-  "generated": "2024-11-18T15:52:13.407617Z",
+  "generated": "2024-11-20T18:09:42.281186Z",
   "generator": "pub",
-  "generatorVersion": "3.5.4",
+  "generatorVersion": "3.5.3",
   "flutterRoot": "file:///opt/homebrew/Caskroom/flutter/3.3.1/flutter",
-  "flutterVersion": "3.24.5",
+  "flutterVersion": "3.24.3",
   "pubCache": "file:///Users/marcusbrasizza/.pub-cache"
 }
