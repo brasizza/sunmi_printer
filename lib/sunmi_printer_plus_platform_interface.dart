@@ -1,4 +1,7 @@
+import 'dart:typed_data';
+
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
+import 'package:sunmi_printer_plus/core/enums/enums.dart';
 
 import 'sunmi_printer_plus_method_channel.dart';
 
@@ -61,5 +64,33 @@ abstract class SunmiPrinterPlusPlatform extends PlatformInterface {
 
   Future<String?> line(String? type) {
     throw UnimplementedError('line() has not been implemented.');
+  }
+
+  Future<String?> lineWrap(int times) {
+    throw UnimplementedError('lineWrap() has not been implemented.');
+  }
+
+  Future<String?> cutPaper() {
+    throw UnimplementedError('cutPaper() has not been implemented.');
+  }
+
+  Future<String?> printImage(Uint8List image, SunmiPrintAlign align) {
+    throw UnimplementedError('cutPaper() has not been implemented.');
+  }
+
+  Future<String?> addText(Map<String, dynamic> printData) {
+    throw UnimplementedError('addText() has not been implemented.');
+  }
+
+  Future<String?> printEscPos(List<int> data) {
+    throw UnimplementedError('printEscPos() has not been implemented.');
+  }
+
+  Future<String?> printTSPL(String data) {
+    throw UnimplementedError('printTSPL() has not been implemented.');
+  }
+
+  Future<String?> printRow({required List text, required List width, required List style}) {
+    throw UnimplementedError('printRow() has not been implemented.');
   }
 }

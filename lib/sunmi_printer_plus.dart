@@ -1,10 +1,18 @@
+import 'dart:typed_data';
+
+import 'package:sunmi_printer_plus/core/enums/enums.dart';
 import 'package:sunmi_printer_plus/core/styles/sunmi_barcode_style.dart';
 import 'package:sunmi_printer_plus/core/styles/sunmi_qrcode_style.dart';
 import 'package:sunmi_printer_plus/core/sunmi/sunmi_config.dart';
+import 'package:sunmi_printer_plus/core/types/sunmi_column.dart';
 
 import 'core/styles/sunmi_text_style.dart';
 import 'core/sunmi/sunmi_printer.dart';
 import 'sunmi_printer_plus_platform_interface.dart';
+
+export 'core/helpers/sunmi_helper.dart';
+export 'core/types/sunmi_column.dart';
+export 'core/types/sunmi_text.dart';
 
 class SunmiPrinterPlus {
   Future<String?> getPlatformVersion() async {
@@ -43,7 +51,35 @@ class SunmiPrinterPlus {
     return await SunmiPrinter.i.printBarcode(text: text, style: style);
   }
 
-  Future<String?> line(String? type) async {
+  Future<String?> line({String? type}) async {
     return await SunmiPrinter.i.line(type: type);
+  }
+
+  Future<String?> lineWrap({required int times}) async {
+    return await SunmiPrinter.i.lineWrap(times: times);
+  }
+
+  Future<String?> cutPaper() async {
+    return await SunmiPrinter.i.cutPaper();
+  }
+
+  Future<String?> printImage({required Uint8List image, required SunmiPrintAlign align}) async {
+    return await SunmiPrinter.i.printImage(image: image, align: align);
+  }
+
+  Future<String?> addText({required String text, SunmiTextStyle? style}) async {
+    return await SunmiPrinter.i.addText(text: text, style: style);
+  }
+
+  Future<String?> printEscPos({required List<int> data}) async {
+    return await SunmiPrinter.i.printEscPos(data: data);
+  }
+
+  Future<String?> printTSPL({required String data}) async {
+    return await SunmiPrinter.i.printTSPL(data: data);
+  }
+
+  Future<String?> printRow({required List<SunmiColumn> cols}) async {
+    return await SunmiPrinter.i.printRow(cols: cols);
   }
 }

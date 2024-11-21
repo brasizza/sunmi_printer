@@ -1,139 +1,187 @@
 package br.com.brasizza.sunmi_printer_plus
 
 import android.util.Log
-import android.content.Context
-import com.sunmi.printerx.PrinterSdk
+import android.graphics.Bitmap
 import com.sunmi.printerx.PrinterSdk.Printer
-import com.sunmi.printerx.PrinterSdk.PrinterListen
 import com.sunmi.printerx.SdkException
-import com.sunmi.printerx.api.LineApi
-import com.sunmi.printerx.api.QueryApi
 import com.sunmi.printerx.enums.Align
 import com.sunmi.printerx.enums.DividingLine
 import com.sunmi.printerx.enums.ErrorLevel
 import com.sunmi.printerx.enums.HumanReadable
-import com.sunmi.printerx.enums.PrinterInfo
+import com.sunmi.printerx.enums.ImageAlgorithm
 import com.sunmi.printerx.enums.Symbology
-import com.sunmi.printerx.style.AreaStyle
 import com.sunmi.printerx.style.BarcodeStyle
 import com.sunmi.printerx.style.BaseStyle
+import com.sunmi.printerx.style.BitmapStyle
 import com.sunmi.printerx.style.QrStyle
 import com.sunmi.printerx.style.TextStyle
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 
 class SunmiPrinterClass(private  val printer: Printer?) {
     private var lineApi = printer?.lineApi();
-    fun printText(printerArgument: Map<String, Any>?): String? {
-        try {
-            val textStyle = TextStyle.getStyle()
-            lineApi?.printText(printerArgument!!["text"] as String?, textStyle);
+    fun printText(printerArgument: Map<String, Any>?): String {
+        if (printerArgument == null) return "No arguments provided"
+
+        return try {
+            val textStyle = TextStyle.getStyle().apply {
+                setAlign(getAlignment(printerArgument["align"] as? String))
+                setTextSize( printerArgument["fontSize"] as? Int ?: 24)
+                enableBold(printerArgument["bold"] as? Boolean ?: false)
+                enableUnderline(printerArgument["underline"] as? Boolean ?: false)
+                enableStrikethrough(printerArgument["strikethrough"] as? Boolean ?: false)
+                enableItalics(printerArgument["italic"] as? Boolean ?: false)
+                enableAntiColor(printerArgument["reverse"] as? Boolean ?: false)
+            }
+            val text = printerArgument["text"] as? String
+                ?: return "No text provided to print"
+            lineApi?.initLine(BaseStyle.getStyle().setAlign(getAlignment(printerArgument["align"] as? String)))
+            lineApi?.printText(text, textStyle)
+            "ok"
         } catch (e: SdkException) {
-            Log.d("sunmi_printer_plus", "Error =>" + e.message)
-            e.printStackTrace()
+            Log.e("sunmi_printer_plus", "Error while printing: ${e.message}", e)
+            "error"
         }
-
-        return "ok";
-
-
     }
 
-    fun printQrcode(qrcodeArgument: Map<String, Any>?): String? {
-        try {
-            val qrStyle = QrStyle.getStyle()
-            qrcodeArgument?.let {
-                val qrSize = it["qrcodeSize"] as? Int ?: 0
-                qrStyle.setDot(qrSize)
-                val qrLevel = when (it["errorLevel"] as? String) {
-                    "LEVEL_H" -> ErrorLevel.H
-                    "LEVEL_M" -> ErrorLevel.M
-                    "LEVEL_Q" -> ErrorLevel.Q
-                    else -> ErrorLevel.L
-                }
-                qrStyle.setErrorLevel(qrLevel)
-                val qrAlign = when (it["align"] as? String) {
-                    "CENTER" -> Align.CENTER
-                    "LEFT" -> Align.LEFT
-                    "RIGHT" -> Align.RIGHT
-                    else -> Align.DEFAULT
-                }
-                qrStyle.setAlign(qrAlign)
-                val qrText = it["text"] as? String
-                lineApi?.printQrCode(qrText, qrStyle)
-            }
-        } catch (e: SdkException) {
-            Log.d("sunmi_printer_plus", "Error => ${e.message}")
-            e.printStackTrace()
+    private fun getAlignment(align: String?): Align {
+        return when (align) {
+            "CENTER" -> Align.CENTER
+            "LEFT" -> Align.LEFT
+            "RIGHT" -> Align.RIGHT
+            else -> Align.DEFAULT
         }
+    }
+
+
+    fun printQrcode(qrcodeArgument: Map<String, Any>?): String {
+        if (qrcodeArgument == null) return "No arguments provided"
+        return try {
+            val qrStyle = QrStyle.getStyle().apply {
+                setDot(qrcodeArgument["qrcodeSize"] as? Int ?: 0)
+                setErrorLevel(getErrorLevel(qrcodeArgument["errorLevel"] as? String))
+                setAlign(getAlignment(qrcodeArgument["align"] as? String))
+            }
+
+            val qrText = qrcodeArgument["text"] as? String ?: return "No text provided for QR code"
+            lineApi?.printQrCode(qrText, qrStyle)
+            "ok"
+        } catch (e: SdkException) {
+            Log.e("sunmi_printer_plus", "Error while printing QR code: ${e.message}", e)
+            "error"
+        }
+    }
+
+    fun printBarcode(barcodeArgument: Map<String, Any>?): String {
+        if (barcodeArgument == null) return "No arguments provided"
+        return try {
+            val barcodeStyle = BarcodeStyle.getStyle().apply {
+                setDotWidth(barcodeArgument["size"] as? Int ?: 0)
+                setBarHeight(barcodeArgument["height"] as? Int ?: 0)
+                setReadable(getTextPosition(barcodeArgument["textPos"] as? String))
+                setAlign(getAlignment(barcodeArgument["align"] as? String))
+                setSymbology(getSymbology(barcodeArgument["type"] as? String))
+            }
+
+            val barcodeText = barcodeArgument["text"] as? String ?: return "No text provided for barcode"
+            lineApi?.printBarCode(barcodeText, barcodeStyle)
+            "ok"
+        } catch (e: SdkException) {
+            Log.e("sunmi_printer_plus", "Error while printing barcode: ${e.message}", e)
+            "error"
+        }
+    }
+
+    fun printLine(lineArgument: String?): String {
+        val divider = when (lineArgument) {
+            "SOLID" -> DividingLine.SOLID
+            "DOTTED" -> DividingLine.DOTTED
+            else -> DividingLine.EMPTY
+        }
+        lineApi?.printDividingLine(divider, 1)
         return "ok"
     }
 
-    fun printBarcode(qrcodeArgument: Map<String, Any>?): String? {
-        try {
-            val qrStyle = BarcodeStyle.getStyle()
-            qrcodeArgument?.let {
-                val barcodeSize = it["size"] as? Int ?: 0
-                qrStyle.setDotWidth(barcodeSize)
-
-                val barcodeHeight = it["height"] as? Int ?: 0
-                qrStyle.setBarHeight(barcodeHeight)
-
-                val textPos = when (it["textPos"] as? String) {
-                    "NO_TEXT" -> HumanReadable.HIDE
-                    "TEXT_ABOVE" -> HumanReadable.POS_ONE
-                    "TEXT_UNDER" -> HumanReadable.POS_TWO
-                    "BOTH" -> HumanReadable.POS_THREE
-                    else -> HumanReadable.HIDE
-                }
-                qrStyle.setReadable(textPos)
-                val qrAlign = when (it["align"] as? String) {
-                    "CENTER" -> Align.CENTER
-                    "LEFT" -> Align.LEFT
-                    "RIGHT" -> Align.RIGHT
-                    else -> Align.DEFAULT
-                }
-                qrStyle.setAlign(qrAlign)
-
-                val qrType = when (it["type"] as? String) {
-                    "UPCA" ->(Symbology.UPCA)
-                    "UPCE" ->(Symbology.UPCE)
-                    "JAN13" ->(Symbology.EAN13)
-                    "JAN8" ->(Symbology.EAN8)
-                    "CODE39" ->(Symbology.CODE39)
-                    "ITF" ->(Symbology.ITF)
-                    "CODABAR" ->(Symbology.CODABAR)
-                    "CODE93" ->(Symbology.CODE93)
-                    "CODE128" ->(Symbology.CODE128)
-                    else ->Symbology.CODE128
-                }
-                qrStyle.setSymbology(qrType)
-
-                val qrText = it["text"] as? String
-                lineApi?.printBarCode(qrText, qrStyle)
-            }
-        } catch (e: SdkException) {
-            Log.d("sunmi_printer_plus", "Error => ${e.message}")
-            e.printStackTrace()
-        }
+    fun lineWrap(times: Int): String {
+        lineApi?.printDividingLine(DividingLine.EMPTY, times)
         return "ok"
     }
 
-    fun printLine(lineArgument: String?): String? {
-        var divider = when (lineArgument) {
-            "SOLID" -> {
-                DividingLine.SOLID;
-            }
-            "DOTTED" -> {
-                DividingLine.DOTTED
-            }
-            else -> {
-                DividingLine.EMPTY
-            }
-        }
-       lineApi?.printDividingLine(divider,1);
+    fun cutPaper(): String {
+        lineApi?.autoOut()
         return "ok"
+    }
+
+    private fun getErrorLevel(level: String?): ErrorLevel {
+        return when (level) {
+            "LEVEL_H" -> ErrorLevel.H
+            "LEVEL_M" -> ErrorLevel.M
+            "LEVEL_Q" -> ErrorLevel.Q
+            else -> ErrorLevel.L
+        }
+    }
+
+    private fun getTextPosition(position: String?): HumanReadable {
+        return when (position) {
+            "NO_TEXT" -> HumanReadable.HIDE
+            "TEXT_ABOVE" -> HumanReadable.POS_ONE
+            "TEXT_UNDER" -> HumanReadable.POS_TWO
+            "BOTH" -> HumanReadable.POS_THREE
+            else -> HumanReadable.HIDE
+        }
+    }
+
+    private fun getSymbology(type: String?): Symbology {
+        return when (type) {
+            "UPCA" -> Symbology.UPCA
+            "UPCE" -> Symbology.UPCE
+            "JAN13" -> Symbology.EAN13
+            "JAN8" -> Symbology.EAN8
+            "CODE39" -> Symbology.CODE39
+            "ITF" -> Symbology.ITF
+            "CODABAR" -> Symbology.CODABAR
+            "CODE93" -> Symbology.CODE93
+            "CODE128" -> Symbology.CODE128
+            else -> Symbology.CODE128
+        }
+    }
+
+    fun printImage(bitmap: Bitmap?, alignArgument: String?)  : String {
+
+        lineApi?.initLine(BaseStyle.getStyle().setAlign(getAlignment(alignArgument as? String)))
+        lineApi?.printBitmap(bitmap, BitmapStyle.getStyle().setAlgorithm(ImageAlgorithm.DITHERING))
+        return "ok"
+    }
+
+    fun addText(printerArgument: Map<String, Any>?): String? {
+        if (printerArgument == null) return "No arguments provided"
+        return try {
+            val textStyle = buildTextStyle(printerArgument)
+            val text = printerArgument["text"] as? String
+                ?: return "No text provided to print"
+            lineApi?.addText(text, textStyle)
+            "ok"
+        } catch (e: SdkException) {
+            Log.e("sunmi_printer_plus", "Error while printing: ${e.message}", e)
+            "error"
+        }
+    }
+
+    private fun buildTextStyle(printerArgument: Map<String, Any>): TextStyle? {
+        val textStyle = TextStyle.getStyle().apply {
+            setAlign(getAlignment(printerArgument["align"] as? String))
+            setTextSize(printerArgument["fontSize"] as? Int ?: 24)
+            enableBold(printerArgument["bold"] as? Boolean ?: false)
+            enableUnderline(printerArgument["underline"] as? Boolean ?: false)
+            enableStrikethrough(printerArgument["strikethrough"] as? Boolean ?: false)
+            enableItalics(printerArgument["italic"] as? Boolean ?: false)
+            enableAntiColor(printerArgument["reverse"] as? Boolean ?: false)
+        }
+        return textStyle
+    }
+
+    fun printRow(rowArguments: Map<String, Any>?): String? {
+            Log.d("sunmi_printer_plus", rowArguments.toString())
+        return ""
 
     }
 

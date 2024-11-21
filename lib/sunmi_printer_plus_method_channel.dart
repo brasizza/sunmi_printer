@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:sunmi_printer_plus/core/enums/enums.dart';
 
 import 'sunmi_printer_plus_platform_interface.dart';
 
@@ -58,5 +59,46 @@ class MethodChannelSunmiPrinterPlus extends SunmiPrinterPlusPlatform {
   @override
   Future<String?> line(String? type) async {
     return await methodChannel.invokeMethod<String>('printLine', {'data': type});
+  }
+
+  @override
+  Future<String?> lineWrap(int times) async {
+    return await methodChannel.invokeMethod<String>('lineWrap', {'times': times});
+  }
+
+  @override
+  Future<String?> cutPaper() async {
+    return await methodChannel.invokeMethod<String>('cutPaper');
+  }
+
+  @override
+  Future<String?> printImage(Uint8List image, SunmiPrintAlign align) async {
+    return await methodChannel.invokeMethod<String>('printImage', {'image': image, "align": align.name});
+  }
+
+  @override
+  Future<String?> addText(Map printData) async {
+    return await methodChannel.invokeMethod<String>('addText', {'data': printData});
+  }
+
+  @override
+  Future<String?> printEscPos(List<int> data) async {
+    return await methodChannel.invokeMethod<String>('printEscPos', {'data': data});
+  }
+
+  @override
+  Future<String?> printTSPL(String data) async {
+    return await methodChannel.invokeMethod<String>('printTSPL', {'data': data});
+  }
+
+  @override
+  Future<String?> printRow({required List text, required List width, required List style}) async {
+    return await methodChannel.invokeMethod<String>('printRow', {
+      'data': {
+        "text": text,
+        "width": width,
+        "style": style,
+      }
+    });
   }
 }
