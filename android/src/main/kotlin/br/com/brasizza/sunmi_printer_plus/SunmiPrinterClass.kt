@@ -1,7 +1,7 @@
 package br.com.brasizza.sunmi_printer_plus
 
-import android.util.Log
 import android.graphics.Bitmap
+import android.util.Log
 import com.sunmi.printerx.PrinterSdk.Printer
 import com.sunmi.printerx.SdkException
 import com.sunmi.printerx.enums.Align
@@ -167,22 +167,45 @@ class SunmiPrinterClass(private  val printer: Printer?) {
     }
 
     private fun buildTextStyle(printerArgument: Map<String, Any>): TextStyle? {
-        val textStyle = TextStyle.getStyle().apply {
-            setAlign(getAlignment(printerArgument["align"] as? String))
-            setTextSize(printerArgument["fontSize"] as? Int ?: 24)
-            enableBold(printerArgument["bold"] as? Boolean ?: false)
-            enableUnderline(printerArgument["underline"] as? Boolean ?: false)
-            enableStrikethrough(printerArgument["strikethrough"] as? Boolean ?: false)
-            enableItalics(printerArgument["italic"] as? Boolean ?: false)
-            enableAntiColor(printerArgument["reverse"] as? Boolean ?: false)
+        val textStyle = try {
+            TextStyle.getStyle().apply {
+                setAlign(getAlignment(printerArgument["align"] as? String))
+                setTextSize(printerArgument["fontSize"] as? Int ?: 24)
+                enableBold(printerArgument["bold"] as? Boolean ?: false)
+                enableUnderline(printerArgument["underline"] as? Boolean ?: false)
+                enableStrikethrough(printerArgument["strikethrough"] as? Boolean ?: false)
+                enableItalics(printerArgument["italic"] as? Boolean ?: false)
+                enableAntiColor(printerArgument["reverse"] as? Boolean ?: false)
+            }
+        } catch (e: Exception) {
+           return TextStyle.getStyle();
         }
         return textStyle
     }
 
-    fun printRow(rowArguments: Map<String, Any>?): String? {
-            Log.d("sunmi_printer_plus", rowArguments.toString())
-        return ""
+    fun printRow(rowArguments: Map<String, Any>): String? {
+       try {
+           val widths = (rowArguments["width"] as? List<*>)?.filterIsInstance<Int>() ?: emptyList()
+           val styles = (rowArguments["style"] as? List<*>)?.map { it as? Map<String, Any?> } ?: emptyList()
+           val texts = (rowArguments["text"] as? List<*>)?.filterIsInstance<String>() ?: emptyList()
+           val textsArray = texts.toTypedArray()
+            val widthsArray: IntArray = widths.toIntArray()
+            val textStylesMutable: MutableList<TextStyle> = mutableListOf()
+            for (style in styles){
+                    if(style == null){
+                        textStylesMutable.add(TextStyle.getStyle())
+                    }else {
+                        val map: Map<String, Any> = style as Map<String, Any>
 
+                        textStylesMutable.add(buildTextStyle(map)!!)
+                    }
+            }
+            val textStylesArray: Array<TextStyle> = textStylesMutable.toTypedArray()
+           lineApi?.printTexts(textsArray,widthsArray,textStylesArray)
+        } catch (e: SdkException) {
+            Log.e("sunmi_printer_plus", "Error while printing: ${e.message}", e)
+        }
+        return "ok"
     }
 
 

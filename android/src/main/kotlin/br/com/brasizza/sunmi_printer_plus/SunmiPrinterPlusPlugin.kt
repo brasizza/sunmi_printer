@@ -124,7 +124,7 @@ class SunmiPrinterPlusPlugin : FlutterPlugin, MethodCallHandler {
 
 
             "printRow" -> {
-                val rowArguments: Map<String, Any>? = call.argument("data")
+                val rowArguments: Map<String, Any> = call.argument("data")!!
                 result.success(printer.printRow(rowArguments))
             }
 
