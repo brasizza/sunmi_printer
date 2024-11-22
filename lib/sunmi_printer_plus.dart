@@ -4,6 +4,7 @@ import 'package:sunmi_printer_plus/core/enums/enums.dart';
 import 'package:sunmi_printer_plus/core/styles/sunmi_barcode_style.dart';
 import 'package:sunmi_printer_plus/core/styles/sunmi_qrcode_style.dart';
 import 'package:sunmi_printer_plus/core/sunmi/sunmi_config.dart';
+import 'package:sunmi_printer_plus/core/sunmi/sunmi_lcd.dart';
 import 'package:sunmi_printer_plus/core/types/sunmi_column.dart';
 
 import 'core/styles/sunmi_text_style.dart';
@@ -81,5 +82,29 @@ class SunmiPrinterPlus {
 
   Future<String?> printRow({required List<SunmiColumn> cols}) async {
     return await SunmiPrinter.i.printRow(cols: cols);
+  }
+
+  Future<String?> configLCD({required SunmiLCDStatus status}) async {
+    return await SunmiLcd.i.configLCD(status: status);
+  }
+
+  Future<String?> sendTextLCD({required String text, required int size, required bool fill}) async {
+    return await SunmiLcd.i.sendTextLCD(text: text, size: size, fill: fill);
+  }
+
+  Future<String?> showDigital(String digital) async {
+    return await SunmiLcd.i.showDigital(digital);
+  }
+
+  Future<String?> sendImageLCD({required Uint8List image}) async {
+    return await SunmiLcd.i.sendImageLCD(image: image);
+  }
+
+  Future<String?> openDrawer() async {
+    return await SunmiPrinterPlusPlatform.instance.openDrawer();
+  }
+
+  Future<bool> isDrawerOpen() async {
+    return await SunmiPrinterPlusPlatform.instance.isDrawerOpen();
   }
 }

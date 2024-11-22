@@ -101,4 +101,34 @@ class MethodChannelSunmiPrinterPlus extends SunmiPrinterPlusPlatform {
       }
     });
   }
+
+  @override
+  Future<String?> configLCD({required SunmiLCDStatus status}) async {
+    return await methodChannel.invokeMethod<String>('configLCD', {'status': status.name});
+  }
+
+  @override
+  Future<String?> sendTextLCD({required String text, required int size, required bool fill}) async {
+    return await methodChannel.invokeMethod<String>('sendTextLCD', {'text': text, 'size': size, 'fill': fill});
+  }
+
+  @override
+  Future<String?> showDigital(String digital) async {
+    return await methodChannel.invokeMethod<String>('showDigital', {'digital': digital});
+  }
+
+  @override
+  Future<String?> sendImageLCD({required Uint8List image}) async {
+    return await methodChannel.invokeMethod<String>('sendImageLCD', {'image': image});
+  }
+
+  @override
+  Future<String?> openDrawer() async {
+    return await methodChannel.invokeMethod<String>('openDrawer');
+  }
+
+  @override
+  Future<bool> isDrawerOpen() async {
+    return await methodChannel.invokeMethod<bool>('isDrawerOpen') ?? false;
+  }
 }

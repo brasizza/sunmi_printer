@@ -95,5 +95,11 @@ enum SunmiBarcodeTextPos {
   BOTH,
 }
 
-///*SunmiFontSize*
-///Enum to set font in the printer
+///*SunmiLCDStatus*
+///Enum to set lcd status
+enum SunmiLCDStatus {
+  INIT,
+  WAKE,
+  SLEEP,
+  CLEAR,
+}

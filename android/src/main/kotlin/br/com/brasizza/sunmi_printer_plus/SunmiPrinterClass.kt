@@ -57,7 +57,7 @@ class SunmiPrinterClass(private  val printer: Printer?) {
         if (qrcodeArgument == null) return "No arguments provided"
         return try {
             val qrStyle = QrStyle.getStyle().apply {
-                setDot(qrcodeArgument["qrcodeSize"] as? Int ?: 0)
+                setDot(qrcodeArgument["qrcodeSize"] as? Int ?: 4)
                 setErrorLevel(getErrorLevel(qrcodeArgument["errorLevel"] as? String))
                 setAlign(getAlignment(qrcodeArgument["align"] as? String))
             }
@@ -147,7 +147,7 @@ class SunmiPrinterClass(private  val printer: Printer?) {
 
     fun printImage(bitmap: Bitmap?, alignArgument: String?)  : String {
 
-        lineApi?.initLine(BaseStyle.getStyle().setAlign(getAlignment(alignArgument as? String)))
+        lineApi?.initLine(BaseStyle.getStyle().setAlign(getAlignment(alignArgument )))
         lineApi?.printBitmap(bitmap, BitmapStyle.getStyle().setAlgorithm(ImageAlgorithm.DITHERING))
         return "ok"
     }
@@ -195,8 +195,8 @@ class SunmiPrinterClass(private  val printer: Printer?) {
                     if(style == null){
                         textStylesMutable.add(TextStyle.getStyle())
                     }else {
-                        val map: Map<String, Any> = style as Map<String, Any>
-
+                        val map: Map<String, Any> = (style as? Map<String, Any?>)?.filterValues { it != null }?.mapValues { it.value!! }
+                        ?: emptyMap()
                         textStylesMutable.add(buildTextStyle(map)!!)
                     }
             }

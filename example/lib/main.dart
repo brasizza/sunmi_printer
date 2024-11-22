@@ -5,7 +5,10 @@ import 'package:sunmi_printer_plus/core/styles/sunmi_barcode_style.dart';
 import 'package:sunmi_printer_plus/core/styles/sunmi_qrcode_style.dart';
 import 'package:sunmi_printer_plus/core/styles/sunmi_text_style.dart';
 import 'package:sunmi_printer_plus/sunmi_printer_plus.dart';
+import 'package:sunmi_printer_plus_example/src/cash_drawer.dart';
+import 'package:sunmi_printer_plus_example/src/lcd_controller.dart';
 import 'package:sunmi_printer_plus_example/src/printer_controller.dart';
+import 'package:sunmi_printer_plus_example/src/status_controller.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,29 +27,40 @@ class _MyAppState extends State<MyApp> {
   String idPrinter = "";
   String paperPrinter = "";
   String typePrinter = "";
-  final PrinterController printerController = PrinterController(printer: SunmiPrinterPlus());
+  String cashDrawerStatus = "Close";
+  late final PrinterController printerController;
+  late final StatusController statusController;
+  late final LcdController lcdController;
+  late final CashDrawer cashDrawer;
 
   @override
   void initState() {
-    super.initState();
+    final SunmiPrinterPlus sunmiPrinterPlus = SunmiPrinterPlus();
 
-    // Run all futures in parallel
-    Future.wait([
-      printerController.getVersion(),
-      printerController.getPaper(),
-      printerController.getId(),
-      printerController.getType(),
-      printerController.getStatus(),
-    ]).then((results) {
-      setState(() {
-        // Unwrap the results into corresponding variables
-        version = results[0].toString();
-        paperPrinter = results[1].toString();
-        idPrinter = results[2].toString();
-        typePrinter = results[3].toString();
-        statusPrinter = results[4] as PrinterStatus;
+    printerController = PrinterController(printer: sunmiPrinterPlus);
+    statusController = StatusController(printer: sunmiPrinterPlus);
+    lcdController = LcdController(printer: sunmiPrinterPlus);
+    cashDrawer = CashDrawer(printer: sunmiPrinterPlus);
+    super.initState();
+    Future.delayed(const Duration(milliseconds: 0)).then((_) {
+      Future.wait([
+        statusController.getVersion(),
+        statusController.getPaper(),
+        statusController.getId(),
+        statusController.getType(),
+        statusController.getStatus(),
+      ]).then((results) {
+        setState(() {
+          // Unwrap the results into corresponding variables
+          version = results[0].toString();
+          paperPrinter = results[1].toString();
+          idPrinter = results[2].toString();
+          typePrinter = results[3].toString();
+          statusPrinter = results[4] as PrinterStatus;
+        });
       });
     });
+    // Run all futures in parallel
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
@@ -67,7 +81,7 @@ class _MyAppState extends State<MyApp> {
                   Row(children: [
                     OutlinedButton(
                         onPressed: () async {
-                          final status = await printerController.getStatus();
+                          final status = await statusController.getStatus();
                           setState(() {
                             statusPrinter = status;
                           });
@@ -89,8 +103,8 @@ class _MyAppState extends State<MyApp> {
                     children: [
                       OutlinedButton(
                         onPressed: () async {
-                          await printerController.printQrcode(
-                            text: "I love flutter",
+                          await printerController.printQRCode(
+                            "I love flutter",
                             style: SunmiQrcodeStyle(
                               align: SunmiPrintAlign.LEFT,
                               errorLevel: SunmiQrcodeLevel.LEVEL_H,
@@ -117,7 +131,7 @@ class _MyAppState extends State<MyApp> {
                       ),
                       OutlinedButton(
                         onPressed: () async {
-                          await printerController.lineWrap(times: 2);
+                          await printerController.lineWrap(2);
                         },
                         child: const Text("lineWrap"),
                       ),
@@ -139,7 +153,7 @@ class _MyAppState extends State<MyApp> {
                     children: [
                       OutlinedButton(
                         onPressed: () async {
-                          await printerController.printText(
+                          await printerController.printCustomText(
                             sunmiText: SunmiText(
                               text: 'I love flutter',
                               style: SunmiTextStyle(
@@ -152,7 +166,7 @@ class _MyAppState extends State<MyApp> {
                       ),
                       OutlinedButton(
                         onPressed: () async {
-                          await printerController.printText(
+                          await printerController.printCustomText(
                             sunmiText: SunmiText(
                               text: 'I love flutter',
                               style: SunmiTextStyle(
@@ -165,7 +179,7 @@ class _MyAppState extends State<MyApp> {
                       ),
                       OutlinedButton(
                         onPressed: () async {
-                          await printerController.printText(
+                          await printerController.printCustomText(
                             sunmiText: SunmiText(
                               text: 'I love flutter',
                               style: SunmiTextStyle(bold: true),
@@ -176,7 +190,7 @@ class _MyAppState extends State<MyApp> {
                       ),
                       OutlinedButton(
                         onPressed: () async {
-                          await printerController.printText(
+                          await printerController.printCustomText(
                             sunmiText: SunmiText(
                               text: 'I love flutter',
                               style: SunmiTextStyle(reverse: true),
@@ -187,7 +201,7 @@ class _MyAppState extends State<MyApp> {
                       ),
                       OutlinedButton(
                         onPressed: () async {
-                          await printerController.printText(
+                          await printerController.printCustomText(
                             sunmiText: SunmiText(
                               text: 'I love flutter',
                             ),
@@ -197,7 +211,7 @@ class _MyAppState extends State<MyApp> {
                       ),
                       OutlinedButton(
                         onPressed: () async {
-                          await printerController.printText(
+                          await printerController.printCustomText(
                             sunmiText: SunmiText(
                                 text: 'I love flutter',
                                 style: SunmiTextStyle(
@@ -209,7 +223,7 @@ class _MyAppState extends State<MyApp> {
                       ),
                       OutlinedButton(
                         onPressed: () async {
-                          await printerController.printText(
+                          await printerController.printCustomText(
                             sunmiText: SunmiText(
                                 text: 'Flutter',
                                 style: SunmiTextStyle(
@@ -221,7 +235,7 @@ class _MyAppState extends State<MyApp> {
                       ),
                       OutlinedButton(
                         onPressed: () async {
-                          await printerController.printText(
+                          await printerController.printCustomText(
                             sunmiText: SunmiText(
                                 text: 'Flutter',
                                 style: SunmiTextStyle(
@@ -268,6 +282,179 @@ class _MyAppState extends State<MyApp> {
                           ]);
                         },
                         child: const Text("Column"),
+                      ),
+                      OutlinedButton(
+                        onPressed: () async {
+                          await printerController.printText('Payment receipt',
+                              style: SunmiTextStyle(
+                                bold: true,
+                                align: SunmiPrintAlign.CENTER,
+                              ));
+                          await printerController.line();
+                          await printerController.lineWrap(2);
+
+                          await printerController.printRow(cols: [
+                            SunmiColumn(
+                              text: 'Name',
+                              width: 12,
+                            ),
+                            SunmiColumn(
+                              text: 'Qty',
+                              width: 6,
+                            ),
+                            SunmiColumn(
+                              text: 'UN',
+                              width: 6,
+                            ),
+                            SunmiColumn(
+                              text: 'TOT',
+                              width: 6,
+                            ),
+                          ]);
+
+                          await printerController.printRow(cols: [
+                            SunmiColumn(
+                              text: 'Fries',
+                              width: 12,
+                            ),
+                            SunmiColumn(
+                              text: '4x',
+                              width: 6,
+                            ),
+                            SunmiColumn(
+                              text: '3.00',
+                              width: 6,
+                            ),
+                            SunmiColumn(
+                              text: '12.00',
+                              width: 6,
+                            ),
+                          ]);
+
+                          await printerController.printRow(cols: [
+                            SunmiColumn(
+                              text: 'Strawberry',
+                              width: 12,
+                            ),
+                            SunmiColumn(
+                              text: '1x',
+                              width: 6,
+                            ),
+                            SunmiColumn(
+                              text: '24.44',
+                              width: 6,
+                            ),
+                            SunmiColumn(
+                              text: '24.44',
+                              width: 6,
+                            ),
+                          ]);
+
+                          await printerController.printRow(cols: [
+                            SunmiColumn(
+                              text: 'Soda',
+                              width: 12,
+                            ),
+                            SunmiColumn(
+                              text: '1x',
+                              width: 6,
+                            ),
+                            SunmiColumn(
+                              text: '1.99',
+                              width: 6,
+                            ),
+                            SunmiColumn(
+                              text: '1.99',
+                              width: 6,
+                            ),
+                          ]);
+
+                          await printerController.line();
+                          await printerController.printRow(cols: [
+                            SunmiColumn(
+                              text: 'TOTAL',
+                              width: 25,
+                            ),
+                            SunmiColumn(
+                              text: '38.43',
+                              width: 5,
+                            ),
+                          ]);
+
+                          await printerController.printRow(cols: [
+                            SunmiColumn(
+                              text: 'ARABIC TEXT',
+                              width: 15,
+                            ),
+                            SunmiColumn(
+                              text: 'اسم المشترك',
+                              width: 15,
+                            ),
+                          ]);
+
+                          await printerController.printRow(cols: [
+                            SunmiColumn(
+                              text: 'اسم المشترك',
+                              width: 15,
+                            ),
+                            SunmiColumn(
+                              text: 'اسم المشترك',
+                              width: 15,
+                            ),
+                          ]);
+
+                          await printerController.printRow(cols: [
+                            SunmiColumn(
+                              text: 'RUSSIAN TEXT',
+                              width: 15,
+                            ),
+                            SunmiColumn(
+                              text: 'Санкт-Петербу́рг',
+                              width: 15,
+                            ),
+                          ]);
+                          await printerController.printRow(cols: [
+                            SunmiColumn(
+                              text: 'Санкт-Петербу́рг',
+                              width: 15,
+                            ),
+                            SunmiColumn(
+                              text: 'Санкт-Петербу́рг',
+                              width: 15,
+                            ),
+                          ]);
+
+                          await printerController.printRow(cols: [
+                            SunmiColumn(
+                              text: 'CHINESE TEXT',
+                              width: 15,
+                            ),
+                            SunmiColumn(
+                              text: '風俗通義',
+                              width: 15,
+                            ),
+                          ]);
+                          await printerController.printRow(cols: [
+                            SunmiColumn(
+                              text: '風俗通義',
+                              width: 15,
+                            ),
+                            SunmiColumn(
+                              text: '風俗通義',
+                              width: 15,
+                            ),
+                          ]);
+
+                          await printerController.printText('Transaction\'s Qrcode',
+                              style: SunmiTextStyle(
+                                align: SunmiPrintAlign.CENTER,
+                                bold: true,
+                                fontSize: 30,
+                              ));
+                          await printerController.printQRCode('https://github.com/brasizza/sunmi_printer');
+                          await printerController.lineWrap(2);
+                        },
+                        child: const Text("Receipt builder (No ESC-POS)"),
                       ),
                     ],
                   ),
@@ -348,7 +535,110 @@ class _MyAppState extends State<MyApp> {
                         child: const Text("Print TSPL (Label printer only)"),
                       ),
                     ],
-                  )
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text('LCD COMMAND (If apliacable  T1 MINI, T2 MINI)'),
+                  ),
+                  Wrap(
+                    spacing: 10,
+                    runSpacing: 10,
+                    children: [
+                      OutlinedButton(
+                        onPressed: () async {
+                          await lcdController.config(status: SunmiLCDStatus.INIT);
+                        },
+                        child: const Text("Init LCD"),
+                      ),
+                      OutlinedButton(
+                        onPressed: () async {
+                          await lcdController.config(status: SunmiLCDStatus.SLEEP);
+                        },
+                        child: const Text("Sleep LCD"),
+                      ),
+                      OutlinedButton(
+                        onPressed: () async {
+                          await lcdController.config(status: SunmiLCDStatus.WAKE);
+                        },
+                        child: const Text("Sleep WAKE UP"),
+                      ),
+                      OutlinedButton(
+                        onPressed: () async {
+                          await lcdController.config(status: SunmiLCDStatus.CLEAR);
+                        },
+                        child: const Text("Clear LCD"),
+                      ),
+                      OutlinedButton(
+                        onPressed: () async {
+                          await lcdController.sendTextLCD('I love flutter', size: 10, fill: false);
+                        },
+                        child: const Text("Insert text"),
+                      ),
+                      OutlinedButton(
+                        onPressed: () async {
+                          await lcdController.showDigital('122.90');
+                        },
+                        child: const Text("LCD Price (7 digits from 0 to 9 and “.”)"),
+                      ),
+                      OutlinedButton(
+                        onPressed: () async {
+                          final assetImage = await SunmiHelper.i.getImageFromAsset('assets/images/dash.jpeg');
+
+                          await lcdController.sendImageLCD(image: assetImage);
+                        },
+                        child: Column(
+                          children: [
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Image.asset(
+                              'assets/images/dash.jpeg',
+                              width: 50,
+                            ),
+                            const Text("Send to LCD"),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text('Cash Drawers (if avaliable)'),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text('Cash Drawers is  $cashDrawerStatus'),
+                  ),
+                  Wrap(
+                    spacing: 10,
+                    runSpacing: 10,
+                    children: [
+                      OutlinedButton(
+                        onPressed: () async {
+                          await cashDrawer.openDrawer();
+                        },
+                        child: const Text("Open drawer"),
+                      ),
+                      OutlinedButton(
+                        onPressed: () async {
+                          final statusDrawer = await cashDrawer.isDrawerOpen();
+                          if (statusDrawer) {
+                            setState(() {
+                              cashDrawerStatus = "Open";
+                            });
+                          } else {
+                            setState(() {
+                              cashDrawerStatus = "Close";
+                            });
+                          }
+                        },
+                        child: const Text("Check if open"),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),

@@ -93,4 +93,28 @@ abstract class SunmiPrinterPlusPlatform extends PlatformInterface {
   Future<String?> printRow({required List text, required List width, required List style}) {
     throw UnimplementedError('printRow() has not been implemented.');
   }
+
+  Future<String?> configLCD({required SunmiLCDStatus status}) {
+    throw UnimplementedError('configLCD() has not been implemented.');
+  }
+
+  Future<String?> sendTextLCD({required String text, required int size, required bool fill}) {
+    throw UnimplementedError('sendTextLCD() has not been implemented.');
+  }
+
+  Future<String?> showDigital(String digital) async {
+    throw UnimplementedError('showDigital() has not been implemented.');
+  }
+
+  Future<String?> sendImageLCD({required Uint8List image}) {
+    throw UnimplementedError('sendImageLCD() has not been implemented.');
+  }
+
+  Future<String?> openDrawer() async {
+    throw UnimplementedError('openDrawer() has not been implemented.');
+  }
+
+  Future<bool> isDrawerOpen() async {
+    throw UnimplementedError('isDrawerOpen() has not been implemented.');
+  }
 }

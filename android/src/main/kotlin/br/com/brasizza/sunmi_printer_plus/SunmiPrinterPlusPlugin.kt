@@ -2,7 +2,7 @@ package br.com.brasizza.sunmi_printer_plus
 
 import android.content.Context
 import android.graphics.BitmapFactory
-import com.sunmi.printerx.PrinterSdk
+import android.os.Build
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
@@ -16,33 +16,32 @@ class SunmiPrinterPlusPlugin : FlutterPlugin, MethodCallHandler {
     /// This local reference serves to register the plugin with the Flutter Engine and unregister it
     /// when the Flutter Engine is detached from the Activity
     private lateinit var channel: MethodChannel
-    private lateinit var printer: SunmiPrinterClass
+    private lateinit var sunmiPrinter: SunmiPrinterClass
     private lateinit var sunmiInit: SunmiInitClass
     private lateinit var configPrinter: SunmiConfigClass
     private lateinit var printerCommand: SunmiCommandPrinter
-    private lateinit var selectPrinter: PrinterSdk.Printer
+    private lateinit var sunmiLCD: SunmiLCDClass
+    private lateinit var sunmiDrawer: SunmiDrawerClass
     override fun onAttachedToEngine(flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
         val context: Context = flutterPluginBinding.getApplicationContext()
-
-        channel = MethodChannel(flutterPluginBinding.binaryMessenger, "sunmi_printer_plus")
-        channel.setMethodCallHandler(this)
         sunmiInit = SunmiInitClass(context);
         sunmiInit.initPrinter { selectPrinter ->
             if (selectPrinter != null) {
-                printer = SunmiPrinterClass(selectPrinter)
                 configPrinter = SunmiConfigClass(selectPrinter)
-                printerCommand = SunmiCommandPrinter(selectPrinter);
-
-            } 
+                sunmiPrinter = SunmiPrinterClass(selectPrinter)
+                printerCommand = SunmiCommandPrinter(selectPrinter)
+                sunmiLCD = SunmiLCDClass(selectPrinter)
+                sunmiDrawer = SunmiDrawerClass(selectPrinter)
+            }
         }
-
-
+        channel = MethodChannel(flutterPluginBinding.binaryMessenger, "sunmi_printer_plus")
+        channel.setMethodCallHandler(this)
     }
 
     override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
         when (call.method) {
             "getPlatformVersion" -> {
-                result.success("Android ${android.os.Build.VERSION.RELEASE}")
+                result.success("Android ${Build.VERSION.RELEASE}")
             }
 
             "getStatus" -> {
@@ -65,33 +64,32 @@ class SunmiPrinterPlusPlugin : FlutterPlugin, MethodCallHandler {
 
             "printText" -> {
                 val printerArgument: Map<String, Any>? = call.argument("data")
-                result.success(printer.printText(printerArgument))
+                result.success(sunmiPrinter.printText(printerArgument))
             }
 
             "printQrcode" -> {
                 val qrcodeArgument: Map<String, Any>? = call.argument("data")
-                result.success(printer.printQrcode(qrcodeArgument))
+                result.success(sunmiPrinter.printQrcode(qrcodeArgument))
             }
 
             "printBarcode" -> {
                 val qrcodeArgument: Map<String, Any>? = call.argument("data")
-                result.success(printer.printBarcode(qrcodeArgument))
+                result.success(sunmiPrinter.printBarcode(qrcodeArgument))
             }
 
             "printLine" -> {
                 val lineArgument: String? = call.argument("data")
-                result.success(printer.printLine(lineArgument))
+                result.success(sunmiPrinter.printLine(lineArgument))
             }
 
             "lineWrap" -> {
                 val wrapArgument: Int = call.argument("times")?: 1
-                result.success(printer.lineWrap(wrapArgument))
+                result.success(sunmiPrinter.lineWrap(wrapArgument))
             }
 
 
             "cutPaper" -> {
-
-                result.success(printer.cutPaper())
+                result.success(sunmiPrinter.cutPaper())
             }
 
             "printImage" -> {
@@ -99,14 +97,16 @@ class SunmiPrinterPlusPlugin : FlutterPlugin, MethodCallHandler {
                 val alignArgument: String? = call.argument("align")
                 if(bytes != null){
                 val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
-                printer.printImage(bitmap,alignArgument)
+                    result.success(sunmiPrinter.printImage(bitmap,alignArgument))
+                }else{
+                    result.success("invalid")
                 }
             }
 
 
             "addText" -> {
                 val printerArgument: Map<String, Any>? = call.argument("data")
-                result.success(printer.addText(printerArgument))
+                result.success(sunmiPrinter.addText(printerArgument))
             }
 
             "printEscPos" -> {
@@ -125,9 +125,45 @@ class SunmiPrinterPlusPlugin : FlutterPlugin, MethodCallHandler {
 
             "printRow" -> {
                 val rowArguments: Map<String, Any> = call.argument("data")!!
-                result.success(printer.printRow(rowArguments))
+                result.success(sunmiPrinter.printRow(rowArguments))
             }
 
+
+
+            "configLCD" -> {
+                val lcdStatus: String? = call.argument("status")
+                result.success(sunmiLCD.configLCD(lcdStatus))
+            }
+
+
+            "sendTextLCD" -> {
+                val textData: String = call.argument("text")?: ""
+                val textSize: Int = call.argument("size")?: 32
+                val textFill: Boolean = call.argument("fill")?: false
+                result.success(sunmiLCD.sendTextLCD(textData,textSize,textFill))
+            }
+
+            "showDigital" -> {
+                val digitalData: String = call.argument("digital")?: ""
+
+                result.success(sunmiLCD.showDigital(digitalData))
+            }
+
+            "sendImageLCD" -> {
+                val bytes: ByteArray? = call.argument("image")
+                if(bytes != null) {
+                    val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                    result.success( sunmiLCD.sendImageLCD(bitmap))
+                }
+            }
+
+            "openDrawer" -> {
+                result.success(sunmiDrawer.openDrawer())
+            }
+
+            "isDrawerOpen" -> {
+                result.success(sunmiDrawer.isDrawerOpen())
+            }
 
 
             else -> {
