@@ -12,27 +12,19 @@ class PrinterController {
 
   PrinterController({required SunmiPrinterPlus printer}) : _printer = printer;
 
-  
-
   Future<String?> printText(String text, {SunmiTextStyle? style}) async {
     return await _printer.printText(text: text, style: style);
   }
 
   Future<String?> printCustomText({required SunmiText sunmiText}) async {
-    return await _printer.printText(text: sunmiText.text, style: sunmiText.style);
+    return await _printer.printCustomText(sunmiText: sunmiText);
   }
 
   Future<String?> addText({required List<SunmiText> sunmiTexts}) async {
-    for (var i = 0; i < sunmiTexts.length; i++) {
-      var sunmiText = sunmiTexts[i];
-      if (i == sunmiTexts.length - 1) {
-        sunmiText = sunmiText.copyWith(text: "${sunmiText.text}\n");
-      }
-      await _printer.addText(text: sunmiText.text, style: sunmiText.style);
-    }
-    return 'ok';
+    return await _printer.addText(sunmiTexts: sunmiTexts);
   }
 
+ 
   Future<String?> printQRCode(String text, {SunmiQrcodeStyle? style}) async {
     return await _printer.printQrcode(text: text, style: style);
   }

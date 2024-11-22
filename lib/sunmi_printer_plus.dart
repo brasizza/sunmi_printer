@@ -9,6 +9,7 @@ import 'package:sunmi_printer_plus/core/types/sunmi_column.dart';
 
 import 'core/styles/sunmi_text_style.dart';
 import 'core/sunmi/sunmi_printer.dart';
+import 'core/types/sunmi_text.dart';
 import 'sunmi_printer_plus_platform_interface.dart';
 
 export 'core/helpers/sunmi_helper.dart';
@@ -44,6 +45,10 @@ class SunmiPrinterPlus {
     return await SunmiPrinter.i.printText(text: text, style: style);
   }
 
+  Future<String?> printCustomText({required SunmiText sunmiText}) async {
+    return await SunmiPrinter.i.printCustomText(sunmiText: sunmiText);
+  }
+
   Future<String?> printQrcode({required String text, SunmiQrcodeStyle? style}) async {
     return await SunmiPrinter.i.printQrcode(text: text, style: style);
   }
@@ -68,8 +73,15 @@ class SunmiPrinterPlus {
     return await SunmiPrinter.i.printImage(image: image, align: align);
   }
 
-  Future<String?> addText({required String text, SunmiTextStyle? style}) async {
-    return await SunmiPrinter.i.addText(text: text, style: style);
+  Future<String?> addText({required List<SunmiText> sunmiTexts}) async {
+    for (var i = 0; i < sunmiTexts.length; i++) {
+      var sunmiText = sunmiTexts[i];
+      if (i == sunmiTexts.length - 1) {
+        sunmiText = sunmiText.copyWith(text: "${sunmiText.text}\n");
+      }
+      await SunmiPrinter.i.addText(text: sunmiText.text, style: sunmiText.style);
+    }
+    return "ok";
   }
 
   Future<String?> printEscPos({required List<int> data}) async {

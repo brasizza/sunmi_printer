@@ -5,12 +5,12 @@ import 'package:sunmi_printer_plus/core/styles/sunmi_barcode_style.dart';
 import 'package:sunmi_printer_plus/core/styles/sunmi_qrcode_style.dart';
 import 'package:sunmi_printer_plus/core/styles/sunmi_text_style.dart';
 import 'package:sunmi_printer_plus/core/types/sunmi_column.dart';
+import 'package:sunmi_printer_plus/core/types/sunmi_text.dart';
 
 import '../../sunmi_printer_plus_platform_interface.dart';
 
 class SunmiPrinter {
   static SunmiPrinter? _instance;
-  // Avoid self instance
   SunmiPrinter._();
   static SunmiPrinter get i => _instance ??= SunmiPrinter._();
 
@@ -20,6 +20,14 @@ class SunmiPrinter {
       if (style != null) ...style.toMap(),
     };
 
+    return await SunmiPrinterPlusPlatform.instance.printText(printData);
+  }
+
+  Future<String?> printCustomText({required SunmiText sunmiText}) async {
+    final printData = {
+      "text": sunmiText.text,
+      if (sunmiText.style != null) ...sunmiText.style!.toMap(),
+    };
     return await SunmiPrinterPlusPlatform.instance.printText(printData);
   }
 
