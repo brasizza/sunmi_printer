@@ -1,9 +1,18 @@
+
 # Changelog
 
 
-## 3.0.1#
--Make compatible with dart >=3.5.0
+## 4.0.0#
+# A WHOLE NEW package (minor break change)
+## One important breakchange is the column in printRow.
+I was needed to improve this method to get the benefits of the implementation.
+- The older version (from aidl) , sometimes that was not possible to print arabic or chinese text, now it is!
+- The other improvment: now in printRow you can send a whole sunmiStyle to do a new cusomization as you need!
 
+# Now i am using the dependencie from gradle and abandon the aidlservice.
+
+Doing that, i have a lot of control with the printer methods and the whole device!
+I took me 3 weeks to make this code good to be release, so before you upgrade to 4.0.0 consider to test all your project before GO LIVE
 
 
 ## 3.0.1#

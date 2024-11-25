@@ -29,7 +29,8 @@ sealed class SunmiPrinter {
     return await SunmiPrinterPlusPlatform.instance.printText(printData);
   }
 
-  static Future<String?> printQRCode(String text, {SunmiQrcodeStyle? style}) async {
+  static Future<String?> printQRCode(String text,
+      {SunmiQrcodeStyle? style}) async {
     final printData = {
       "text": text,
       if (style != null) ...style.toMap(),
@@ -38,7 +39,8 @@ sealed class SunmiPrinter {
     return await SunmiPrinterPlusPlatform.instance.printQrcode(printData);
   }
 
-  static Future<String?> printBarcode({required String text, SunmiBarcodeStyle? style}) async {
+  static Future<String?> printBarcode(
+      {required String text, SunmiBarcodeStyle? style}) async {
     final printData = {
       "text": text,
       if (style != null) ...style.toMap(),
@@ -58,11 +60,13 @@ sealed class SunmiPrinter {
     return await SunmiPrinterPlusPlatform.instance.cutPaper();
   }
 
-  static Future<String?> printImage({required Uint8List image, required SunmiPrintAlign align}) async {
+  static Future<String?> printImage(
+      {required Uint8List image, required SunmiPrintAlign align}) async {
     return await SunmiPrinterPlusPlatform.instance.printImage(image, align);
   }
 
-  static Future<String?> addText({required String text, SunmiTextStyle? style}) async {
+  static Future<String?> addText(
+      {required String text, SunmiTextStyle? style}) async {
     final printData = {
       "text": text,
       if (style != null) ...style.toMap(),
@@ -95,6 +99,9 @@ sealed class SunmiPrinter {
     }
 
     List<List<dynamic>> separatedProperties = separateProperties(cols);
-    return await SunmiPrinterPlusPlatform.instance.printRow(text: separatedProperties[0], width: separatedProperties[1], style: separatedProperties[2]);
+    return await SunmiPrinterPlusPlatform.instance.printRow(
+        text: separatedProperties[0],
+        width: separatedProperties[1],
+        style: separatedProperties[2]);
   }
 }

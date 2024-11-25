@@ -1,22 +1,26 @@
-# sunmi_printer_plus
 
-# This is a fork from [sunmi_printer](https://pub.dev/packages/sunmi_printer) , but i implemented a lot of other features described below
+# Sunmi printer 4.0.0
 
-## Important: 
-  **THIS PACKAGE WILL WORK ONLY IN ANDROID!**
+Package Sunmi printer will support all sunmi devices with different behaviours
 
-Support Sunmi and Null Safety.
-I build this flutter plugin based on this:
-[Official Sunmi Inner Printer Doc](https://file.cdn.sunmi.com/SUNMIDOCS/%E5%95%86%E7%B1%B3%E5%86%85%E7%BD%AE%E6%89%93%E5%8D%B0%E6%9C%BA%E5%BC%80%E5%8F%91%E8%80%85%E6%96%87%E6%A1%A3EN-0224.pdf). But not all method from doc was included in this package, beacuse i don't have equipment. If you have and can help me, just contact me on github!
+## Important
 
-## Installation  
+THIS PACKAGE WILL WORK ONLY IN ANDROID!
+
+This flutter plugin based  Official Sunmi Inner Printer Doc using the latest implementation libs [Documentation](https://developer.sunmi.com/docs/en-US/xeghjk491/mafeghjk535)
+
+You can help me out to keep this package updated!
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/donate?business=5BMWJ9CYNVDAE&no_recurring=0&currency_code=BRL)
+
+## Installation
 
 ```bash
-flutter pub add sunmi_printer_plus
+ flutter pub add sunmi_printer_plus
 ```
 
+# Should be a bit break change between versions below 4.0
+
 ## What this package do
-- [x] Print in label mode (when avaliable!)
 - [x] Write some text (with style or not!)
 - [x] Change font size
 - [x] Jump (n) lines
@@ -31,20 +35,15 @@ flutter pub add sunmi_printer_plus
 - [x] Printer serial no - Get the serial number of the printer
 - [x] Printer version - Get the printer's version
 - [x] Printer paper size - Get the paper size ( 0: 80mm 1: 58mm)
-- [x] LCD Print a image  [ytyng](https://github.com/ytyng)
-- [x] LCD Print a string , multi lines as double lines Thanks to [ytyng](https://github.com/ytyng)
-- [x] Open de cash drawer Thanks to [ZheruiL](https://github.com/ZheruiL)
-- [x] Check if the cash drawer is connected or not 
-- [x] Get how many times the cash drawer was oppened
+- [x] LCD Print a image  
+- [x] LCD Print a string
+- [x] Open de cash drawer 
+- [x] Check if the cash drawer is open of close
 
+# You can run the project cloning the repository below
+[Repository](https://github.com/brasizza/sunmi_printer.git) - then change branch to **version-4.0**
+![Logo](https://github.com/brasizza/sunmi_printer/blob/version-4.0/doc/screen.png?raw=true)
 
-## Tested Devices
-
-```bash
-Sunmi V2 Pro 
-Sunmi T2 mini
-Sunmi V2S
-```
 
 
 # **You can also combine this package with the package [esc_pos_utils](https://pub.dev/packages/esc_pos_utils)**
@@ -52,73 +51,62 @@ Sunmi V2S
 _With this package you  **can**  create a custom escpos and than you don't need to use any other command.
 This is good if you already have a code that another printers use, and u can reuse this code as well_ 
 
-#Just see the example folder!
-
-
 ```dart
 // import packages
 import 'package:sunmi_printer_plus/sunmi_printer_plus.dart';
 
 
-// all method from sunmi printer need to async await
-await SunmiPrinter.bindingPrinter(); // must bind the printer first. for more exmaple.. pls refer to example tab.
+
 
 ```
-## Example code when use for transaction printing
+## Example code when use SunmiPrinter
 
 ```dart
-  await SunmiPrinter.startTransactionPrint(true);
+        await SunmiPrinter.printText('Simple raw text');
+        await SunmiPrinter.printText('Bold text centered',
+            style: SunmiTextStyle(
+            bold: true,
+            align: SunmiPrintAlign.CENTER,
+            ));
 
-  await SunmiPrinter.setAlignment(SunmiPrintAlign.RIGHT); // Right align
-  await SunmiPrinter.printText('Align right');
-
-  await SunmiPrinter.setAlignment(SunmiPrintAlign.LEFT);// Left align
-  await SunmiPrinter.printText('Align left');
-
-  await SunmiPrinter.setAlignment(SunmiPrintAlign.CENTER);// Center align
-  await SunmiPrinter.printText('Align center');
-
-  await SunmiPrinter.lineWrap(2); // Jump 2 lines
-
-  await SunmiPrinter.setFontSize(SunmiFontSize.XL); // Set font to very large
-  await SunmiPrinter.printText('Very Large font!');
-  await SunmiPrinter.resetFontSize(); // Reset font to medium size
-
-  await SunmiPrinter.setCustomFontSize(12); // SET CUSTOM FONT 12
-  await SunmiPrinter.printText('Custom font size!!!');
-  await SunmiPrinter.resetFontSize(); // Reset font to medium size
-
-  await SunmiPrinter.printQRCode('https://github.com/brasizza/sunmi_printer'); // PRINT A QRCODE
-  await SunmiPrinter.submitTransactionPrint(); // SUBMIT and cut paper
-  await SunmiPrinter.exitTransactionPrint(true); // Close the transaction
+        await SunmiPrinter.lineWrap(2); // Jump 2 lines
+        await SunmiPrinter.printText('Very Large font!',
+            style: SunmiTextStyle(
+            fontSize: 80,
+            ));
+                          
+        await SunmiPrinter.printText('Custom font size!!!',
+            style: SunmiTextStyle(
+            fontSize: 32,
+            ));
+                          
+        await SunmiPrinter.printQRCode(
+            'https://github.com/brasizza/sunmi_printer',
+            style: SunmiQrcodeStyle(
+            qrcodeSize: 3,
+            errorLevel: SunmiQrcodeLevel.LEVEL_H,
+            )); // PRINT A QRCODE
 
 ```
 
-# Example code for LCD functions  [@ytyng](https://github.com/ytyng)
+# Example code for LCD functions 
 
 ```dart
- await SunmiPrinter.lcdInitialize(); //Initialize the LCD 
- await SunmiPrinter.lcdWakeup(); //Turn the LCD ON
- await SunmiPrinter.lcdSleep(); //Turn the LCD OFF
- await SunmiPrinter.lcdClear(); //Clear LCD screen
- await SunmiPrinter.lcdString('Hello'); //Write a simple line 
- await SunmiPrinter.lcdString('Hello'); //Write a simple line 
- await SunmiPrinter.lcdDoubleString('Hello', 'World'); //Write two lines
+await SunmiLcd.configLCD(SunmiLCDStatus)
+ await SunmiLcd.lcdString('Hello'); //Write a simple line 
+ await SunmiLcd.lcdString('Hello' , 12 , true); //Write a simple line with 12 in size and fill screen
 
  Uint8List byte = await readFileBytes('assets/images/128x40.png');
- await SunmiPrinter.lcdImage(byte); // Put an image in LCD
- await SunmiPrinter.lcdFillString('abcDEFgj0123\$&=+', size: 16, fill: true); // Print a string and fill with zeros until the size is reached
- await SunmiPrinter.lcdMultiString([  'Welcome to flutter.',  'Align 2.',], [  1,  2,]); // Write multiple lines with alignent
+ await SunmiLcd.lcdImage(byte); // Put an image in LCD
 
 ```
-# Example to open the cashier  [@ZheruiL](https://github.com/ZheruiL)
+# Example to open the cashier 
 
 ```dart
-  bool await SunmiPrinter.drawerStatus(); //check if the cash drawer is connect or disconnect
+  bool await SunmiDrawer.i.isDrawerOpen(); //check if the cash drawer is connect or disconnect
 
-  await SunmiPrinter.openDrawer(); //open de cash drawer
+  await SunmiDrawer.i.openDrawer(); //open de cash drawer
 
-  int await SunmiPrinter.drawerTimesOpen(); //How many times de cash drawer was oppened
 
  ```
 
@@ -189,4 +177,12 @@ enum SunmiFontSize {
 }
 ```
 
-
+### List of enum SunmiLCDStatus
+```dart
+enum SunmiLCDStatus {
+  INIT,
+  WAKE,
+  SLEEP,
+  CLEAR,
+}
+```

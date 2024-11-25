@@ -41,7 +41,8 @@ class SunmiPrinterPlus {
     return await SunmiConfig.getId();
   }
 
-  Future<String?> printText({required String text, SunmiTextStyle? style}) async {
+  Future<String?> printText(
+      {required String text, SunmiTextStyle? style}) async {
     return await SunmiPrinter.printText(text, style: style);
   }
 
@@ -49,11 +50,13 @@ class SunmiPrinterPlus {
     return await SunmiPrinter.printCustomText(sunmiText: sunmiText);
   }
 
-  Future<String?> printQrcode({required String text, SunmiQrcodeStyle? style}) async {
+  Future<String?> printQrcode(
+      {required String text, SunmiQrcodeStyle? style}) async {
     return await SunmiPrinter.printQRCode(text, style: style);
   }
 
-  Future<String?> printBarcode({required String text, SunmiBarcodeStyle? style}) async {
+  Future<String?> printBarcode(
+      {required String text, SunmiBarcodeStyle? style}) async {
     return await SunmiPrinter.printBarcode(text: text, style: style);
   }
 
@@ -69,7 +72,8 @@ class SunmiPrinterPlus {
     return await SunmiPrinter.cutPaper();
   }
 
-  Future<String?> printImage({required Uint8List image, required SunmiPrintAlign align}) async {
+  Future<String?> printImage(
+      {required Uint8List image, required SunmiPrintAlign align}) async {
     return await SunmiPrinter.printImage(image: image, align: align);
   }
 
@@ -100,7 +104,8 @@ class SunmiPrinterPlus {
     return await SunmiLcd.configLCD(status: status);
   }
 
-  Future<String?> sendTextLCD({required String text, required int size, required bool fill}) async {
+  Future<String?> sendTextLCD(
+      {required String text, required int size, required bool fill}) async {
     return await SunmiLcd.lcdString(text, size: size, fill: fill);
   }
 

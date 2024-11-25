@@ -12,8 +12,10 @@ sealed class SunmiLcd {
     return await SunmiPrinterPlusPlatform.instance.configLCD(status: status);
   }
 
-  static Future<String?> lcdString(String text, {required int size, required bool fill}) async {
-    return await SunmiPrinterPlusPlatform.instance.sendTextLCD(text: text, size: size, fill: fill);
+  static Future<String?> lcdString(String text,
+      {required int size, required bool fill}) async {
+    return await SunmiPrinterPlusPlatform.instance
+        .sendTextLCD(text: text, size: size, fill: fill);
   }
 
   static Future<String?> showDigital(String digital) async {
