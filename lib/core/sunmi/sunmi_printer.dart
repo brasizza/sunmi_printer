@@ -9,13 +9,10 @@ import 'package:sunmi_printer_plus/core/types/sunmi_text.dart';
 
 import '../../sunmi_printer_plus_platform_interface.dart';
 
-class SunmiPrinter {
-  static SunmiPrinter? _instance;
+sealed class SunmiPrinter {
   SunmiPrinter._();
-  static SunmiPrinter get i => _instance ??= SunmiPrinter._();
-  static set mock(SunmiPrinter value) => _instance = value;
 
-  Future<String?> printText(String text, {SunmiTextStyle? style}) async {
+  static Future<String?> printText(String text, {SunmiTextStyle? style}) async {
     final printData = {
       "text": text,
       if (style != null) ...style.toMap(),
@@ -24,7 +21,7 @@ class SunmiPrinter {
     return await SunmiPrinterPlusPlatform.instance.printText(printData);
   }
 
-  Future<String?> printCustomText({required SunmiText sunmiText}) async {
+  static Future<String?> printCustomText({required SunmiText sunmiText}) async {
     final printData = {
       "text": sunmiText.text,
       if (sunmiText.style != null) ...sunmiText.style!.toMap(),
@@ -32,7 +29,7 @@ class SunmiPrinter {
     return await SunmiPrinterPlusPlatform.instance.printText(printData);
   }
 
-  Future<String?> printQRCode(String text, {SunmiQrcodeStyle? style}) async {
+  static Future<String?> printQRCode(String text, {SunmiQrcodeStyle? style}) async {
     final printData = {
       "text": text,
       if (style != null) ...style.toMap(),
@@ -41,8 +38,7 @@ class SunmiPrinter {
     return await SunmiPrinterPlusPlatform.instance.printQrcode(printData);
   }
 
-  Future<String?> printBarcode(
-      {required String text, SunmiBarcodeStyle? style}) async {
+  static Future<String?> printBarcode({required String text, SunmiBarcodeStyle? style}) async {
     final printData = {
       "text": text,
       if (style != null) ...style.toMap(),
@@ -50,24 +46,23 @@ class SunmiPrinter {
     return await SunmiPrinterPlusPlatform.instance.printBarcode(printData);
   }
 
-  Future<String?> line({String? type}) async {
+  static Future<String?> line({String? type}) async {
     return await SunmiPrinterPlusPlatform.instance.line(type);
   }
 
-  Future<String?> lineWrap(int times) async {
+  static Future<String?> lineWrap(int times) async {
     return await SunmiPrinterPlusPlatform.instance.lineWrap(times);
   }
 
-  Future<String?> cutPaper() async {
+  static Future<String?> cutPaper() async {
     return await SunmiPrinterPlusPlatform.instance.cutPaper();
   }
 
-  Future<String?> printImage(
-      {required Uint8List image, required SunmiPrintAlign align}) async {
+  static Future<String?> printImage({required Uint8List image, required SunmiPrintAlign align}) async {
     return await SunmiPrinterPlusPlatform.instance.printImage(image, align);
   }
 
-  Future<String?> addText({required String text, SunmiTextStyle? style}) async {
+  static Future<String?> addText({required String text, SunmiTextStyle? style}) async {
     final printData = {
       "text": text,
       if (style != null) ...style.toMap(),
@@ -76,15 +71,15 @@ class SunmiPrinter {
     return await SunmiPrinterPlusPlatform.instance.addText(printData);
   }
 
-  Future<String?> printEscPos({required List<int> data}) async {
+  static Future<String?> printEscPos({required List<int> data}) async {
     return await SunmiPrinterPlusPlatform.instance.printEscPos(data);
   }
 
-  Future<String?> printTSPL({required String data}) async {
+  static Future<String?> printTSPL({required String data}) async {
     return await SunmiPrinterPlusPlatform.instance.printTSPL(data);
   }
 
-  Future<String?> printRow({required List<SunmiColumn> cols}) async {
+  static Future<String?> printRow({required List<SunmiColumn> cols}) async {
     List<List<dynamic>> separateProperties(List<SunmiColumn> columns) {
       List<String> textList = [];
       List<int> widthList = [];
@@ -100,9 +95,6 @@ class SunmiPrinter {
     }
 
     List<List<dynamic>> separatedProperties = separateProperties(cols);
-    return await SunmiPrinterPlusPlatform.instance.printRow(
-        text: separatedProperties[0],
-        width: separatedProperties[1],
-        style: separatedProperties[2]);
+    return await SunmiPrinterPlusPlatform.instance.printRow(text: separatedProperties[0], width: separatedProperties[1], style: separatedProperties[2]);
   }
 }

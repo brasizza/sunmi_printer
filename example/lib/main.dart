@@ -117,49 +117,42 @@ class _MyAppState extends State<MyApp> {
                       ),
                       OutlinedButton(
                         onPressed: () async {
-                          await SunmiPrinter.i.printText('Simple raw text');
-                          await SunmiPrinter.i.printText('Bold text centered',
+                          await SunmiPrinter.printText('Simple raw text');
+                          await SunmiPrinter.printText('Bold text centered',
                               style: SunmiTextStyle(
                                 bold: true,
                                 align: SunmiPrintAlign.CENTER,
                               ));
 
-                          await SunmiPrinter.i.lineWrap(2); // Jump 2 lines
-                          await SunmiPrinter.i.printText('Very Large font!',
+                          await SunmiPrinter.lineWrap(2); // Jump 2 lines
+                          await SunmiPrinter.printText('Very Large font!',
                               style: SunmiTextStyle(
                                 fontSize: 80,
                               ));
-                          await SunmiPrinter.i.printText('Custom font size!!!',
+                          await SunmiPrinter.printText('Custom font size!!!',
                               style: SunmiTextStyle(
                                 fontSize: 32,
                               ));
-                          await SunmiPrinter.i.printQRCode(
-                              'https://github.com/brasizza/sunmi_printer',
+                          await SunmiPrinter.printQRCode('https://github.com/brasizza/sunmi_printer',
                               style: SunmiQrcodeStyle(
                                 qrcodeSize: 3,
                                 errorLevel: SunmiQrcodeLevel.LEVEL_H,
                               )); // PRINT A QRCODE
                         },
-                        child: const Text("TESTE"),
+                        child: const Text("Simple test"),
                       ),
                       OutlinedButton(
                         onPressed: () async {
                           await printerController.printBarcode(
                             text: "1234567890",
-                            style: SunmiBarcodeStyle(
-                                align: SunmiPrintAlign.RIGHT,
-                                height: 100,
-                                size: 2,
-                                type: SunmiBarcodeType.CODABAR,
-                                textPos: SunmiBarcodeTextPos.NO_TEXT),
+                            style: SunmiBarcodeStyle(align: SunmiPrintAlign.RIGHT, height: 100, size: 2, type: SunmiBarcodeType.CODABAR, textPos: SunmiBarcodeTextPos.NO_TEXT),
                           );
                         },
                         child: const Text("Barcode"),
                       ),
                       OutlinedButton(
                         onPressed: () async {
-                          await printerController.line(
-                              style: SunmiPrintLine.SOLID);
+                          await printerController.line(style: SunmiPrintLine.SOLID);
                         },
                         child: const Text("Print Line"),
                       ),
@@ -285,17 +278,9 @@ class _MyAppState extends State<MyApp> {
                             SunmiText(
                               text: 'I ',
                             ),
-                            SunmiText(
-                                text: 'love ',
-                                style: SunmiTextStyle(
-                                    bold: true, align: SunmiPrintAlign.CENTER)),
-                            SunmiText(
-                                text: 'React ',
-                                style: SunmiTextStyle(strikethrough: true)),
-                            SunmiText(
-                                text: 'Flutter ',
-                                style: SunmiTextStyle(
-                                    fontSize: 50, underline: true, bold: true)),
+                            SunmiText(text: 'love ', style: SunmiTextStyle(bold: true, align: SunmiPrintAlign.CENTER)),
+                            SunmiText(text: 'React ', style: SunmiTextStyle(strikethrough: true)),
+                            SunmiText(text: 'Flutter ', style: SunmiTextStyle(fontSize: 50, underline: true, bold: true)),
                           ]);
                         },
                         child: const Text("Multiple formats"),
@@ -487,15 +472,13 @@ class _MyAppState extends State<MyApp> {
                             ),
                           ]);
 
-                          await printerController.printText(
-                              'Transaction\'s Qrcode',
+                          await printerController.printText('Transaction\'s Qrcode',
                               style: SunmiTextStyle(
                                 align: SunmiPrintAlign.CENTER,
                                 bold: true,
                                 fontSize: 30,
                               ));
-                          await printerController.printQRCode(
-                              'https://github.com/brasizza/sunmi_printer');
+                          await printerController.printQRCode('https://github.com/brasizza/sunmi_printer');
                           await printerController.lineWrap(2);
                         },
                         child: const Text("Receipt builder (No ESC-POS)"),
@@ -512,8 +495,7 @@ class _MyAppState extends State<MyApp> {
                     children: [
                       OutlinedButton(
                         onPressed: () async {
-                          final assetImage = await SunmiHelper.i
-                              .getImageFromAsset('assets/images/dash.jpeg');
+                          final assetImage = await SunmiHelper.i.getImageFromAsset('assets/images/dash.jpeg');
                           await printerController.printImage(image: assetImage);
                         },
                         child: Column(
@@ -534,14 +516,9 @@ class _MyAppState extends State<MyApp> {
                       ),
                       OutlinedButton(
                         onPressed: () async {
-                          String url =
-                              'https://avatars.githubusercontent.com/u/14101776?s=100';
+                          String url = 'https://avatars.githubusercontent.com/u/14101776?s=100';
                           // convert image to Uint8List format
-                          Uint8List assetImage =
-                              (await NetworkAssetBundle(Uri.parse(url))
-                                      .load(url))
-                                  .buffer
-                                  .asUint8List();
+                          Uint8List assetImage = (await NetworkAssetBundle(Uri.parse(url)).load(url)).buffer.asUint8List();
                           await printerController.printImage(
                             image: assetImage,
                             align: SunmiPrintAlign.CENTER,
@@ -552,8 +529,7 @@ class _MyAppState extends State<MyApp> {
                             const SizedBox(
                               height: 5,
                             ),
-                            Image.network(
-                                'https://avatars.githubusercontent.com/u/14101776?s=50'),
+                            Image.network('https://avatars.githubusercontent.com/u/14101776?s=50'),
                             const Text("Print from web (center)"),
                             const SizedBox(
                               height: 5,
@@ -580,8 +556,7 @@ class _MyAppState extends State<MyApp> {
                       ),
                       OutlinedButton(
                         onPressed: () async {
-                          const tspl =
-                              "! 0 200 200 400 1\nTEXT 100 100 \"3\" \"Hello, TSPL!\"\nPRINT\n";
+                          const tspl = "! 0 200 200 400 1\nTEXT 100 100 \"3\" \"Hello, TSPL!\"\nPRINT\n";
                           await printerController.printTSPL(data: tspl);
                         },
                         child: const Text("Print TSPL (Label printer only)"),
@@ -590,8 +565,7 @@ class _MyAppState extends State<MyApp> {
                   ),
                   const Padding(
                     padding: EdgeInsets.all(8.0),
-                    child:
-                        Text('LCD COMMAND (If apliacable  T1 MINI, T2 MINI)'),
+                    child: Text('LCD COMMAND (If apliacable  T1 MINI, T2 MINI)'),
                   ),
                   Wrap(
                     spacing: 10,
@@ -599,36 +573,31 @@ class _MyAppState extends State<MyApp> {
                     children: [
                       OutlinedButton(
                         onPressed: () async {
-                          await lcdController.config(
-                              status: SunmiLCDStatus.INIT);
+                          await lcdController.config(status: SunmiLCDStatus.INIT);
                         },
                         child: const Text("Init LCD"),
                       ),
                       OutlinedButton(
                         onPressed: () async {
-                          await lcdController.config(
-                              status: SunmiLCDStatus.SLEEP);
+                          await lcdController.config(status: SunmiLCDStatus.SLEEP);
                         },
                         child: const Text("Sleep LCD"),
                       ),
                       OutlinedButton(
                         onPressed: () async {
-                          await lcdController.config(
-                              status: SunmiLCDStatus.WAKE);
+                          await lcdController.config(status: SunmiLCDStatus.WAKE);
                         },
                         child: const Text("Sleep WAKE UP"),
                       ),
                       OutlinedButton(
                         onPressed: () async {
-                          await lcdController.config(
-                              status: SunmiLCDStatus.CLEAR);
+                          await lcdController.config(status: SunmiLCDStatus.CLEAR);
                         },
                         child: const Text("Clear LCD"),
                       ),
                       OutlinedButton(
                         onPressed: () async {
-                          await lcdController.sendTextLCD('I love flutter',
-                              size: 10, fill: false);
+                          await lcdController.sendTextLCD('I love flutter', size: 10, fill: false);
                         },
                         child: const Text("Insert text"),
                       ),
@@ -636,15 +605,13 @@ class _MyAppState extends State<MyApp> {
                         onPressed: () async {
                           await lcdController.showDigital('122.90');
                         },
-                        child: const Text(
-                            "LCD Price (7 digits from 0 to 9 and “.”)"),
+                        child: const Text("LCD Price (7 digits from 0 to 9 and “.”)"),
                       ),
                       OutlinedButton(
                         onPressed: () async {
-                          final assetImage = await SunmiHelper.i
-                              .getImageFromAsset('assets/images/dash.jpeg');
+                          final assetImage = await SunmiHelper.i.getImageFromAsset('assets/images/dash.jpeg');
 
-                          await lcdController.sendImageLCD(image: assetImage);
+                          await lcdController.lcdImage(image: assetImage);
                         },
                         child: Column(
                           children: [
