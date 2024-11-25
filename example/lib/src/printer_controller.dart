@@ -5,6 +5,8 @@ import 'package:sunmi_printer_plus/core/enums/enums.dart';
 import 'package:sunmi_printer_plus/core/styles/sunmi_barcode_style.dart';
 import 'package:sunmi_printer_plus/core/styles/sunmi_qrcode_style.dart';
 import 'package:sunmi_printer_plus/core/styles/sunmi_text_style.dart';
+import 'package:sunmi_printer_plus/core/types/sunmi_column.dart';
+import 'package:sunmi_printer_plus/core/types/sunmi_text.dart';
 import 'package:sunmi_printer_plus/sunmi_printer_plus.dart';
 
 class PrinterController {

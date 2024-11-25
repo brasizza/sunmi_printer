@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sunmi_printer_plus/core/enums/enums.dart';
+import 'package:sunmi_printer_plus/core/helpers/sunmi_helper.dart';
 import 'package:sunmi_printer_plus/core/styles/sunmi_barcode_style.dart';
 import 'package:sunmi_printer_plus/core/styles/sunmi_qrcode_style.dart';
 import 'package:sunmi_printer_plus/core/styles/sunmi_text_style.dart';
+import 'package:sunmi_printer_plus/core/types/sunmi_column.dart';
+import 'package:sunmi_printer_plus/core/types/sunmi_text.dart';
 import 'package:sunmi_printer_plus/sunmi_printer_plus.dart';
 import 'package:sunmi_printer_plus_example/src/cash_drawer.dart';
 import 'package:sunmi_printer_plus_example/src/lcd_controller.dart';
@@ -484,8 +487,9 @@ class _MyAppState extends State<MyApp> {
                     children: [
                       OutlinedButton(
                         onPressed: () async {
-                          final assetImage = await SunmiHelper.i
-                              .getImageFromAsset('assets/images/dash.jpeg');
+                          final assetImage =
+                              await SunmiHelper.getImageFromAsset(
+                                  'assets/images/dash.jpeg');
                           await printerController.printImage(image: assetImage);
                         },
                         child: Column(
@@ -613,8 +617,9 @@ class _MyAppState extends State<MyApp> {
                       ),
                       OutlinedButton(
                         onPressed: () async {
-                          final assetImage = await SunmiHelper.i
-                              .getImageFromAsset('assets/images/dash.jpeg');
+                          final assetImage =
+                              await SunmiHelper.getImageFromAsset(
+                                  'assets/images/dash.jpeg');
 
                           await lcdController.lcdImage(image: assetImage);
                         },
