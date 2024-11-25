@@ -5,6 +5,7 @@ class SunmiConfig {
   // Avoid self instance
   SunmiConfig._();
   static SunmiConfig get i => _instance ??= SunmiConfig._();
+  static set mock(SunmiConfig value) => _instance = value;
 
   Future<String?> getStatus() async {
     return await SunmiPrinterPlusPlatform.instance.getStatus();

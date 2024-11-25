@@ -90,7 +90,8 @@ abstract class SunmiPrinterPlusPlatform extends PlatformInterface {
     throw UnimplementedError('printTSPL() has not been implemented.');
   }
 
-  Future<String?> printRow({required List text, required List width, required List style}) {
+  Future<String?> printRow(
+      {required List text, required List width, required List style}) {
     throw UnimplementedError('printRow() has not been implemented.');
   }
 
@@ -98,7 +99,8 @@ abstract class SunmiPrinterPlusPlatform extends PlatformInterface {
     throw UnimplementedError('configLCD() has not been implemented.');
   }
 
-  Future<String?> sendTextLCD({required String text, required int size, required bool fill}) {
+  Future<String?> sendTextLCD(
+      {required String text, required int size, required bool fill}) {
     throw UnimplementedError('sendTextLCD() has not been implemented.');
   }
 

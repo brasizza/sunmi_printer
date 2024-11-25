@@ -13,7 +13,8 @@ class StatusController {
         (e) => e.toString().split('.').last == status,
       );
     } catch (e) {
-      return PrinterStatus.UNKNOWN; // Return null if the string doesn't match any enum value
+      return PrinterStatus
+          .UNKNOWN; // Return null if the string doesn't match any enum value
     }
   }
 

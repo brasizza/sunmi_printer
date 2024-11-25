@@ -12,7 +12,8 @@ class MethodChannelSunmiPrinterPlus extends SunmiPrinterPlusPlatform {
 
   @override
   Future<String?> getPlatformVersion() async {
-    final version = await methodChannel.invokeMethod<String>('getPlatformVersion');
+    final version =
+        await methodChannel.invokeMethod<String>('getPlatformVersion');
     return version;
   }
 
@@ -43,27 +44,32 @@ class MethodChannelSunmiPrinterPlus extends SunmiPrinterPlusPlatform {
 
   @override
   Future<String?> printText(Map printData) async {
-    return await methodChannel.invokeMethod<String>('printText', {'data': printData});
+    return await methodChannel
+        .invokeMethod<String>('printText', {'data': printData});
   }
 
   @override
   Future<String?> printQrcode(Map printData) async {
-    return await methodChannel.invokeMethod<String>('printQrcode', {'data': printData});
+    return await methodChannel
+        .invokeMethod<String>('printQrcode', {'data': printData});
   }
 
   @override
   Future<String?> printBarcode(Map printData) async {
-    return await methodChannel.invokeMethod<String>('printBarcode', {'data': printData});
+    return await methodChannel
+        .invokeMethod<String>('printBarcode', {'data': printData});
   }
 
   @override
   Future<String?> line(String? type) async {
-    return await methodChannel.invokeMethod<String>('printLine', {'data': type});
+    return await methodChannel
+        .invokeMethod<String>('printLine', {'data': type});
   }
 
   @override
   Future<String?> lineWrap(int times) async {
-    return await methodChannel.invokeMethod<String>('lineWrap', {'times': times});
+    return await methodChannel
+        .invokeMethod<String>('lineWrap', {'times': times});
   }
 
   @override
@@ -73,26 +79,31 @@ class MethodChannelSunmiPrinterPlus extends SunmiPrinterPlusPlatform {
 
   @override
   Future<String?> printImage(Uint8List image, SunmiPrintAlign align) async {
-    return await methodChannel.invokeMethod<String>('printImage', {'image': image, "align": align.name});
+    return await methodChannel.invokeMethod<String>(
+        'printImage', {'image': image, "align": align.name});
   }
 
   @override
   Future<String?> addText(Map printData) async {
-    return await methodChannel.invokeMethod<String>('addText', {'data': printData});
+    return await methodChannel
+        .invokeMethod<String>('addText', {'data': printData});
   }
 
   @override
   Future<String?> printEscPos(List<int> data) async {
-    return await methodChannel.invokeMethod<String>('printEscPos', {'data': data});
+    return await methodChannel
+        .invokeMethod<String>('printEscPos', {'data': data});
   }
 
   @override
   Future<String?> printTSPL(String data) async {
-    return await methodChannel.invokeMethod<String>('printTSPL', {'data': data});
+    return await methodChannel
+        .invokeMethod<String>('printTSPL', {'data': data});
   }
 
   @override
-  Future<String?> printRow({required List text, required List width, required List style}) async {
+  Future<String?> printRow(
+      {required List text, required List width, required List style}) async {
     return await methodChannel.invokeMethod<String>('printRow', {
       'data': {
         "text": text,
@@ -104,22 +115,27 @@ class MethodChannelSunmiPrinterPlus extends SunmiPrinterPlusPlatform {
 
   @override
   Future<String?> configLCD({required SunmiLCDStatus status}) async {
-    return await methodChannel.invokeMethod<String>('configLCD', {'status': status.name});
+    return await methodChannel
+        .invokeMethod<String>('configLCD', {'status': status.name});
   }
 
   @override
-  Future<String?> sendTextLCD({required String text, required int size, required bool fill}) async {
-    return await methodChannel.invokeMethod<String>('sendTextLCD', {'text': text, 'size': size, 'fill': fill});
+  Future<String?> sendTextLCD(
+      {required String text, required int size, required bool fill}) async {
+    return await methodChannel.invokeMethod<String>(
+        'sendTextLCD', {'text': text, 'size': size, 'fill': fill});
   }
 
   @override
   Future<String?> showDigital(String digital) async {
-    return await methodChannel.invokeMethod<String>('showDigital', {'digital': digital});
+    return await methodChannel
+        .invokeMethod<String>('showDigital', {'digital': digital});
   }
 
   @override
   Future<String?> sendImageLCD({required Uint8List image}) async {
-    return await methodChannel.invokeMethod<String>('sendImageLCD', {'image': image});
+    return await methodChannel
+        .invokeMethod<String>('sendImageLCD', {'image': image});
   }
 
   @override

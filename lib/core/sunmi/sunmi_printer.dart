@@ -13,8 +13,9 @@ class SunmiPrinter {
   static SunmiPrinter? _instance;
   SunmiPrinter._();
   static SunmiPrinter get i => _instance ??= SunmiPrinter._();
+  static set mock(SunmiPrinter value) => _instance = value;
 
-  Future<String?> printText({required String text, SunmiTextStyle? style}) async {
+  Future<String?> printText(String text, {SunmiTextStyle? style}) async {
     final printData = {
       "text": text,
       if (style != null) ...style.toMap(),
@@ -31,7 +32,7 @@ class SunmiPrinter {
     return await SunmiPrinterPlusPlatform.instance.printText(printData);
   }
 
-  Future<String?> printQrcode({required String text, SunmiQrcodeStyle? style}) async {
+  Future<String?> printQRCode(String text, {SunmiQrcodeStyle? style}) async {
     final printData = {
       "text": text,
       if (style != null) ...style.toMap(),
@@ -40,7 +41,8 @@ class SunmiPrinter {
     return await SunmiPrinterPlusPlatform.instance.printQrcode(printData);
   }
 
-  Future<String?> printBarcode({required String text, SunmiBarcodeStyle? style}) async {
+  Future<String?> printBarcode(
+      {required String text, SunmiBarcodeStyle? style}) async {
     final printData = {
       "text": text,
       if (style != null) ...style.toMap(),
@@ -52,7 +54,7 @@ class SunmiPrinter {
     return await SunmiPrinterPlusPlatform.instance.line(type);
   }
 
-  Future<String?> lineWrap({required int times}) async {
+  Future<String?> lineWrap(int times) async {
     return await SunmiPrinterPlusPlatform.instance.lineWrap(times);
   }
 
@@ -60,7 +62,8 @@ class SunmiPrinter {
     return await SunmiPrinterPlusPlatform.instance.cutPaper();
   }
 
-  Future<String?> printImage({required Uint8List image, required SunmiPrintAlign align}) async {
+  Future<String?> printImage(
+      {required Uint8List image, required SunmiPrintAlign align}) async {
     return await SunmiPrinterPlusPlatform.instance.printImage(image, align);
   }
 
@@ -97,6 +100,9 @@ class SunmiPrinter {
     }
 
     List<List<dynamic>> separatedProperties = separateProperties(cols);
-    return await SunmiPrinterPlusPlatform.instance.printRow(text: separatedProperties[0], width: separatedProperties[1], style: separatedProperties[2]);
+    return await SunmiPrinterPlusPlatform.instance.printRow(
+        text: separatedProperties[0],
+        width: separatedProperties[1],
+        style: separatedProperties[2]);
   }
 }
