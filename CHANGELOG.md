@@ -1,6 +1,7 @@
 
 # Changelog
-
+## 4.0.2#
+Improve doc and remove the required alignment in image(Default LEFT)
 ## 4.0.1#
 Just improve pub points with documentation.
 ## 4.0.0#

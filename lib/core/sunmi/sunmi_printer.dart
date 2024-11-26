@@ -107,7 +107,8 @@ class SunmiPrinter {
   ///
   /// Returns a [String] indicating the result of the print operation, or `null`.
   static Future<String?> printImage(
-      {required Uint8List image, required SunmiPrintAlign align}) async {
+      {required Uint8List image,
+      SunmiPrintAlign align = SunmiPrintAlign.LEFT}) async {
     return await SunmiPrinterPlusPlatform.instance.printImage(image, align);
   }
 
