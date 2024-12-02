@@ -98,9 +98,8 @@ class SunmiPrinterPlus {
   /// [style]: Optional style for the barcode.
   ///
   /// Returns a [String] indicating the result or `null` if unsuccessful.
-  Future<String?> printBarcode(
-      {required String text, SunmiBarcodeStyle? style}) async {
-    return await SunmiPrinter.printBarcode(text: text, style: style);
+  Future<String?> printBarcode(String text, {SunmiBarcodeStyle? style}) async {
+    return await SunmiPrinter.printBarCode(text, style: style);
   }
 
   /// Prints a line with an optional [type] (e.g., solid or dashed).
@@ -134,9 +133,9 @@ class SunmiPrinterPlus {
   /// [align]: The alignment of the image (e.g., left, center, right).
   ///
   /// Returns a [String] indicating the result or `null` if unsuccessful.
-  Future<String?> printImage(
-      {required Uint8List image, required SunmiPrintAlign align}) async {
-    return await SunmiPrinter.printImage(image: image, align: align);
+  Future<String?> printImage(Uint8List image,
+      {required SunmiPrintAlign align}) async {
+    return await SunmiPrinter.printImage(image, align: align);
   }
 
   /// Adds multiple [SunmiText] objects to the print buffer.
@@ -160,8 +159,8 @@ class SunmiPrinterPlus {
   /// [data]: The ESC/POS data as a list of integers.
   ///
   /// Returns a [String] indicating the result or `null` if unsuccessful.
-  Future<String?> printEscPos({required List<int> data}) async {
-    return await SunmiPrinter.printEscPos(data: data);
+  Future<String?> printEscPos(List<int> data) async {
+    return await SunmiPrinter.printEscPos(data);
   }
 
   /// Sends raw TSPL command data to the printer.

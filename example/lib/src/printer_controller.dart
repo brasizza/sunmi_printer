@@ -32,7 +32,7 @@ class PrinterController {
 
   Future<String?> printBarcode(
       {required String text, SunmiBarcodeStyle? style}) async {
-    return await _printer.printBarcode(text: text, style: style);
+    return await _printer.printBarcode(text, style: style);
   }
 
   Future<String?> line({SunmiPrintLine? style}) async {
@@ -50,7 +50,7 @@ class PrinterController {
   Future<String?> printImage(
       {required Uint8List image,
       SunmiPrintAlign align = SunmiPrintAlign.LEFT}) async {
-    return await _printer.printImage(image: image, align: align);
+    return await _printer.printImage(image, align: align);
   }
 
   Future<List<int>> customEscPos() async {
@@ -112,7 +112,7 @@ class PrinterController {
   }
 
   Future<String?> printEscPos({required List<int> data}) async {
-    return await _printer.printEscPos(data: data);
+    return await _printer.printEscPos(data);
   }
 
   Future<String?> printTSPL({required String data}) async {

@@ -31,6 +31,119 @@ class SunmiPrinter {
     return await SunmiPrinterPlusPlatform.instance.printText(printData);
   }
 
+  /// Initializes the printer.
+  ///
+  /// **Deprecated**: This method will be removed in a future version.
+  ///
+  /// Returns `null`.
+  @Deprecated('This method will be removed in a future version. ')
+  static Future<String?> initPrinter() async {
+    return null;
+  }
+
+  /// Set bold
+  ///
+  /// **Deprecated**: This method will be removed in a future version.
+  ///
+  /// Returns `null`.
+  @Deprecated('This method will be removed in a future version. ')
+  static Future<String?> bold() async {
+    return null;
+  }
+
+  /// Reset bold
+  ///
+  /// **Deprecated**: This method will be removed in a future version.
+  ///
+  /// Returns `null`.
+  @Deprecated('This method will be removed in a future version. ')
+  static Future<String?> resetBold() async {
+    return null;
+  }
+
+  /// Print escpos data.
+  ///
+  /// **Deprecated**: This method will be removed in a future version.
+  ///
+  /// Use [printEscPos] instead.
+  ///
+  /// Returns `null`.
+  @Deprecated(
+      'This method will be removed in a future version. Use printEscPos instead.')
+  static Future<String?> printRawData(Uint8List data) async {
+    return null;
+  }
+
+  /// Set custom font size.
+  ///
+  /// **Deprecated**: This method will be removed in a future version.
+  ///
+  /// Returns `null`.
+  @Deprecated('This method will be removed in a future version. ')
+  static Future<String?> setCustomFontSize(int size) async {
+    return null;
+  }
+
+  /// Set alignment.
+  ///
+  /// **Deprecated**: This method will be removed in a future version.
+  ///
+  /// Returns `null`.
+  @Deprecated('This method will be removed in a future version. ')
+  static Future<String?> setAlignment(dynamic align) async {
+    return null;
+  }
+
+  /// Reset font size
+  ///
+  /// **Deprecated**: This method will be removed in a future version.
+  ///
+  /// Returns `null`.
+  @Deprecated('This method will be removed in a future version. ')
+  static Future<String?> resetFontSize() async {
+    return null;
+  }
+
+  /// Set font size
+  ///
+  /// **Deprecated**: This method will be removed in a future version.
+  ///
+  /// Returns `null`.
+  @Deprecated('This method will be removed in a future version. ')
+  static Future<String?> setFontSize(dynamic size) async {
+    return null;
+  }
+
+  /// startTransaction the printer.
+  ///
+  /// **Deprecated**: This method will be removed in a future version.
+  ///
+  /// Returns `null`.
+  @Deprecated('This method will be removed in a future version. ')
+  static Future<String?> startTransactionPrint(bool trans) async {
+    return null;
+  }
+
+  /// exitTransactionPrint the printer.
+  ///
+  /// **Deprecated**: This method will be removed in a future version.
+  ///
+  /// Returns `null`.
+  @Deprecated('This method will be removed in a future version. ')
+  static Future<String?> exitTransactionPrint(bool trans) async {
+    return null;
+  }
+
+  /// bindingPrinter the printer.
+  ///
+  /// **Deprecated**: This method will be removed in a future version.
+  ///
+  /// Returns `null`.
+  @Deprecated('This method will be removed in a future version. ')
+  static Future<bool?> bindingPrinter() async {
+    return null;
+  }
+
   /// Prints custom text using a [SunmiText] object.
   ///
   /// [sunmiText]: The text and style to print.
@@ -66,8 +179,8 @@ class SunmiPrinter {
   /// [style]: The optional style for the barcode.
   ///
   /// Returns a [String] indicating the result of the print operation, or `null`.
-  static Future<String?> printBarcode(
-      {required String text, SunmiBarcodeStyle? style}) async {
+  static Future<String?> printBarCode(String text,
+      {SunmiBarcodeStyle? style}) async {
     final printData = {
       "text": text,
       if (style != null) ...style.toMap(),
@@ -100,15 +213,27 @@ class SunmiPrinter {
     return await SunmiPrinterPlusPlatform.instance.cutPaper();
   }
 
+  /// Print escpos data.
+  ///
+  /// **Deprecated**: This method will be removed in a future version.
+  ///
+  /// Use [cutPaper] instead.
+  ///
+  /// Returns `null`.
+  @Deprecated(
+      'This method will be removed in a future version. Use cutPaper instead.')
+  static Future<String?> cut() async {
+    return null;
+  }
+
   /// Prints an image with a specified alignment.
   ///
   /// [image]: The image data as [Uint8List].
   /// [align]: The alignment for the image (e.g., left, center, right).
   ///
   /// Returns a [String] indicating the result of the print operation, or `null`.
-  static Future<String?> printImage(
-      {required Uint8List image,
-      SunmiPrintAlign align = SunmiPrintAlign.LEFT}) async {
+  static Future<String?> printImage(Uint8List image,
+      {SunmiPrintAlign align = SunmiPrintAlign.LEFT}) async {
     return await SunmiPrinterPlusPlatform.instance.printImage(image, align);
   }
 
@@ -133,7 +258,7 @@ class SunmiPrinter {
   /// [data]: The raw ESC/POS command data as a list of integers.
   ///
   /// Returns a [String] indicating the result of the operation, or `null`.
-  static Future<String?> printEscPos({required List<int> data}) async {
+  static Future<String?> printEscPos(List<int> data) async {
     return await SunmiPrinterPlusPlatform.instance.printEscPos(data);
   }
 
