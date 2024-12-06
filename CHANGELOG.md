@@ -1,5 +1,8 @@
 
 # Changelog
+## 4.1.0#
+Improve doc, remove IOS needs and make a few changes in code trying to maintain compatible as possible with 3.0.0
+
 ## 4.0.2#
 Improve doc and remove the required alignment in image(Default LEFT)
 ## 4.0.1#
