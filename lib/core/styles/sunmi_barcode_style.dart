@@ -1,4 +1,4 @@
-import '../enums/enums.dart';
+import 'package:sunmi_printer_plus/sunmi_printer_plus.dart';
 
 /// Represents the configuration for printing barcodes using a Sunmi printer.
 ///

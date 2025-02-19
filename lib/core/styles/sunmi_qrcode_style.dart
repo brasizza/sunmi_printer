@@ -1,4 +1,4 @@
-import '../enums/enums.dart';
+import 'package:sunmi_printer_plus/sunmi_printer_plus.dart';
 
 /// A class that represents the style for printing QR codes on Sunmi printers.
 ///
@@ -86,8 +86,7 @@ class SunmiQrcodeStyle {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'qrcodeSize': qrcodeSize, // The size of the QR code.
-      'errorLevel': errorLevel
-          .name, // The error correction level (string representation).
+      'errorLevel': errorLevel.name, // The error correction level (string representation).
       'align': align.name, // The alignment (string representation).
     };
   }

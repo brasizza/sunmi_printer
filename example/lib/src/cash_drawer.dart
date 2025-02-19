@@ -1,4 +1,4 @@
-import 'package:sunmi_printer_plus/sunmi_printer_plus.dart';
+import 'package:sunmi_printer_plus/plugin/sunmi_printer_plus.dart';
 
 class CashDrawer {
   final SunmiPrinterPlus _printer;

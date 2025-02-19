@@ -1,4 +1,4 @@
-import 'package:sunmi_printer_plus/sunmi_printer_plus_platform_interface.dart';
+import 'package:sunmi_printer_plus/sunmi_printer_plus.dart';
 
 /// A utility class for retrieving configuration and status information from the Sunmi printer.
 class SunmiConfig {

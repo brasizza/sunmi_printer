@@ -1,9 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
-
-import 'core/enums/enums.dart';
-import 'sunmi_printer_plus_method_channel.dart';
+import 'package:sunmi_printer_plus/sunmi_printer_plus.dart';
 
 /// Abstract platform interface for interacting with the Sunmi Printer Plus.
 ///
@@ -113,8 +111,7 @@ abstract class SunmiPrinterPlusPlatform extends PlatformInterface {
   }
 
   /// Print a row of text with specified columns, widths, and styles.
-  Future<String?> printRow(
-      {required List text, required List width, required List style}) {
+  Future<String?> printRow({required List text, required List width, required List style}) {
     throw UnimplementedError('printRow() has not been implemented.');
   }
 
@@ -124,8 +121,7 @@ abstract class SunmiPrinterPlusPlatform extends PlatformInterface {
   }
 
   /// Send text to the LCD screen with specified size and fill option.
-  Future<String?> sendTextLCD(
-      {required String text, required int size, required bool fill}) {
+  Future<String?> sendTextLCD({required String text, required int size, required bool fill}) {
     throw UnimplementedError('sendTextLCD() has not been implemented.');
   }
 
