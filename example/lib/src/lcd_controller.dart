@@ -1,7 +1,6 @@
 import 'dart:typed_data';
 
-import 'package:sunmi_printer_plus/core/enums/enums.dart';
-import 'package:sunmi_printer_plus/plugin/sunmi_printer_plus.dart';
+import 'package:sunmi_printer_plus/sunmi_printer_plus.dart';
 
 class LcdController {
   final SunmiPrinterPlus _printer;
