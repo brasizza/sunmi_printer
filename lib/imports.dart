@@ -1,4 +1,6 @@
-//GENERATED BARREL FILE 
+library sunmi_printer_plus;
+
+//GENERATED BARREL FILE
 export './core/enums/enums.dart'; 
 export './core/helpers/sunmi_helper.dart'; 
 export './core/styles/sunmi_barcode_style.dart'; 
