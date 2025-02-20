@@ -1,12 +1,6 @@
 import 'dart:typed_data';
 
 import 'package:esc_pos_utils/esc_pos_utils.dart';
-import 'package:sunmi_printer_plus/core/enums/enums.dart';
-import 'package:sunmi_printer_plus/core/styles/sunmi_barcode_style.dart';
-import 'package:sunmi_printer_plus/core/styles/sunmi_qrcode_style.dart';
-import 'package:sunmi_printer_plus/core/styles/sunmi_text_style.dart';
-import 'package:sunmi_printer_plus/core/types/sunmi_column.dart';
-import 'package:sunmi_printer_plus/core/types/sunmi_text.dart';
 import 'package:sunmi_printer_plus/sunmi_printer_plus.dart';
 
 class PrinterController {
@@ -30,8 +24,7 @@ class PrinterController {
     return await _printer.printQrcode(text: text, style: style);
   }
 
-  Future<String?> printBarcode(
-      {required String text, SunmiBarcodeStyle? style}) async {
+  Future<String?> printBarcode({required String text, SunmiBarcodeStyle? style}) async {
     return await _printer.printBarcode(text, style: style);
   }
 
@@ -47,9 +40,7 @@ class PrinterController {
     return await _printer.cutPaper();
   }
 
-  Future<String?> printImage(
-      {required Uint8List image,
-      SunmiPrintAlign align = SunmiPrintAlign.LEFT}) async {
+  Future<String?> printImage({required Uint8List image, SunmiPrintAlign align = SunmiPrintAlign.LEFT}) async {
     return await _printer.printImage(image, align: align);
   }
 
@@ -59,26 +50,17 @@ class PrinterController {
     List<int> bytes = [];
 
     bytes += generator.reset();
-    bytes += generator.text(
-        'Regular: aA bB cC dD eE fF gG hH iI jJ kK lL mM nN oO pP qQ rR sS tT uU vV wW xX yY zZ');
-    bytes += generator.text('Special 1: àÀ èÈ éÉ ûÛ üÜ çÇ ôÔ',
-        styles: const PosStyles(codeTable: 'CP1252'));
-    bytes += generator.text('Special 2: blåbærgrød',
-        styles: const PosStyles(codeTable: 'CP1252'));
+    bytes += generator.text('Regular: aA bB cC dD eE fF gG hH iI jJ kK lL mM nN oO pP qQ rR sS tT uU vV wW xX yY zZ');
+    bytes += generator.text('Special 1: àÀ èÈ éÉ ûÛ üÜ çÇ ôÔ', styles: const PosStyles(codeTable: 'CP1252'));
+    bytes += generator.text('Special 2: blåbærgrød', styles: const PosStyles(codeTable: 'CP1252'));
 
     bytes += generator.text('Bold text', styles: const PosStyles(bold: true));
-    bytes +=
-        generator.text('Reverse text', styles: const PosStyles(reverse: true));
-    bytes += generator.text('Underlined text',
-        styles: const PosStyles(underline: true), linesAfter: 1);
-    bytes += generator.text('Align left',
-        styles: const PosStyles(align: PosAlign.left));
-    bytes += generator.text('Align center',
-        styles: const PosStyles(align: PosAlign.center));
-    bytes += generator.text('Align right',
-        styles: const PosStyles(align: PosAlign.right), linesAfter: 1);
-    bytes += generator.qrcode('Barcode by escpos',
-        size: QRSize.Size4, cor: QRCorrection.H);
+    bytes += generator.text('Reverse text', styles: const PosStyles(reverse: true));
+    bytes += generator.text('Underlined text', styles: const PosStyles(underline: true), linesAfter: 1);
+    bytes += generator.text('Align left', styles: const PosStyles(align: PosAlign.left));
+    bytes += generator.text('Align center', styles: const PosStyles(align: PosAlign.center));
+    bytes += generator.text('Align right', styles: const PosStyles(align: PosAlign.right), linesAfter: 1);
+    bytes += generator.qrcode('Barcode by escpos', size: QRSize.Size4, cor: QRCorrection.H);
     bytes += generator.feed(2);
 
     bytes += generator.row([

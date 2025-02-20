@@ -1,6 +1,5 @@
 import 'dart:typed_data';
 
-import 'package:sunmi_printer_plus/core/enums/enums.dart';
 import 'package:sunmi_printer_plus/sunmi_printer_plus.dart';
 
 class LcdController {
@@ -12,8 +11,7 @@ class LcdController {
     return await _printer.configLCD(status: status);
   }
 
-  Future<String?> sendTextLCD(String text,
-      {int size = 32, bool fill = false}) async {
+  Future<String?> sendTextLCD(String text, {int size = 32, bool fill = false}) async {
     return await _printer.sendTextLCD(text: text, size: size, fill: fill);
   }
 
