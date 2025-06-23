@@ -44,6 +44,22 @@ You can help me out to keep this package updated!
 [Repository](https://github.com/brasizza/sunmi_printer.git) - then change branch to **version-4.0**
 ![Logo](https://github.com/brasizza/sunmi_printer/blob/version-4.0/doc/screen.png?raw=true)
 
+## Deprecated Methods (`@Deprecated`)
+
+The following methods have been kept for compatibility reasons but will be removed in future releases. Avoid using them in new implementations:
+
+- `SunmiPrinter.initPrinter()`
+- `SunmiPrinter.bold()`
+- `SunmiPrinter.resetBold()`
+- `SunmiPrinter.printRawData(Uint8List data)` → Use `printEscPos()` instead
+- `SunmiPrinter.setCustomFontSize(int size)`
+- `SunmiPrinter.setAlignment(dynamic align)`
+- `SunmiPrinter.resetFontSize()`
+- `SunmiPrinter.setFontSize(dynamic size)`
+- `SunmiPrinter.startTransactionPrint(bool trans)`
+- `SunmiPrinter.exitTransactionPrint(bool trans)`
+- `SunmiPrinter.bindingPrinter()`
+- `SunmiPrinter.cut()` → Use `cutPaper()` instead
 
 
 # **You can also combine this package with the package [esc_pos_utils](https://pub.dev/packages/esc_pos_utils)**
