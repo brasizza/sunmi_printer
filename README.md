@@ -2,6 +2,13 @@
 
 # This is a fork from [sunmi_printer](https://pub.dev/packages/sunmi_printer) , but i implemented a lot of other features described below
 
+![Pub Monthly Downloads](https://img.shields.io/pub/dm/sunmi_printer)
+![Pub Points](https://img.shields.io/pub/points/sunmi_printer)
+![Pub Likes](https://img.shields.io/pub/likes/sunmi_printer)
+![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/brasizza/sunmi_printer)
+![GitHub contributors](https://img.shields.io/github/contributors/brasizza/sunmi_printer)
+![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/:user/sunmi_printer/total)
+
 ## Important: 
   **THIS PACKAGE WILL WORK ONLY IN ANDROID!**
 
