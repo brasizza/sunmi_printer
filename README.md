@@ -1,5 +1,5 @@
 
-# Sunmi printer 4.0.0
+# Sunmi printer 4.1.1
 
 Package Sunmi printer will support all sunmi devices with different behaviours
 
