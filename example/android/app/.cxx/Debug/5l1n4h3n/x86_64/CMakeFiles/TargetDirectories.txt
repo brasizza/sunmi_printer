@@ -1,0 +1,2 @@
+/Users/antonio/Proyectos/sunmi_printer/example/android/app/.cxx/Debug/5l1n4h3n/x86_64/CMakeFiles/edit_cache.dir
+/Users/antonio/Proyectos/sunmi_printer/example/android/app/.cxx/Debug/5l1n4h3n/x86_64/CMakeFiles/rebuild_cache.dir

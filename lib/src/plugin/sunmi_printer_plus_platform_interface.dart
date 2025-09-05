@@ -8,6 +8,11 @@ import 'package:sunmi_printer_plus/sunmi_printer_plus.dart';
 /// This class defines the methods for Sunmi Printer Plus functionality.
 /// Concrete implementations should override these methods for their specific platforms (e.g., Android, iOS).
 abstract class SunmiPrinterPlusPlatform extends PlatformInterface {
+  /// Rebinds the printer service (useful if the service was killed or lost).
+  Future<bool> rebindPrinter() {
+    throw UnimplementedError('rebindPrinter() has not been implemented.');
+  }
+
   /// Constructs a [SunmiPrinterPlusPlatform].
   SunmiPrinterPlusPlatform() : super(token: _token);
 
@@ -111,7 +116,8 @@ abstract class SunmiPrinterPlusPlatform extends PlatformInterface {
   }
 
   /// Print a row of text with specified columns, widths, and styles.
-  Future<String?> printRow({required List text, required List width, required List style}) {
+  Future<String?> printRow(
+      {required List text, required List width, required List style}) {
     throw UnimplementedError('printRow() has not been implemented.');
   }
 
@@ -121,7 +127,8 @@ abstract class SunmiPrinterPlusPlatform extends PlatformInterface {
   }
 
   /// Send text to the LCD screen with specified size and fill option.
-  Future<String?> sendTextLCD({required String text, required int size, required bool fill}) {
+  Future<String?> sendTextLCD(
+      {required String text, required int size, required bool fill}) {
     throw UnimplementedError('sendTextLCD() has not been implemented.');
   }
 
