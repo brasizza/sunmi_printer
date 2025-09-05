@@ -40,6 +40,20 @@ class SunmiPrinterPlusPlugin : FlutterPlugin, MethodCallHandler {
 
     override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
         when (call.method) {
+            "rebindPrinter" -> {
+                sunmiInit.initPrinter { selectPrinter ->
+                    if (selectPrinter != null) {
+                        configPrinter = SunmiConfigClass(selectPrinter)
+                        sunmiPrinter = SunmiPrinterClass(selectPrinter)
+                        printerCommand = SunmiCommandPrinter(selectPrinter)
+                        sunmiLCD = SunmiLCDClass(selectPrinter)
+                        sunmiDrawer = SunmiDrawerClass(selectPrinter)
+                        result.success(true)
+                    } else {
+                        result.success(false)
+                    }
+                }
+            }
             "getPlatformVersion" -> {
                 result.success("Android ${Build.VERSION.RELEASE}")
             }

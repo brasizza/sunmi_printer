@@ -8,6 +8,10 @@ import 'package:sunmi_printer_plus/sunmi_printer_plus.dart';
 /// This class defines the methods for Sunmi Printer Plus functionality.
 /// Concrete implementations should override these methods for their specific platforms (e.g., Android, iOS).
 abstract class SunmiPrinterPlusPlatform extends PlatformInterface {
+  /// Rebinds the printer service (useful if the service was killed or lost).
+  Future<bool> rebindPrinter() {
+    throw UnimplementedError('rebindPrinter() has not been implemented.');
+  }
   /// Constructs a [SunmiPrinterPlusPlatform].
   SunmiPrinterPlusPlatform() : super(token: _token);
 

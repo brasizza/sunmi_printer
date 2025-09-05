@@ -5,6 +5,10 @@ import 'package:sunmi_printer_plus/sunmi_printer_plus.dart';
 
 /// An implementation of [SunmiPrinterPlusPlatform] that uses method channels.
 class MethodChannelSunmiPrinterPlus extends SunmiPrinterPlusPlatform {
+  @override
+  Future<bool> rebindPrinter() async {
+    return await methodChannel.invokeMethod<bool>('rebindPrinter') ?? false;
+  }
   /// The method channel used to interact with the native platform.
   @visibleForTesting
   final methodChannel = const MethodChannel('sunmi_printer_plus');
