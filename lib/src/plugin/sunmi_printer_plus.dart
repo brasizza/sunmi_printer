@@ -61,7 +61,8 @@ class SunmiPrinterPlus {
   /// [style]: Optional text style to apply.
   ///
   /// Returns a [String] indicating the result or `null` if unsuccessful.
-  Future<String?> printText({required String text, SunmiTextStyle? style}) async {
+  Future<String?> printText(
+      {required String text, SunmiTextStyle? style}) async {
     return await SunmiPrinter.printText(text, style: style);
   }
 
@@ -80,7 +81,8 @@ class SunmiPrinterPlus {
   /// [style]: Optional style for the QR code.
   ///
   /// Returns a [String] indicating the result or `null` if unsuccessful.
-  Future<String?> printQrcode({required String text, SunmiQrcodeStyle? style}) async {
+  Future<String?> printQrcode(
+      {required String text, SunmiQrcodeStyle? style}) async {
     return await SunmiPrinter.printQRCode(text, style: style);
   }
 
@@ -125,7 +127,8 @@ class SunmiPrinterPlus {
   /// [align]: The alignment of the image (e.g., left, center, right).
   ///
   /// Returns a [String] indicating the result or `null` if unsuccessful.
-  Future<String?> printImage(Uint8List image, {required SunmiPrintAlign align}) async {
+  Future<String?> printImage(Uint8List image,
+      {required SunmiPrintAlign align}) async {
     return await SunmiPrinter.printImage(image, align: align);
   }
 
@@ -188,7 +191,8 @@ class SunmiPrinterPlus {
   /// [fill]: Whether the text should fill the screen.
   ///
   /// Returns a [String] indicating the result or `null` if unsuccessful.
-  Future<String?> sendTextLCD({required String text, required int size, required bool fill}) async {
+  Future<String?> sendTextLCD(
+      {required String text, required int size, required bool fill}) async {
     return await SunmiLcd.lcdString(text, size: size, fill: fill);
   }
 
