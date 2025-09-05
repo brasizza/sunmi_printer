@@ -1,7 +1,7 @@
 
 # Changelog
 
-## 4.1.2#
+## 4.1.1#
 [Antonio Bellido](https://github.com/abellido) creates an rebindPrinter in cases that in the startup of the package the printers is not ready for a lot of reasons (memory, if there is printers sunmi nearby or other thigs), now you should check if the printer is still offline and call the method again.
 In a future version i will turn off this feature to autoconnect, maybe put in the class construction to avoid this problem
 
