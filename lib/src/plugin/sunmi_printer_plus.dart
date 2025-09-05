@@ -8,7 +8,7 @@ import 'package:sunmi_printer_plus/sunmi_printer_plus.dart';
 /// It also includes functionalities for interacting with the device's LCD and drawer.
 class SunmiPrinterPlus {
   /// Rebinds the printer service (useful if the service was killed or lost).
-  static Future<bool> rebindPrinter() async {
+  Future<bool> rebindPrinter() async {
     return await SunmiPrinterPlusPlatform.instance.rebindPrinter();
   }
   // Constructor

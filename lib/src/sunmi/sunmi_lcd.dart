@@ -26,8 +26,10 @@ class SunmiLcd {
   /// [fill]: Whether to fill the remaining space on the LCD with blank characters.
   ///
   /// Returns a [String] message from the printer if successful, or `null` otherwise.
-  static Future<String?> lcdString(String text, {required int size, required bool fill}) async {
-    return await SunmiPrinterPlusPlatform.instance.sendTextLCD(text: text, size: size, fill: fill);
+  static Future<String?> lcdString(String text,
+      {required int size, required bool fill}) async {
+    return await SunmiPrinterPlusPlatform.instance
+        .sendTextLCD(text: text, size: size, fill: fill);
   }
 
   /// Displays a digital number on the LCD screen.

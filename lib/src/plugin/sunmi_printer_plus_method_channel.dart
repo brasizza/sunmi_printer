@@ -1,6 +1,7 @@
+import 'dart:typed_data';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-
 import 'package:sunmi_printer_plus/sunmi_printer_plus.dart';
 
 /// An implementation of [SunmiPrinterPlusPlatform] that uses method channels.

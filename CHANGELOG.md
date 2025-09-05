@@ -1,5 +1,12 @@
 
 # Changelog
+
+## 4.1.2#
+[Antonio Bellido](https://github.com/abellido) creates an rebindPrinter in cases that in the startup of the package the printers is not ready for a lot of reasons (memory, if there is printers sunmi nearby or other thigs), now you should check if the printer is still offline and call the method again.
+In a future version i will turn off this feature to autoconnect, maybe put in the class construction to avoid this problem
+
+**I am still working on the label printer,I am looking for a device to get to test, but here is very difficult to find**
+
 ## 4.1.0#
 Improve doc, remove IOS needs and make a few changes in code trying to maintain compatible as possible with 3.0.0
 
