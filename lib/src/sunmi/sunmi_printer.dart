@@ -129,12 +129,25 @@ class SunmiPrinter {
 
   /// bindingPrinter the printer.
   ///
-  /// **Deprecated**: This method will be removed in a future version.
+  /// **Deprecated**: Use [rebindPrinter] instead.
   ///
   /// Returns `null`.
-  @Deprecated('This method will be removed in a future version. ')
+  @Deprecated('Use rebindPrinter() instead.')
   static Future<bool?> bindingPrinter() async {
     return null;
+  }
+
+  /// Re-initializes the printer binding.
+  ///
+  /// This triggers the native AIDL service discovery and initializes
+  /// all printer subsystems (printer, command, LCD, drawer).
+  ///
+  /// Call this if the automatic initialization in `onAttachedToEngine`
+  /// hasn't completed yet, or if you need to re-establish the connection.
+  ///
+  /// Returns `true` if the printer was found and initialized, `false` otherwise.
+  static Future<bool> rebindPrinter() async {
+    return await SunmiPrinterPlusPlatform.instance.rebindPrinter();
   }
 
   /// Prints custom text using a [SunmiText] object.

@@ -38,7 +38,20 @@ class SunmiPrinterPlusPlugin : FlutterPlugin, MethodCallHandler {
         channel.setMethodCallHandler(this)
     }
 
+    private val isPrinterReady: Boolean
+        get() = ::sunmiPrinter.isInitialized && ::printerCommand.isInitialized
+
     override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
+        // Allow rebindPrinter and getPlatformVersion without printer being ready
+        if (call.method != "rebindPrinter" && call.method != "getPlatformVersion" && !isPrinterReady) {
+            result.error(
+                "PRINTER_NOT_INITIALIZED",
+                "Printer is not initialized yet. Call rebindPrinter() first.",
+                null
+            )
+            return
+        }
+
         when (call.method) {
             "rebindPrinter" -> {
                 sunmiInit.initPrinter { selectPrinter ->
