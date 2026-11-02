@@ -2,12 +2,12 @@ name: sunmi_printer_plus
 
 
 description: "Support V2 Pro Sunmi Label Version and Null safety. With this package you can connect with Sunmi printers, print text, image, qrcode, barcodes and a custom Esc/Pos if you like."
-version: 4.1.1
+version: 4.2.0
 homepage: https://github.com/brasizza/sunmi_printer/
 
 environment:
-  sdk: '>=3.5.3 <4.0.0'
-  flutter: '>=1.20.0'
+  sdk: ^3.12.0
+  flutter: ">=3.44.0"
 dependencies:
   flutter:
     sdk: flutter
