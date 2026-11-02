@@ -5,11 +5,7 @@ class SunmiColumn {
   final String text;
   final int width;
   final SunmiTextStyle? style;
-  SunmiColumn({
-    required this.text,
-    required this.width,
-    this.style,
-  });
+  SunmiColumn({required this.text, required this.width, this.style});
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{

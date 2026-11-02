@@ -43,8 +43,10 @@ class SunmiHelper {
     // Convert the loaded ByteData into a Uint8List for further processing.
     // The 'buffer' property gives access to the underlying byte data,
     // and 'asUint8List' converts it into a list of unsigned 8-bit integers.
-    Uint8List fileUnit8List = fileData.buffer
-        .asUint8List(fileData.offsetInBytes, fileData.lengthInBytes);
+    Uint8List fileUnit8List = fileData.buffer.asUint8List(
+      fileData.offsetInBytes,
+      fileData.lengthInBytes,
+    );
 
     // Return the image data as a Uint8List.
     return fileUnit8List;

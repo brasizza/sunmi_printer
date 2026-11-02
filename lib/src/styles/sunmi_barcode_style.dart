@@ -96,9 +96,7 @@ class SunmiBarcodeStyle {
   }) {
     // Validate the size to ensure it falls within the valid range of 1 to 16.
     if (size < 1 || size > 16) {
-      throw ArgumentError(
-        'Invalid size: $size. Must be between 1 and 16.',
-      );
+      throw ArgumentError('Invalid size: $size. Must be between 1 and 16.');
     }
 
     // Validate the height to ensure it falls within the valid range of 1 to 255.

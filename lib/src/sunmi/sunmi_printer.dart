@@ -16,10 +16,7 @@ class SunmiPrinter {
   ///
   /// Returns a [String] indicating the result of the print operation, or `null`.
   static Future<String?> printText(String text, {SunmiTextStyle? style}) async {
-    final printData = {
-      "text": text,
-      if (style != null) ...style.toMap(),
-    };
+    final printData = {"text": text, if (style != null) ...style.toMap()};
 
     return await SunmiPrinterPlusPlatform.instance.printText(printData);
   }
@@ -62,7 +59,8 @@ class SunmiPrinter {
   ///
   /// Returns `null`.
   @Deprecated(
-      'This method will be removed in a future version. Use printEscPos instead.')
+    'This method will be removed in a future version. Use printEscPos instead.',
+  )
   static Future<String?> printRawData(Uint8List data) async {
     return null;
   }
@@ -156,12 +154,11 @@ class SunmiPrinter {
   /// [style]: The optional style for the QR code.
   ///
   /// Returns a [String] indicating the result of the print operation, or `null`.
-  static Future<String?> printQRCode(String text,
-      {SunmiQrcodeStyle? style}) async {
-    final printData = {
-      "text": text,
-      if (style != null) ...style.toMap(),
-    };
+  static Future<String?> printQRCode(
+    String text, {
+    SunmiQrcodeStyle? style,
+  }) async {
+    final printData = {"text": text, if (style != null) ...style.toMap()};
 
     return await SunmiPrinterPlusPlatform.instance.printQrcode(printData);
   }
@@ -172,12 +169,11 @@ class SunmiPrinter {
   /// [style]: The optional style for the barcode.
   ///
   /// Returns a [String] indicating the result of the print operation, or `null`.
-  static Future<String?> printBarCode(String text,
-      {SunmiBarcodeStyle? style}) async {
-    final printData = {
-      "text": text,
-      if (style != null) ...style.toMap(),
-    };
+  static Future<String?> printBarCode(
+    String text, {
+    SunmiBarcodeStyle? style,
+  }) async {
+    final printData = {"text": text, if (style != null) ...style.toMap()};
     return await SunmiPrinterPlusPlatform.instance.printBarcode(printData);
   }
 
@@ -214,7 +210,8 @@ class SunmiPrinter {
   ///
   /// Returns `null`.
   @Deprecated(
-      'This method will be removed in a future version. Use cutPaper instead.')
+    'This method will be removed in a future version. Use cutPaper instead.',
+  )
   static Future<String?> cut() async {
     return null;
   }
@@ -225,8 +222,10 @@ class SunmiPrinter {
   /// [align]: The alignment for the image (e.g., left, center, right).
   ///
   /// Returns a [String] indicating the result of the print operation, or `null`.
-  static Future<String?> printImage(Uint8List image,
-      {SunmiPrintAlign align = SunmiPrintAlign.LEFT}) async {
+  static Future<String?> printImage(
+    Uint8List image, {
+    SunmiPrintAlign align = SunmiPrintAlign.LEFT,
+  }) async {
     return await SunmiPrinterPlusPlatform.instance.printImage(image, align);
   }
 
@@ -236,12 +235,11 @@ class SunmiPrinter {
   /// [style]: The optional style for the text.
   ///
   /// Returns a [String] indicating the result of the operation, or `null`.
-  static Future<String?> addText(
-      {required String text, SunmiTextStyle? style}) async {
-    final printData = {
-      "text": text,
-      if (style != null) ...style.toMap(),
-    };
+  static Future<String?> addText({
+    required String text,
+    SunmiTextStyle? style,
+  }) async {
+    final printData = {"text": text, if (style != null) ...style.toMap()};
 
     return await SunmiPrinterPlusPlatform.instance.addText(printData);
   }
@@ -286,8 +284,9 @@ class SunmiPrinter {
 
     List<List<dynamic>> separatedProperties = separateProperties(cols);
     return await SunmiPrinterPlusPlatform.instance.printRow(
-        text: separatedProperties[0],
-        width: separatedProperties[1],
-        style: separatedProperties[2]);
+      text: separatedProperties[0],
+      width: separatedProperties[1],
+      style: separatedProperties[2],
+    );
   }
 }

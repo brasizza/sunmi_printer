@@ -5,18 +5,9 @@ class SunmiText {
   final String text;
   final SunmiTextStyle? style;
 
-  SunmiText({
-    required this.text,
-    this.style,
-  });
+  SunmiText({required this.text, this.style});
 
-  SunmiText copyWith({
-    String? text,
-    SunmiTextStyle? style,
-  }) {
-    return SunmiText(
-      text: text ?? this.text,
-      style: style ?? this.style,
-    );
+  SunmiText copyWith({String? text, SunmiTextStyle? style}) {
+    return SunmiText(text: text ?? this.text, style: style ?? this.style);
   }
 }
