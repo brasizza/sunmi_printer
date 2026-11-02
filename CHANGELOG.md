@@ -1,4 +1,35 @@
+
 # Changelog
+
+## 4.2.0#
+- Updates the minimum supported SDK version to Flutter 3.44/Dart 3.12.
+- Migrates to built-in Kotlin (AGP 9 support).
+
+## 4.1.1#
+[Antonio Bellido](https://github.com/abellido) creates an rebindPrinter in cases that in the startup of the package the printers is not ready for a lot of reasons (memory, if there is printers sunmi nearby or other thigs), now you should check if the printer is still offline and call the method again.
+In a future version i will turn off this feature to autoconnect, maybe put in the class construction to avoid this problem
+
+**I am still working on the label printer,I am looking for a device to get to test, but here is very difficult to find**
+
+## 4.1.0#
+Improve doc, remove IOS needs and make a few changes in code trying to maintain compatible as possible with 3.0.0
+
+## 4.0.2#
+Improve doc and remove the required alignment in image(Default LEFT)
+## 4.0.1#
+Just improve pub points with documentation.
+## 4.0.0#
+# A WHOLE NEW package (minor break change)
+## One important breakchange is the column in printRow.
+I was needed to improve this method to get the benefits of the implementation.
+- The older version (from aidl) , sometimes that was not possible to print arabic or chinese text, now it is!
+- The other improvment: now in printRow you can send a whole sunmiStyle to do a new cusomization as you need!
+
+# Now i am using the dependencie from gradle and abandon the aidlservice.
+
+Doing that, i have a lot of control with the printer methods and the whole device!
+I took me 3 weeks to make this code good to be release, so before you upgrade to 4.0.0 consider to test all your project before GO LIVE
+
 
 ## 3.0.1#
 -Make compatible with dart >=3.5.0
