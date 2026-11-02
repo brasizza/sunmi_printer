@@ -5,7 +5,7 @@ import 'package:sunmi_printer_plus/sunmi_printer_plus.dart';
 class LcdController {
   final SunmiPrinterPlus _printer;
 
-  LcdController({required SunmiPrinterPlus printer}) : _printer = printer;
+  LcdController({required this._printer});
 
   Future<String?> config({required SunmiLCDStatus status}) async {
     return await _printer.configLCD(status: status);

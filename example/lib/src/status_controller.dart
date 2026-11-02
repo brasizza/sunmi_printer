@@ -3,7 +3,7 @@ import 'package:sunmi_printer_plus/sunmi_printer_plus.dart';
 class StatusController {
   final SunmiPrinterPlus _printer;
 
-  StatusController({required SunmiPrinterPlus printer}) : _printer = printer;
+  StatusController({required this._printer});
 
   Future<PrinterStatus> getStatus() async {
     final status = await _printer.getStatus();

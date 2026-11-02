@@ -6,7 +6,7 @@ import 'package:sunmi_printer_plus/sunmi_printer_plus.dart';
 class PrinterController {
   final SunmiPrinterPlus _printer;
 
-  PrinterController({required SunmiPrinterPlus printer}) : _printer = printer;
+  PrinterController({required this._printer});
 
   Future<String?> printText(String text, {SunmiTextStyle? style}) async {
     return await _printer.printText(text: text, style: style);

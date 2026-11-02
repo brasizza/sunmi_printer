@@ -3,7 +3,7 @@ import 'package:sunmi_printer_plus/sunmi_printer_plus.dart';
 class CashDrawer {
   final SunmiPrinterPlus _printer;
 
-  CashDrawer({required SunmiPrinterPlus printer}) : _printer = printer;
+  CashDrawer({required this._printer});
 
   Future<String?> openDrawer() async {
     return await _printer.openDrawer();
